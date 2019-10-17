@@ -1,0 +1,75 @@
+html
+  head
+    meta(charset='UTF-8')
+    title Quản lý đề cương chi tiết
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css')
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
+    link(rel='stylesheet', href='/style.css')
+    link(rel='stylesheet', href='/script.js')
+    link(rel='stylesheet', href='/fontawesome-free/css/all.min.css')
+    script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM', crossorigin='anonymous')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+  body
+    #two-navbar.two-navbar
+      div(style='background: rgba(255, 255, 255, 0.7);')
+        .container
+          nav.navbar.navbar-expand.mx-auto
+            ul.navbar-nav.align-items-center
+              li.nav-item
+                a.navbar-brand(href='#')
+                  img(src='/image/logo-light.png', alt='logo')
+            ul.navbar-nav.ml-auto.align-items-center
+              if !result
+                li.nav-item
+                  a.user-login(href="/users/login").nav-link.btn.btn-light Đăng Nhập  
+      nav.navbar.navbar-expand-md.navbar-dark(style='background: rgba(202, 201, 201, 0.7); ')
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsibleNavbar')
+          span.navbar-toggler-icon
+        ul#collapsibleNavbar.navbar-nav.collapse.navbar-collapse.justify-content-center
+          li.nav-item.dropdown
+            a.nav-link(href='/') Trang Ch&#x1EE7;
+          li.nav-item.dropdown
+            a#navbardrop.nav-link.dropdown-toggle(href='#', data-toggle='dropdown') Giới thiệu
+            ul.dropdown-menu.animated.fadeIn
+              li
+                .row(style='width: 250px;')
+                  ul.list-unstyled.col-md-12
+                    li
+                      a(href='#') Tổng quan
+                    li
+                      a(href='#') Đề tài
+          if result
+            li.nav-item.dropdown
+              a.nav-link(href='/users/profile/'+ result.magv) Đề cương          
+          if result
+            if result[0].role == "admin"
+              li.nav-item.dropdown
+                a#navbardrop.nav-link.dropdown-toggle(data-toggle='dropdown', href='/users/profile/'+ result.magv) Admin
+                ul.dropdown-menu.animated.fadeIn
+                  li
+                    .row(style='width: 250px;')
+                      ul.list-unstyled.col-md-12
+                        li
+                          a(href='/users/signup') Tạo tài khoản
+                        li
+                          a(href='/users/userList') Danh sách tài khoản
+                        li
+                          a(href='#') Sinh Viên
+                        li
+                          a(href='#') Sinh Viên
+          if result
+            li.nav-item.dropdown
+              a#navbardrop.nav-link.dropdown-toggle(data-toggle='dropdown', href='/users/profile/'+ result.magv) Cá Nhân
+              ul.dropdown-menu.animated.fadeIn
+                li
+                  .row(style='width: 180px;')
+                    ul.list-unstyled.col-md-12
+                      li
+                        a(href='#') Đổi mật khẩu
+                      li
+                        a(href='/users/logout') Đăng xuất
+    div(style='margin-top: 154px')
+                   
+    block content

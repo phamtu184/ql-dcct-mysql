@@ -1,0 +1,19 @@
+extends ../layouts/commons.pug
+block content
+  .container
+    table.table.mt-4
+      thead
+        tr
+          th Tên giáo viên
+          th sdt
+          th Email
+          th Vai trò
+          th Action
+      each results in result 
+        tr
+          td= results.tengv
+          td= results.sdt
+          td= results.email
+          td= results.role
+          td
+            a(href= "/users/profile/" + result.magv).btn.btn-info View

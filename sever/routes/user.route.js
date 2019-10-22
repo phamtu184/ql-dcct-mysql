@@ -29,11 +29,13 @@ router.get('/userlist', auth.permission, controller.userList);
 
 router.get('/logout', controller.userLogout);
 
+router.get('/deletegv', controller.deletegv);
+
 router.post('/login', controller.postUserLogin);
 
 router.post('/signup', controller.postUserSignup);
 
-
+router.post('/userlist', auth.permission, controller.userDelete);
 
 // router.get('/login', controller.userLogin);
 

@@ -1,6 +1,51 @@
 extends ../layouts/commons.pug
 block content
   .container
+    button.btn.btn-primary.mr-2(type='button', data-toggle='modal', data-target='#deleteModal')
+      | Xóa tài khoản
+    // The Modal
+    #deleteModal.modal.fade
+      .modal-dialog.modal-md
+        .modal-content
+          // Modal Header
+          .modal-header
+            h4.modal-title Xóa tài khoản
+            button.close(type='button', data-dismiss='modal') &times;
+          // Modal body
+          .modal-body
+            form(action="/users/userList", method="POST")
+              div.form-group.form-inline   
+                label(for="emailToDelete").mb-2.mr-sm-2 Tên đăng nhập muốn xóa:
+                select(name="emailToDelete").form-control.mb-2.mr-sm-2
+                  each result in results
+                    option(value= result.email)= result.email
+              button.btn.btn-primary.mb-2.mr-sm-2 Xóa
+              button.btn.btn-secondary(type='button', data-dismiss='modal', style='float: right') Đóng
+    button.btn.btn-primary.mr-2(type='button', data-toggle='modal', data-target='#changeRoleModal')
+      | Thay đổi vai trò
+    // The Modal
+    #changeRoleModal.modal.fade
+      .modal-dialog.modal-md
+        .modal-content
+          // Modal Header
+          .modal-header
+            h4.modal-title Thay đổi vai trò
+            button.close(type='button', data-dismiss='modal') &times;
+          // Modal body
+          .modal-body
+            form(action="/users/userList", method="POST")
+              div.form-group.form-inline
+                label(for="emailToChangeRole").mb-2.mr-sm-2 Tên đăng nhập:
+                select(name="emailToChangeRole").form-control.mb-2.mr-sm-2
+                  each result in results
+                    option(value= result.email)= result.email
+              div.form-group.form-inline  
+                label(for="roleToChange").mb-2.mr-sm-2 Vai trò:
+                select(name="roleToChange").form-control.mb-2.mr-sm-2
+                  option(value="user") User
+                  option(value="admin") Admin
+              button.btn.btn-primary.mb-2.mr-sm-2 Xác nhận
+              button.btn.btn-secondary(type='button', data-dismiss='modal', style='float: right') Đóng
     table.table.mt-4
       thead
         tr
@@ -9,11 +54,11 @@ block content
           th Email
           th Vai trò
           th Action
-      each results in result 
+      each result in results
         tr
-          td= results.tengv
-          td= results.sdt
-          td= results.email
-          td= results.role
+          td= result.tengv
+          td= result.sdt
+          td= result.email
+          td= result.role
           td
             a(href= "/users/profile/" + result.magv).btn.btn-info View

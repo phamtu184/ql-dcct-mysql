@@ -27,11 +27,14 @@ module.exports.userSignup = async function(req, res){
 
 module.exports.userList = async function(req, res){
   const magv = req.signedCookies.magv;
-  connection.query(`SELECT * FROM giangvien`, function (err, result) {
+  connection.query(`SELECT * FROM giangvien`, function (err, results) {
     if (err) throw err;
-    res.render('users/userList.pug',{
-      magv: magv,
-      result: result
+    connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, result){
+      res.render('users/userList.pug',{
+        magv: magv,
+        result: result,
+        results: results
+      })
     })
   });
 }
@@ -40,6 +43,22 @@ module.exports.userLogout = function(req, res){
   res.clearCookie("magv");
   res.clearCookie("tengv");
   res.redirect('/')
+}
+
+module.exports.deletegv = function(req, res){
+  const id = req.params.id;
+    connection.query(`SELECT * FROM giangvien WHERE magv = '${req.signedCookies.magv}'`, function (err, result){
+      if(result[0].magv == "qtv"){
+        connection.query(`DELETE FROM giangvien WHERE magv = '${id}'`, function (err, result){
+          if (err) throw err;
+        })
+        console.log("Successful delete");
+        res.redirect('/users/userList/');
+      }
+      else{
+        res.redirect('/users/userList/');
+      }
+    })
 }
 
 //-----------------POST----------------------
@@ -135,5 +154,22 @@ module.exports.postUserSignup = async function(req, res){
       }
     })
   }
+}
 
+module.exports.userDelete = function(req, res, next){
+  if(req.body.emailToDelete){
+    connection.query(`DELETE FROM giangvien WHERE email = '${req.body.emailToDelete}'`, function (err, result){
+      if (err) throw err;
+    })
+    console.log("Successful delete");
+    res.redirect('/users/userList/');
+  }
+  
+  if(req.body.emailToChangeRole){
+    connection.query(`UPDATE giangvien SET role = '${req.body.roleToChange}' WHERE email = '${req.body.emailToChangeRole}'`, function (err, result){
+      if (err) throw err;
+    })
+    console.log("Successful change role");
+    res.redirect('/users/userList/');
+  }
 }

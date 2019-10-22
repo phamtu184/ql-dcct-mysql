@@ -24,7 +24,6 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', async function(req, res){
   const magv = req.signedCookies.magv;
-  console.log(magv);
   if (magv){
     connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, result) {
       if (err) throw err;

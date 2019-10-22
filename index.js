@@ -7,9 +7,9 @@ const userRoutes = require('./sever/routes/user.route');
 const port = process.env.PORT || 4000;
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "ql-dcct-mysql"
+  host: process.env.HOST,
+  user: process.env.USER,
+  database: process.env.DATABASE
 });
 connection.connect();
 
@@ -24,6 +24,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', async function(req, res){
   const magv = req.signedCookies.magv;
+  console.log(magv);
   if (magv){
     connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, result) {
       if (err) throw err;

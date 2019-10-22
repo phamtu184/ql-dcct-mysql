@@ -44,9 +44,9 @@ html
             li.nav-item.dropdown
               a.nav-link(href='/users/profile/'+ result.magv) Đề cương          
           if result
-            if result[0].role == "admin"
+            if result[0].role == "qtv"
               li.nav-item.dropdown
-                a#navbardrop.nav-link.dropdown-toggle(data-toggle='dropdown', href='/users/profile/'+ result.magv) Admin
+                a#navbardrop.nav-link.dropdown-toggle(data-toggle='dropdown', href='/users/profile/'+ result.magv) Quản trị viên
                 ul.dropdown-menu.animated.fadeIn
                   li
                     .row(style='width: 250px;')

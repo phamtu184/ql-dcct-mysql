@@ -1,11 +1,12 @@
 const bcrypt = require("bcryptjs");
 const cloudinary = require('cloudinary');
 let salt = bcrypt.genSaltSync(10);
+const shortid = require('shortid');
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "ql-dcct-mysql"
+  host: process.env.HOST,
+  user: process.env.USER,
+  database: process.env.DATABASE
 });
 connection.connect();
 
@@ -102,6 +103,7 @@ module.exports.postUserSignup = async function(req, res){
 
 }
   let user ={
+    "magv":shortid.generate(),
     "tengv": req.body.tengv,
     "sdt" : req.body.sdt,
     "email": req.body.email,

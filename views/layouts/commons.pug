@@ -21,7 +21,7 @@ html
                 a.navbar-brand(href='#')
                   img(src='/image/logo-light.png', alt='logo')
             ul.navbar-nav.ml-auto.align-items-center
-              if !result
+              if !user
                 li.nav-item
                   a.user-login(href="/users/login").nav-link.btn.btn-light Đăng Nhập  
       nav.navbar.navbar-expand-md.navbar-dark(style='background: rgba(202, 201, 201, 0.7); ')
@@ -40,13 +40,13 @@ html
                       a(href='#') Tổng quan
                     li
                       a(href='#') Đề tài
-          if result
+          if user
             li.nav-item.dropdown
-              a.nav-link(href='/users/profile/'+ result.magv) Đề cương          
-          if result
-            if result[0].role == "qtv"
+              a.nav-link(href='/users/profile/'+ user.magv) Đề cương          
+          if user
+            if user[0].role == "qtv"
               li.nav-item.dropdown
-                a#navbardrop.nav-link.dropdown-toggle(data-toggle='dropdown', href='/users/profile/'+ result.magv) Quản trị viên
+                a#navbardrop.nav-link.dropdown-toggle(data-toggle='dropdown', href='/users/profile/'+ user.magv) Quản trị viên
                 ul.dropdown-menu.animated.fadeIn
                   li
                     .row(style='width: 250px;')
@@ -56,12 +56,12 @@ html
                         li
                           a(href='/users/userList') Danh sách tài khoản
                         li
-                          a(href='#') Sinh Viên
+                          a(href='/data/updateData') Cập nhật dữ liệu
                         li
                           a(href='#') Sinh Viên
-          if result
+          if user
             li.nav-item.dropdown
-              a#navbardrop.nav-link.dropdown-toggle(data-toggle='dropdown', href='/users/profile/'+ result.magv) Cá Nhân
+              a#navbardrop.nav-link.dropdown-toggle(data-toggle='dropdown', href='/users/profile/'+ user.magv) Cá Nhân
               ul.dropdown-menu.animated.fadeIn
                 li
                   .row(style='width: 180px;')

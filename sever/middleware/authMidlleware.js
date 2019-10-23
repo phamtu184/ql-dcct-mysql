@@ -13,8 +13,8 @@ module.exports.stillLogin = async function isLoggedIn(req, res, next) {
     res.redirect('/');
     return;
   }
-  connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, result){
-    if (!result) {
+  connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
+    if (!user) {
       res.redirect("/");
       return;
     }
@@ -22,10 +22,21 @@ module.exports.stillLogin = async function isLoggedIn(req, res, next) {
   next();
 }
 
-module.exports.permission = async function(req, res , next){
+module.exports.permissionQtv = async function(req, res , next){
   const magv = req.signedCookies.magv;
-  connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, result){
-    if(result[0].role !== "qtv"){
+  connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
+    if(user[0].role !== "qtv"){
+      res.redirect("/");
+      return;
+    }
+  })
+  next();
+}
+
+module.exports.permissionAdmin = async function(req, res , next){
+  const magv = req.signedCookies.magv;
+  connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
+    if(user[0].role !== "admin"){
       res.redirect("/");
       return;
     }

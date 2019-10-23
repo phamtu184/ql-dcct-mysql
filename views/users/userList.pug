@@ -17,8 +17,8 @@ block content
               div.form-group.form-inline   
                 label(for="emailToDelete").mb-2.mr-sm-2 Tên đăng nhập muốn xóa:
                 select(name="emailToDelete").form-control.mb-2.mr-sm-2
-                  each result in results
-                    option(value= result.email)= result.email
+                  each user in users
+                    option(value= user.email)= user.email
               button.btn.btn-primary.mb-2.mr-sm-2 Xóa
               button.btn.btn-secondary(type='button', data-dismiss='modal', style='float: right') Đóng
     button.btn.btn-primary.mr-2(type='button', data-toggle='modal', data-target='#changeRoleModal')
@@ -37,8 +37,8 @@ block content
               div.form-group.form-inline
                 label(for="emailToChangeRole").mb-2.mr-sm-2 Tên đăng nhập:
                 select(name="emailToChangeRole").form-control.mb-2.mr-sm-2
-                  each result in results
-                    option(value= result.email)= result.email
+                  each user in users
+                    option(value= user.email)= user.email
               div.form-group.form-inline  
                 label(for="roleToChange").mb-2.mr-sm-2 Vai trò:
                 select(name="roleToChange").form-control.mb-2.mr-sm-2
@@ -54,11 +54,11 @@ block content
           th Email
           th Vai trò
           th Action
-      each result in results
+      each user in users
         tr
-          td= result.tengv
-          td= result.sdt
-          td= result.email
-          td= result.role
+          td= user.tengv
+          td= user.sdt
+          td= user.email
+          td= user.role
           td
-            a(href= "/users/profile/" + result.magv).btn.btn-info View
+            a(href= "/users/profile/" + user.magv).btn.btn-info View

@@ -1,5 +1,4 @@
 const bcrypt = require("bcryptjs");
-const cloudinary = require('cloudinary');
 let salt = bcrypt.genSaltSync(10);
 const shortid = require('shortid');
 var mysql = require('mysql');
@@ -16,24 +15,24 @@ module.exports.userLogin = async function(req, res){
 
 module.exports.userSignup = async function(req, res){
   const magv = req.signedCookies.magv;
-  connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, result) {
+  connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user) {
     if (err) throw err;
     res.render('users/signup.pug',{
       magv: magv,
-      result: result
+      user: user
     })
   });
 }
 
 module.exports.userList = async function(req, res){
   const magv = req.signedCookies.magv;
-  connection.query(`SELECT * FROM giangvien`, function (err, results) {
+  connection.query(`SELECT * FROM giangvien`, function (err, users) {
     if (err) throw err;
-    connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, result){
+    connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
       res.render('users/userList.pug',{
         magv: magv,
-        result: result,
-        results: results
+        user: user,
+        users: users
       })
     })
   });
@@ -47,9 +46,9 @@ module.exports.userLogout = function(req, res){
 
 module.exports.deletegv = function(req, res){
   const id = req.params.id;
-    connection.query(`SELECT * FROM giangvien WHERE magv = '${req.signedCookies.magv}'`, function (err, result){
-      if(result[0].magv == "qtv"){
-        connection.query(`DELETE FROM giangvien WHERE magv = '${id}'`, function (err, result){
+    connection.query(`SELECT * FROM giangvien WHERE magv = '${req.signedCookies.magv}'`, function (err, user){
+      if(user[0].magv == "qtv"){
+        connection.query(`DELETE FROM giangvien WHERE magv = '${id}'`, function (err, user){
           if (err) throw err;
         })
         console.log("Successful delete");
@@ -66,28 +65,28 @@ module.exports.deletegv = function(req, res){
 module.exports.postUserLogin = async function(req, res){
   const email = req.body.email;
   const password = req.body.password;
-  connection.query(`SELECT * FROM giangvien WHERE email = '${email}'`, function (err, result) {
-  if (!result.length) {
+  connection.query(`SELECT * FROM giangvien WHERE email = '${email}'`, function (err, user) {
+  if (!user.length) {
     res.render("users/login", {
       errors: ["Tài khoản không tồn tại!"],
       values: req.body
     });
     return;
   }
-  if (!bcrypt.compareSync(password, result[0].password)) {
+  if (!bcrypt.compareSync(password, user[0].password)) {
     res.render("users/login", {
       errors: ["Sai mật khẩu!"],
       values: req.body
     });
     return;
   }
-  res.cookie("magv", result[0].magv, {
+  res.cookie("magv", user[0].magv, {
     signed: true
   });
-  res.cookie("tengv", result[0].tengv, {
+  res.cookie("tengv", user[0].tengv, {
     signed: true
   });
-  res.redirect('/users/profile/' + result[0].magv);
+  res.redirect('/users/profile/' + user[0].magv);
   });
 }
 
@@ -97,6 +96,7 @@ module.exports.postUserSignup = async function(req, res){
   const passwordConf = req.body.passwordConf;
   const email = req.body.email;
   const tengv = req.body.tengv;
+  const sdt = req.body.sdt;
   const magv = req.signedCookies.magv;
   if (email.length < 4){
     errors.push("Tên đăng nhập phải có từ 5 kí tự trở lên!")
@@ -110,18 +110,21 @@ module.exports.postUserSignup = async function(req, res){
   if (password.length < 7){
     errors.push("Mật khẩu phải có từ 8 kí tự trở lên!");
   }
+  if (sdt.length < 10 || sdt.length > 10){
+    errors.push("Số điện thoại phải có 10 chữ số!");
+  }
   if (errors.length) {
-    connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, result){
+    connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
       res.render("users/signup", {
         errors: errors,
         values: req.body,
-        result: result
+        user: user
       });
       return;
     })
 
 }
-  let user ={
+  let giangvien ={
     "magv":shortid.generate(),
     "tengv": req.body.tengv,
     "sdt" : req.body.sdt,
@@ -131,23 +134,23 @@ module.exports.postUserSignup = async function(req, res){
     "role": req.body.role
   }
   if(!errors.length){
-    connection.query(`SELECT * FROM giangvien WHERE email = '${req.body.email}'`, function (err, result){
-      if(result.length){
+    connection.query(`SELECT * FROM giangvien WHERE email = '${req.body.email}'`, function (err, user){
+      if(user.length){
         errors.push("Email này đã được đăng ký!");
-        connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, result){
+        connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
           res.render("users/signup", {
             errors: errors,
             values: req.body,
-            result: result
+            user: user
           });
           return;
         })
       }
       else{
-        connection.query('INSERT INTO giangvien SET ?', user, function (err, result){
+        connection.query('INSERT INTO giangvien SET ?', giangvien, function (err, user){
           if (err) throw err;
           res.render('users/userList.pug',{
-            result: result
+            user: user
           })
         });
         res.redirect('/users/userList')
@@ -158,7 +161,7 @@ module.exports.postUserSignup = async function(req, res){
 
 module.exports.userDelete = function(req, res, next){
   if(req.body.emailToDelete){
-    connection.query(`DELETE FROM giangvien WHERE email = '${req.body.emailToDelete}'`, function (err, result){
+    connection.query(`DELETE FROM giangvien WHERE email = '${req.body.emailToDelete}'`, function (err, user){
       if (err) throw err;
     })
     console.log("Successful delete");
@@ -166,7 +169,7 @@ module.exports.userDelete = function(req, res, next){
   }
   
   if(req.body.emailToChangeRole){
-    connection.query(`UPDATE giangvien SET role = '${req.body.roleToChange}' WHERE email = '${req.body.emailToChangeRole}'`, function (err, result){
+    connection.query(`UPDATE giangvien SET role = '${req.body.roleToChange}' WHERE email = '${req.body.emailToChangeRole}'`, function (err, user){
       if (err) throw err;
     })
     console.log("Successful change role");

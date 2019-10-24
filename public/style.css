@@ -136,7 +136,10 @@ body{
   transform: scale(1.1);
   text-decoration: none;
 }
- 
+/* ------------------update data----------------- */
+.panel {display: none;}
+#lop {display: block;}
+
 /* -----------------resposive----------------- */
 @media(max-width:720px){
   .hover-img button{

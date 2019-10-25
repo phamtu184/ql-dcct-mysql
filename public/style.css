@@ -138,7 +138,7 @@ body{
 }
 /* ------------------update data----------------- */
 .panel {display: none;}
-#lop {display: block;}
+#khoa {display: block;}
 
 /* -----------------resposive----------------- */
 @media(max-width:720px){

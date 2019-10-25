@@ -9,7 +9,7 @@ router.get('/login', controller.userLogin);
 
 router.get('/signup', auth.stillLogin, auth.permissionQtv, controller.userSignup);
 
-router.get('/userlist', auth.permissionAdmin, controller.userList);
+router.get('/userlist', auth.permissionQtv, controller.userList);
 
 router.get('/logout', controller.userLogout);
 
@@ -19,7 +19,7 @@ router.post('/login', controller.postUserLogin);
 
 router.post('/signup', controller.postUserSignup);
 
-router.post('/userlist', auth.permissionAdmin, controller.userDelete);
+router.post('/userlist', auth.permissionQtv, controller.userDelete);
 
 // router.get('/login', controller.userLogin);
 

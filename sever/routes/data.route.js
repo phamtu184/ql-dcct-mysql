@@ -21,4 +21,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-router.get('/updateData', controller.updateData);
+router.get('/updateData', auth.permissionQtv, controller.getData);
+
+router.post('/updateData', auth.permissionQtv, controller.postData);

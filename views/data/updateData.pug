@@ -4,34 +4,85 @@ block content
     div.form-inline.pt-2
       label.mb-2.mr-sm-2.form-inline Cập nhật dữ liệu:
       select(style="width: 400px").form-control.mb-2.mr-sm-2#sectionChooser
-        option(value="lop") Lớp
-        option(value="monhoc") Môn học
         option(value="khoa") Khoa
         option(value="bomon") Bộ môn
-        option(value="hedaotao") Hệ đào tạo
-        option(value="hocki") Học kì
         option(value="namhoc") Năm học
-        option(value="nganhhoc") Ngành học
+        option(value="hocki") Học kì
+        option(value="monhoc") Môn học
+        option(value="hedaotao") Hệ đào tạo
         option(value="bachoc") Bậc học
-      
-    div.panel#lop
+        option(value="nganhhoc") Ngành học
+        option(value="lop") Lớp
+
+    div.panel#khoa
       form(action="/data/updateData", method="POST").was-validated
         div.form-group
-          label(for="malop") Mã lớp:
-          input(type="text", name="malop", placeholder='Nhập mã lớp', required).form-control
+          label(for="makhoa") Mã khoa:
+          input(type="text", name="makhoa", placeholder='Nhập mã khoa', required).form-control
           div.valid-feedback Tốt.
           div.invalid-feedback Xin điền trường này
         div.form-group
-          label(for="manganh") Mã ngành:
-          input(type="text", name="manganh", placeholder='Nhập mã ngành', required).form-control
+          label(for="tenkhoa") Tên khoa:
+          input(type="text", name="tenkhoa", placeholder='Nhập tên khoa', required).form-control
+          div.valid-feedback Tốt.
+          div.invalid-feedback Xin điền trường này
+        button.btn.btn-primary Thêm khoa 
+
+    div.panel#bomon
+      form(action="/data/updateData", method="POST").was-validated
+        div.form-group
+          label(for="mabm") Mã bộ môn:
+          input(type="text", name="mabm", placeholder='Nhập mã bộ môn', required).form-control
           div.valid-feedback Tốt.
           div.invalid-feedback Xin điền trường này
         div.form-group
-          label(for="tenlop") Tên lớp:
-          input(type="text", name="tenlop", placeholder='Nhập tên lớp', required).form-control
+          label(for="tenbm") Tên bộ môn:
+          input(type="text", name="tenbm", placeholder='Nhập tên bộ môn', required).form-control
           div.valid-feedback Tốt.
           div.invalid-feedback Xin điền trường này
-        button.btn.btn-primary Thêm lớp
+        div.form-group
+          label(for="knmakhoa") Tên khoa:
+          select(name="knmakhoa").form-control.mb-2.mr-sm-2
+            each khoas in khoa
+              option(value= khoas.makhoa)= khoas.tenkhoa
+          div.valid-feedback Tốt.
+          div.invalid-feedback Xin điền trường này
+        button.btn.btn-primary Thêm bộ môn     
+
+    div.panel#namhoc
+      form(action="/data/updateData", method="POST").was-validated
+        div.form-group
+          label(for="manh") Mã năm học:
+          input(type="text", name="manh", placeholder='Nhập mã năm học', required).form-control
+          div.valid-feedback Tốt.
+          div.invalid-feedback Xin điền trường này
+        div.form-group
+          label(for="namhoc") Năm học:
+          input(type="text", name="namhoc", placeholder='Nhập năm học', required).form-control
+          div.valid-feedback Tốt.
+          div.invalid-feedback Xin điền trường này
+        button.btn.btn-primary Thêm năm học
+
+    div.panel#hocki
+      form(action="/data/updateData", method="POST").was-validated
+        div.form-group
+          label(for="mahk") Mã học kì:
+          input(type="text", name="mahk", placeholder='Nhập mã học kì', required).form-control
+          div.valid-feedback Tốt.
+          div.invalid-feedback Xin điền trường này
+        div.form-group
+          label(for="tenhk") Tên học kì:
+          input(type="text", name="tenhk", placeholder='Nhập tên học kì', required).form-control
+          div.valid-feedback Tốt.
+          div.invalid-feedback Xin điền trường này
+        div.form-group
+          label(for="knmanh") Năm học:
+          select(name="knmanh").form-control.mb-2.mr-sm-2
+            each namhocs in namhoc
+              option(value= namhocs.manh)= namhocs.namhoc
+          div.valid-feedback Tốt.
+          div.invalid-feedback Xin điền trường này
+        button.btn.btn-primary Thêm học kì
 
     div.panel#monhoc
       form(action="/data/updateData", method="POST").was-validated
@@ -57,34 +108,6 @@ block content
           div.invalid-feedback Xin điền trường này
         button.btn.btn-primary Thêm môn học
 
-    div.panel#khoa
-      form(action="/data/updateData", method="POST").was-validated
-        div.form-group
-          label(for="makhoa") Mã khoa:
-          input(type="text", name="makhoa", placeholder='Nhập mã khoa', required).form-control
-          div.valid-feedback Tốt.
-          div.invalid-feedback Xin điền trường này
-        div.form-group
-          label(for="tenkhoa") Tên khoa:
-          input(type="text", name="tenkhoa", placeholder='Nhập tên khoa', required).form-control
-          div.valid-feedback Tốt.
-          div.invalid-feedback Xin điền trường này
-        button.btn.btn-primary Thêm khoa
-
-    div.panel#bomon
-      form(action="/data/updateData", method="POST").was-validated
-        div.form-group
-          label(for="mabm") Mã bộ môn:
-          input(type="text", name="mabm", placeholder='Nhập mã bộ môn', required).form-control
-          div.valid-feedback Tốt.
-          div.invalid-feedback Xin điền trường này
-        div.form-group
-          label(for="tenbm") Tên bộ môn:
-          input(type="text", name="tenbm", placeholder='Nhập tên bộ môn', required).form-control
-          div.valid-feedback Tốt.
-          div.invalid-feedback Xin điền trường này
-        button.btn.btn-primary Thêm bộ môn
-
     div.panel#hedaotao
       form(action="/data/updateData", method="POST").was-validated
         div.form-group
@@ -99,48 +122,8 @@ block content
           div.invalid-feedback Xin điền trường này
         button.btn.btn-primary Thêm hệ đào tạo
 
-    div.panel#hocki
-      form(action="/data/updateData", method="POST").was-validated
-        div.form-group
-          label(for="mahk") Mã học kì:
-          input(type="text", name="mahk", placeholder='Nhập mã học kì', required).form-control
-          div.valid-feedback Tốt.
-          div.invalid-feedback Xin điền trường này
-        div.form-group
-          label(for="tenhk") Tên học kì:
-          input(type="text", name="tenhk", placeholder='Nhập tên học kì', required).form-control
-          div.valid-feedback Tốt.
-          div.invalid-feedback Xin điền trường này
-        button.btn.btn-primary Thêm học kì
-
-    div.panel#namhoc
-      form(action="/data/updateData", method="POST").was-validated
-        div.form-group
-          label(for="manh") Mã năm học:
-          input(type="text", name="manh", placeholder='Nhập mã năm học', required).form-control
-          div.valid-feedback Tốt.
-          div.invalid-feedback Xin điền trường này
-        div.form-group
-          label(for="namhoc") Năm học:
-          input(type="text", name="namhoc", placeholder='Nhập năm học', required).form-control
-          div.valid-feedback Tốt.
-          div.invalid-feedback Xin điền trường này
-        button.btn.btn-primary Thêm năm học
-
-    div.panel#nganhhoc
-        div.form-group
-          label(for="manganh") Mã ngành:
-          input(type="text", name="manganh", placeholder='Nhập mã ngành', required).form-control
-          div.valid-feedback Tốt.
-          div.invalid-feedback Xin điền trường này
-        div.form-group
-          label(for="tenganh") Tên ngành:
-          input(type="text", name="tennganh", placeholder='Nhập tên ngành', required).form-control
-          div.valid-feedback Tốt.
-          div.invalid-feedback Xin điền trường này
-        button.btn.btn-primary Thêm ngành
-
     div.panel#bachoc
+      form(action="/data/updateData", method="POST").was-validated
         div.form-group
           label(for="mabh") Mã bậc học:
           input(type="text", name="mabh", placeholder='Nhập mã bậc học', required).form-control
@@ -151,6 +134,40 @@ block content
           input(type="text", name="tenbh", placeholder='Nhập tên bậc học', required).form-control
           div.valid-feedback Tốt.
           div.invalid-feedback Xin điền trường này
-        button.btn.btn-primary Thêm bậc học
+        button.btn.btn-primary Thêm bậc học   
+
+    div.panel#nganhhoc
+      form(action="/data/updateData", method="POST").was-validated
+        div.form-group
+          label(for="manganh") Mã ngành:
+          input(type="text", name="manganh", placeholder='Nhập mã ngành', required).form-control
+          div.valid-feedback Tốt.
+          div.invalid-feedback Xin điền trường này
+        div.form-group
+          label(for="tenganh") Tên ngành:
+          input(type="text", name="tennganh", placeholder='Nhập tên ngành', required).form-control
+          div.valid-feedback Tốt.
+          div.invalid-feedback Xin điền trường này
+        button.btn.btn-primary Thêm ngành     
+
+    div.panel#lop
+      form(action="/data/updateData", method="POST").was-validated
+        div.form-group
+          label(for="malop") Mã lớp:
+          input(type="text", name="malop", placeholder='Nhập mã lớp', required).form-control
+          div.valid-feedback Tốt.
+          div.invalid-feedback Xin điền trường này
+        div.form-group
+          label(for="manganh") Mã ngành:
+          input(type="text", name="manganh", placeholder='Nhập mã ngành', required).form-control
+          div.valid-feedback Tốt.
+          div.invalid-feedback Xin điền trường này
+        div.form-group
+          label(for="tenlop") Tên lớp:
+          input(type="text", name="tenlop", placeholder='Nhập tên lớp', required).form-control
+          div.valid-feedback Tốt.
+          div.invalid-feedback Xin điền trường này
+        button.btn.btn-primary Thêm lớp
+
 
   script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')

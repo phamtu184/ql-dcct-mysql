@@ -98,14 +98,22 @@ block content
           div.invalid-feedback Xin điền trường này
         div.form-group
           label(for="tclythuyet") Tín chỉ lí thuyết:
-          input(type="text", name="tclythuyet", placeholder='Nhập tín chỉ lí thuyết', required).form-control
-          div.valid-feedback Tốt.
-          div.invalid-feedback Xin điền trường này
+          select(name="tclythuyet").form-control.mb-2.mr-sm-2
+            option(value="0") 0
+            option(value="1") 1
+            option(value="2") 2
+            option(value="3") 3
+            option(value="4") 4
+            option(value="5") 5
         div.form-group
           label(for="tcthuchanh") Tín chỉ thực hành:
-          input(type="text", name="tcthuchanh", placeholder='Nhập tên lớp', required).form-control
-          div.valid-feedback Tốt.
-          div.invalid-feedback Xin điền trường này
+          select(name="tcthuchanh").form-control.mb-2.mr-sm-2
+            option(value="0") 0
+            option(value="1") 1
+            option(value="2") 2
+            option(value="3") 3
+            option(value="4") 4
+            option(value="5") 5          
         button.btn.btn-primary Thêm môn học
 
     div.panel#hedaotao
@@ -148,6 +156,13 @@ block content
           input(type="text", name="tennganh", placeholder='Nhập tên ngành', required).form-control
           div.valid-feedback Tốt.
           div.invalid-feedback Xin điền trường này
+        div.form-group
+          label(for="knmabh") Tên bậc học:
+          select(name="knmabh").form-control.mb-2.mr-sm-2
+            each bachocs in bachoc
+              option(value= bachocs.mabh)= bachocs.tenbh
+          div.valid-feedback Tốt.
+          div.invalid-feedback Xin điền trường này          
         button.btn.btn-primary Thêm ngành     
 
     div.panel#lop
@@ -158,15 +173,24 @@ block content
           div.valid-feedback Tốt.
           div.invalid-feedback Xin điền trường này
         div.form-group
-          label(for="manganh") Mã ngành:
-          input(type="text", name="manganh", placeholder='Nhập mã ngành', required).form-control
-          div.valid-feedback Tốt.
-          div.invalid-feedback Xin điền trường này
-        div.form-group
           label(for="tenlop") Tên lớp:
           input(type="text", name="tenlop", placeholder='Nhập tên lớp', required).form-control
           div.valid-feedback Tốt.
           div.invalid-feedback Xin điền trường này
+        div.form-group
+          label(for="knmahdt") Tên hệ đào tạo:
+          select(name="knmahdt").form-control.mb-2.mr-sm-2
+            each hedaotaos in hedaotao
+              option(value= hedaotaos.mahdt)= hedaotaos.tenhdt
+          div.valid-feedback Tốt.
+          div.invalid-feedback Xin điền trường này     
+        div.form-group
+          label(for="knmanganh") Tên ngành:
+          select(name="knmanganh").form-control.mb-2.mr-sm-2
+            each nganhs in nganh
+              option(value= nganhs.manganh)= nganhs.tennganh
+          div.valid-feedback Tốt.
+          div.invalid-feedback Xin điền trường này                         
         button.btn.btn-primary Thêm lớp
 
 

@@ -26,16 +26,19 @@ module.exports.userSignup = async function(req, res){
 
 module.exports.userList = async function(req, res){
   const magv = req.signedCookies.magv;
-  connection.query(`SELECT * FROM giangvien`, function (err, users) {
-    if (err) throw err;
-    connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
-      res.render('users/userList.pug',{
-        magv: magv,
-        user: user,
-        users: users
+  connection.query(`SELECT * FROM giangvien`, function (err, userss){
+    connection.query(`SELECT * FROM giangvien WHERE role = 'admin' OR role ='user'`, function (err, users) {
+      if (err) throw err;
+      connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
+        res.render('users/userList.pug',{
+          magv: magv,
+          user: user,
+          users: users,
+          userss: userss
+        })
       })
-    })
-  });
+    });
+  })
 }
 
 module.exports.userLogout = function(req, res){

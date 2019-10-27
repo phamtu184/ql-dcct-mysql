@@ -1,6 +1,7 @@
 extends ../layouts/commons.pug
 block content
   .container
+    h1 Danh sách tài khoản
     button.btn.btn-primary.mr-2(type='button', data-toggle='modal', data-target='#deleteModal')
       | Xóa tài khoản
     // The Modal
@@ -49,16 +50,18 @@ block content
     table.table.mt-4
       thead
         tr
-          th Tên giáo viên
-          th sdt
+          th Mã giảng viên
+          th Tên giảng viên
+          th SĐT
           th Email
           th Vai trò
           th Action
-      each user in userss
+      each user in userss 
         tr
+          td= user.magv
           td= user.tengv
           td= user.sdt
           td= user.email
           td= user.role
           td
-            a(href= "/users/profile/" + user.magv).btn.btn-info View
+            a(href= "/users/profile/" + user.magv).btn.btn-info Sửa

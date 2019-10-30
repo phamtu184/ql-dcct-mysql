@@ -1,5 +1,3 @@
-const cloudinary = require('cloudinary');
-const shortid = require('shortid');
 var mysql = require('mysql');
 var connection = mysql.createConnection({
   host: process.env.HOST,

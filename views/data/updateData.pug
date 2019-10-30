@@ -43,8 +43,9 @@ block content
         div.form-group
           label(for="knmakhoa") Tên khoa:
           select(name="knmakhoa").form-control.mb-2.mr-sm-2
-            each khoas in khoa
-              option(value= khoas.makhoa)= khoas.tenkhoa
+            if khoa
+              each khoas in khoa
+                option(value= khoas.makhoa)= khoas.tenkhoa
           div.valid-feedback Tốt.
           div.invalid-feedback Xin điền trường này
         button.btn.btn-primary Thêm bộ môn     
@@ -78,8 +79,9 @@ block content
         div.form-group
           label(for="knmanh") Năm học:
           select(name="knmanh").form-control.mb-2.mr-sm-2
-            each namhocs in namhoc
-              option(value= namhocs.manh)= namhocs.namhoc
+            if namhoc
+              each namhocs in namhoc
+                option(value= namhocs.manh)= namhocs.namhoc
           div.valid-feedback Tốt.
           div.invalid-feedback Xin điền trường này
         button.btn.btn-primary Thêm học kì
@@ -159,8 +161,9 @@ block content
         div.form-group
           label(for="knmabh") Tên bậc học:
           select(name="knmabh").form-control.mb-2.mr-sm-2
-            each bachocs in bachoc
-              option(value= bachocs.mabh)= bachocs.tenbh
+            if bachoc
+              each bachocs in bachoc
+                option(value= bachocs.mabh)= bachocs.tenbh
           div.valid-feedback Tốt.
           div.invalid-feedback Xin điền trường này          
         button.btn.btn-primary Thêm ngành     
@@ -180,15 +183,17 @@ block content
         div.form-group
           label(for="knmahdt") Tên hệ đào tạo:
           select(name="knmahdt").form-control.mb-2.mr-sm-2
-            each hedaotaos in hedaotao
-              option(value= hedaotaos.mahdt)= hedaotaos.tenhdt
+            if hedaotao
+              each hedaotaos in hedaotao
+                option(value= hedaotaos.mahdt)= hedaotaos.tenhdt
           div.valid-feedback Tốt.
           div.invalid-feedback Xin điền trường này     
         div.form-group
           label(for="knmanganh") Tên ngành:
           select(name="knmanganh").form-control.mb-2.mr-sm-2
-            each nganhs in nganh
-              option(value= nganhs.manganh)= nganhs.tennganh
+            if nganh
+              each nganhs in nganh
+                option(value= nganhs.manganh)= nganhs.tennganh
           div.valid-feedback Tốt.
           div.invalid-feedback Xin điền trường này                         
         button.btn.btn-primary Thêm lớp

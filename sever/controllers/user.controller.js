@@ -109,7 +109,7 @@ module.exports.postUserLogin = async function(req, res){
   res.cookie("tengv", user[0].tengv, {
     signed: true
   });
-  res.redirect('/users/profile/' + user[0].magv);
+  res.redirect('/');
   });
 }
 

@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 const userRoutes = require('./sever/routes/user.route');
 const dataRoutes = require('./sever/routes/data.route');
+const fileRoutes = require('./sever/routes/file.route');
 const port = process.env.PORT || 4000;
 var mysql = require('mysql');
 var connection = mysql.createConnection({
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser("kimboyune"));
 app.use('/users', userRoutes);
 app.use('/data', dataRoutes);
+app.use('/file', fileRoutes);
 app.set('view engine', 'pug');
 app.set('views', './views');
 app.use(express.static(__dirname + '/public'));

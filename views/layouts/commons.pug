@@ -33,11 +33,11 @@ html
                       a(href='#') Đề tài
           if user
             li.nav-item.dropdown
-              a.nav-link(href='/users/profile/'+ user.magv) Đề cương          
+              a.nav-link(href='/file/myFile/') Đề cương          
           if user
             if user[0].role == "qtv"
               li.nav-item.dropdown
-                a#navbardrop.nav-link.dropdown-toggle(data-toggle='dropdown', href='/users/profile/'+ user.magv) Quản trị viên
+                a#navbardrop.nav-link.dropdown-toggle(data-toggle='dropdown') Quản trị viên
                 ul.dropdown-menu.animated.fadeIn
                   li
                     .row(style='width: 250px;')

@@ -2,3 +2,66 @@ extends ../layouts/commons.pug
 block content
   .container
     h1 De cuong cua #{user[0].tengv}
+    button.btn.btn-primary.mr-2(type='button', data-toggle='modal', data-target='#addFileModal')
+      | Tải file mới
+    // The Modal
+    #addFileModal.modal.fade
+      .modal-dialog.modal-md
+        .modal-content
+          // Modal Header
+          .modal-header
+            h4.modal-title Tải file mới
+            button.close(type='button', data-dismiss='modal') &times;
+          // Modal body
+          .modal-body
+            form(action= "/file/myFile", method="POST", enctype="multipart/form-data")
+              .form-group
+                label(for="linkFile") File:
+                input(type="file", name="linkFile", required).form-control-file
+              .form-group.was-validated
+                label(for="tendc") Tên file:
+                input(type="text", name="tendc", placeholder="Nhập tên file", required).form-control
+                .valid-feedback Tốt.
+                .invalid-feedback Xin điền trường này
+              .form-group
+                label(for="knmalop") Tên lớp:
+                select(name="knmalop").form-control.mb-2.mr-sm-2
+                  if lop
+                    each lops in lop
+                      option(value= lops.malop)= lops.tenlop
+              .form-group
+                label(for="knmamh") Tên môn học:
+                select(name="knmamh").form-control.mb-2.mr-sm-2
+                  if monhoc
+                    each monhocs in monhoc
+                      option(value= monhocs.mamh)= monhocs.tenmh
+              .form-group
+                label(for="knmahk") Tên học kì:
+                select(name="knmahk").form-control.mb-2.mr-sm-2
+                  if hocki
+                    each hockis in hocki
+                      option(value= hockis.mahk)= hockis.tenhk                     
+                div.valid-feedback Tốt.
+                div.invalid-feedback Xin điền trường này                      
+                div.valid-feedback Tốt.
+                div.invalid-feedback Xin điền trường này
+              button.btn.btn-primary.mb-2.mr-sm-2 Xác nhận
+              button.btn.btn-secondary(type='button', data-dismiss='modal', style='float: right') Đóng    
+    table.table.mt-4
+      thead
+        tr
+          th Tên đề cương
+          th Ngày tải
+          th Học kì
+          th Môn học
+          th Lớp
+          th Tải
+      each files in file
+        tr
+          td= files.tendc
+          td= files.ngaytai
+          td= files.mahk
+          td= files.mamh
+          td= files.malop
+          td
+            a(href= files.linkfile) Tải 

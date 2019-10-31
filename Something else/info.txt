@@ -1,3 +1,9 @@
 yV_csgao
 qtv@tvu.edu.vn
 $2a$10$oAnOKu.tRChcW17lR3sQw.q5vpfIMzVv165DpZFlH9CeI/sB50GEK
+
+HOST=localhost
+USER=root
+DATABASE=ql-dcct-mysql
+CLOUDINARY_API_KEY=737984878679449
+CLOUDINARY_API_SECRET=UWyafF8LTTx3KjYrmPTRHVgdkUA

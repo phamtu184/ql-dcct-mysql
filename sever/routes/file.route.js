@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express();
-var multer  = require('multer');
+const express = require('express');
+const router = express();
+const multer  = require('multer');
 const path = require('path');
-var cloudinary = require('cloudinary');
-var controller = require('../controllers/file.controller');
+const cloudinary = require('cloudinary');
+const controller = require('../controllers/file.controller');
 const auth = require('../middleware/authMidlleware');
 
 module.exports = router;
@@ -29,5 +29,7 @@ cloudinary.config({
 var upload = multer({ storage: storage });
 
 router.get('/myFile', auth.stillLogin, controller.listFile);
+
+router.get('/delFile/:id', controller.deleteFile);
 
 router.post('/myFile', upload.single('linkFile'), controller.postListFile);

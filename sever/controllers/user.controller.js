@@ -1,8 +1,7 @@
 const bcrypt = require("bcryptjs");
-let salt = bcrypt.genSaltSync(10);
-const shortid = require('shortid');
-var mysql = require('mysql');
-var connection = mysql.createConnection({
+const salt = bcrypt.genSaltSync(10);
+const mysql = require('mysql');
+const connection = mysql.createConnection({
   host: process.env.HOST,
   user: process.env.USER,
   database: process.env.DATABASE
@@ -32,14 +31,14 @@ module.exports.userList = async function(req, res){
   connection.query(`SELECT * FROM giangvien`, function (err, userss){
     connection.query(`SELECT * FROM giangvien WHERE role = 'admin' OR role ='user'`, function (err, users) {
       if (err) throw err;
-      connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
-        res.render('users/userList.pug',{
-          magv: magv,
-          user: user,
-          users: users,
-          userss: userss
+        connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
+          res.render('users/userList.pug',{
+            magv: magv,
+            user: user,
+            users: users,
+            userss: userss
+          })
         })
-      })
     });
   })
 }
@@ -177,7 +176,7 @@ module.exports.postUserSignup = async function(req, res){
             })
           })
         }
-        if(emailbd.length){
+        else if(emailbd.length){
           errors.push("Email này đã được đăng ký!");
           connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
             connection.query(`SELECT * FROM bomon`, function (err, bomon){

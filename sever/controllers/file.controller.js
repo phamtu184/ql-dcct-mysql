@@ -1,7 +1,6 @@
-var cloudinary = require('cloudinary');
-var mysql = require('mysql');
-let shortid = require('shortid');
-var connection = mysql.createConnection({
+const cloudinary = require('cloudinary');
+const mysql = require('mysql');
+const connection = mysql.createConnection({
   host: process.env.HOST,
   user: process.env.USER,
   database: process.env.DATABASE
@@ -9,6 +8,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 module.exports.listFile = async function(req, res){
+  
   const magv = req.signedCookies.magv;
   connection.query(`SELECT * FROM decuong WHERE magv = '${magv}'`, function (err, file){
     connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
@@ -29,13 +29,29 @@ module.exports.listFile = async function(req, res){
   })
 }
 
+module.exports.deleteFile = async function(req, res, next){
+  const id = req.params.id;
+  console.log(id);
+  connection.query(`SELECT * FROM decuong WHERE madc = '${id}'`, function (err, file){
+    if(file){
+      cloudinary.uploader.destroy(file[0].madc, function(result) { console.log(result) }, {invalidate: true, resource_type: "raw"});
+      connection.query(`DELETE FROM decuong WHERE madc = '${id}'`, function (err, deldecuong){
+        if (err) throw err;
+        console.log("Successful delete");
+        res.redirect('/file/myFile');
+      })
+    }
+    else{res.redirect('/file/myFile')}
+  })
+}
+
 module.exports.postListFile = async function(req, res){
   const magv = req.signedCookies.magv;
   if(req.body.tendc){
     cloudinary.uploader.upload(req.file.path, async function(result){
       let date = result.created_at.slice(0,10);
       let decuong ={
-        "madc": shortid.generate(),
+        "madc": result.public_id,
         "malop": req.body.knmalop,
         "mamh": req.body.knmamh,
         "mahk": req.body.knmahk,
@@ -48,6 +64,6 @@ module.exports.postListFile = async function(req, res){
         if (err) throw err;
       });
       res.redirect('/file/myFile')
-    }, {resource_type: "raw", use_filename:true, unique_filename:false});
+    }, {resource_type: "raw", use_filename:true, unique_filename: true});
   }
 }

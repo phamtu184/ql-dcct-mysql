@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express();
-var controller = require('../controllers/data.controller');
+const express = require('express');
+const router = express();
+const controller = require('../controllers/data.controller');
 const auth = require('../middleware/authMidlleware');
 
 module.exports = router;

@@ -55,7 +55,7 @@ block content
           th Học kì
           th Môn học
           th Lớp
-          th Tải
+          th Thao tác
       each files in file
         tr
           td= files.tendc
@@ -64,4 +64,17 @@ block content
           td= files.mamh
           td= files.malop
           td
-            a(href= files.linkfile) Tải 
+            a(href= files.linkfile).btn.btn-info.fas.fa-download.mr-2
+            #deleteFileModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+              .modal-dialog(role='document')
+                .modal-content
+                  .modal-header
+                    h5#exampleModalLabel.modal-title Xóa file
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                      span(aria-hidden='true') &times;
+                  .modal-body
+                    | Bạn có đồng ý xóa file?
+                  .modal-footer
+                    a(href="/file/delFile/" + files.madc ).btn.btn-primary Xác nhận
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Đóng  
+            button.btn.btn-danger.fas.fa-trash-alt(type='button', data-toggle='modal', data-target='#deleteFileModal').mr-2          

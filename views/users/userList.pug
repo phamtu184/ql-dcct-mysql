@@ -54,6 +54,7 @@ block content
           th Tên giảng viên
           th SĐT
           th Email
+          th Bộ môn
           th Vai trò
           th Action
       each user in userss 
@@ -62,6 +63,7 @@ block content
           td= user.tengv
           td= user.sdt
           td= user.email
+          td= user.mabm
           td= user.role
           td
             a(href= "/users/profile/" + user.magv).btn.btn-info Sửa

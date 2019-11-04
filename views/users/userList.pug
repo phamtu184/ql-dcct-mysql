@@ -56,14 +56,11 @@ block content
           th Email
           th Bộ môn
           th Vai trò
-          th Action
-      each user in userss 
+      each user in userss
         tr
           td= user.magv
           td= user.tengv
           td= user.sdt
           td= user.email
-          td= user.mabm
+          td= user.tenbm
           td= user.role
-          td
-            a(href= "/users/profile/" + user.magv).btn.btn-info Sửa

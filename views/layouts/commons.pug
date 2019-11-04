@@ -20,20 +20,22 @@ html
           span.navbar-toggler-icon
         ul#collapsibleNavbar.navbar-nav.collapse.navbar-collapse.justify-content-center
           li.nav-item.dropdown
-            a.nav-link(href='/') Trang Ch&#x1EE7;
-          li.nav-item.dropdown
-            a#navbardrop.nav-link.dropdown-toggle(href='#', data-toggle='dropdown') Giới thiệu
-            ul.dropdown-menu.animated.fadeIn
-              li
-                .row(style='width: 250px;')
-                  ul.list-unstyled.col-md-12
-                    li
-                      a(href='#') Tổng quan
-                    li
-                      a(href='#') Đề tài
+            a.nav-link(href='/') Trang Ch&#x1EE7;                   
           if user
             li.nav-item.dropdown
-              a.nav-link(href='/file/myFile/') Đề cương          
+              a.nav-link(href='/file/myFile/') Đề cương   
+          li.nav-item.dropdown
+            a#navbardrop.nav-link.dropdown-toggle(href='#', data-toggle='dropdown') Thống kê
+            ul.dropdown-menu.animated.fadeIn
+              li
+                .row(style='width: 230px;')
+                  ul.list-unstyled.col-md-12
+                    li
+                      a(href='#') Môn học
+                    li
+                      a(href='#') Lớp
+                    li
+                      a(href='#') Năm học-Học kì                       
           if user
             if user[0].role == "qtv"
               li.nav-item.dropdown
@@ -49,7 +51,7 @@ html
                         li
                           a(href='/users/changeuser') Sửa tài khoản                          
                         li
-                          a(href='/data/updateData') Cập nhật dữ liệu
+                          a(href='/data/updateData') Cập nhật dữ liệu                          
           if user
             li.nav-item
               a.nav-link.btn.btn-light(href='/users/logout') Đăng xuất

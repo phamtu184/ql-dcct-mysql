@@ -8,9 +8,9 @@ const connection = mysql.createConnection({
 connection.connect();
 
 module.exports.listFile = async function(req, res){
-  
   const magv = req.signedCookies.magv;
-  connection.query(`SELECT * FROM decuong WHERE magv = '${magv}'`, function (err, file){
+  connection.query(`SELECT decuong.madc AS madc ,decuong.linkfile AS linkfile, decuong.ngaytai AS ngaytai, lop.tenlop AS tenlop, monhoc.tenmh AS tenmh, hocki.tenhk AS tenhk
+   FROM decuong JOIN lop ON decuong.malop = lop.malop JOIN monhoc ON decuong.mamh = monhoc.mamh JOIN hocki ON decuong.mahk = hocki.mahk`, function (err, file){
     connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
       connection.query(`SELECT * FROM lop`, function (err, lop){
         connection.query(`SELECT * FROM monhoc`, function (err, monhoc){
@@ -31,7 +31,6 @@ module.exports.listFile = async function(req, res){
 
 module.exports.deleteFile = async function(req, res, next){
   const id = req.params.id;
-  console.log(id);
   connection.query(`SELECT * FROM decuong WHERE madc = '${id}'`, function (err, file){
     if(file){
       cloudinary.uploader.destroy(file[0].madc, function(result) { console.log(result) }, {invalidate: true, resource_type: "raw"});
@@ -46,8 +45,7 @@ module.exports.deleteFile = async function(req, res, next){
 }
 
 module.exports.postListFile = async function(req, res){
-  const magv = req.signedCookies.magv;
-  if(req.body.tendc){
+  if(req.body.knmalop){
     cloudinary.uploader.upload(req.file.path, async function(result){
       let date = result.created_at.slice(0,10);
       let decuong ={
@@ -56,7 +54,6 @@ module.exports.postListFile = async function(req, res){
         "mamh": req.body.knmamh,
         "mahk": req.body.knmahk,
         "magv": req.signedCookies.magv,
-        "tendc": req.body.tendc,
         "linkfile": result.url,
         "ngaytai": date
       }

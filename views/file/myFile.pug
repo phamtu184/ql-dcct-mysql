@@ -1,7 +1,7 @@
 extends ../layouts/commons.pug
 block content
   .container
-    h1 De cuong cua #{user[0].tengv}
+    h1 Đề cương của #{user[0].tengv}
     button.btn.btn-primary.mr-2(type='button', data-toggle='modal', data-target='#addFileModal')
       | Tải file mới
     // The Modal
@@ -18,11 +18,6 @@ block content
               .form-group
                 label(for="linkFile") File:
                 input(type="file", name="linkFile", required).form-control-file
-              .form-group.was-validated
-                label(for="tendc") Tên file:
-                input(type="text", name="tendc", placeholder="Nhập tên file", required).form-control
-                .valid-feedback Tốt.
-                .invalid-feedback Xin điền trường này
               .form-group
                 label(for="knmalop") Tên lớp:
                 select(name="knmalop").form-control.mb-2.mr-sm-2
@@ -50,7 +45,6 @@ block content
     table.table.mt-4
       thead
         tr
-          th Tên đề cương
           th Ngày tải
           th Học kì
           th Môn học
@@ -58,11 +52,10 @@ block content
           th Thao tác
       each files in file
         tr
-          td= files.tendc
           td= files.ngaytai
-          td= files.mahk
-          td= files.mamh
-          td= files.malop
+          td= files.tenhk
+          td= files.tenmh
+          td= files.tenlop
           td
             a(href= files.linkfile).btn.btn-info.fas.fa-download.mr-2
             a(href="/file/delFile/" + files.madc ).btn.btn-danger.fas.fa-trash-alt

@@ -24,34 +24,24 @@ html
           if user
             li.nav-item.dropdown
               a.nav-link(href='/file/myFile/') Đề cương   
-          li.nav-item.dropdown
-            a#navbardrop.nav-link.dropdown-toggle(href='#', data-toggle='dropdown') Thống kê
-            ul.dropdown-menu.animated.fadeIn
-              li
-                .row(style='width: 230px;')
-                  ul.list-unstyled.col-md-12
-                    li
-                      a(href='#') Môn học
-                    li
-                      a(href='#') Lớp
-                    li
-                      a(href='#') Năm học-Học kì                       
-          if user
-            if user[0].role == "qtv"
-              li.nav-item.dropdown
-                a#navbardrop.nav-link.dropdown-toggle(data-toggle='dropdown') Quản trị viên
-                ul.dropdown-menu.animated.fadeIn
-                  li
-                    .row(style='width: 250px;')
-                      ul.list-unstyled.col-md-12
-                        li
-                          a(href='/users/signup') Tạo tài khoản
-                        li
-                          a(href='/users/userList') Danh sách tài khoản
-                        li
-                          a(href='/users/changeuser') Sửa tài khoản                          
-                        li
-                          a(href='/data/updateData') Cập nhật dữ liệu                          
+          if user[0].role == "qtv" || user[0].role == "admin"
+            li.nav-item.dropdown
+              a.nav-link(href='/file/myFile/') Thống kê                      
+          if user[0].role == "qtv"
+            li.nav-item.dropdown
+              a#navbardrop.nav-link.dropdown-toggle(data-toggle='dropdown') Quản trị viên
+              ul.dropdown-menu.animated.fadeIn
+                li
+                  .row(style='width: 250px;')
+                    ul.list-unstyled.col-md-12
+                      li
+                        a(href='/users/signup') Tạo tài khoản
+                      li
+                        a(href='/users/userList') Danh sách tài khoản
+                      li
+                        a(href='/users/changeuser') Sửa tài khoản                          
+                      li
+                        a(href='/data/updateData') Cập nhật dữ liệu                          
           if user
             li.nav-item
               a.nav-link.btn.btn-light(href='/users/logout') Đăng xuất

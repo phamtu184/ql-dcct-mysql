@@ -44,6 +44,24 @@ module.exports.deleteFile = async function(req, res, next){
   })
 }
 
+module.exports.findFile = async function(req, res, next){
+  const magv = req.signedCookies.magv;
+  connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
+    connection.query(`SELECT * FROM giangvien`, function (err, gv){
+      connection.query(`SELECT * FROM lop`, function (err, lop){
+        connection.query(`SELECT * FROM hocki`, function (err, hk){
+          res.render('file/findFile.pug',{
+            user: user,
+            gv: gv,
+            lop: lop,
+            hk: hk
+          })
+        })
+      })
+    })
+  })
+}
+
 module.exports.postListFile = async function(req, res){
   if(req.body.knmalop){
     cloudinary.uploader.upload(req.file.path, async function(result){

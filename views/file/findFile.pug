@@ -1,0 +1,37 @@
+extends ../layouts/commons.pug
+block content
+  .container
+    h1 Thống kê
+    div.form-inline.pt-2.mb-2
+      label.mb-2.mr-sm-2.form-inline Thống kê theo:
+      select(style="width: 400px").form-control.mb-2.mr-sm-2#sectionChooser
+        option(value="") Chọn...
+        option(value="giangvien") Giảng viên
+        option(value="lop") Lớp
+        option(value="hocki") Học kì
+
+    form(action="/file/findFile", method="POST").panel#giangvien
+      div.form-group.form-inline   
+        label(for="gvtofind").mb-2.mr-sm-2 Giảng viên:
+        select(name="gvtofind").form-control.mb-2.mr-sm-2
+          each gvs in gv
+            option(value="gvtofind")= gvs.tengv
+      button.btn.btn-primary.mb-2.mr-sm-2 Thống kê
+
+    form(action="/file/findFile", method="POST").panel#lop
+      div.form-group.form-inline   
+        label(for="gvtofind").mb-2.mr-sm-2 Lớp:
+        select(name="gvtofind").form-control.mb-2.mr-sm-2
+          each lops in lop
+            option(value="gvtofind")= lops.tenlop
+      button.btn.btn-primary.mb-2.mr-sm-2 Thống kê
+
+    form(action="/file/findFile", method="POST").panel#hocki
+      div.form-group.form-inline   
+        label(for="gvtofind").mb-2.mr-sm-2 Học kì:
+        select(name="gvtofind").form-control.mb-2.mr-sm-2
+          each hks in hk
+            option(value="gvtofind")= hks.tenhk
+      button.btn.btn-primary.mb-2.mr-sm-2 Thống kê      
+
+  script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')

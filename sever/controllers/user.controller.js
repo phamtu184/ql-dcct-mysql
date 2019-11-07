@@ -193,9 +193,6 @@ module.exports.postUserSignup = async function(req, res){
         else{
           connection.query('INSERT INTO giangvien SET ?', giangvien, function (err, user){
             if (err) throw err;
-            res.render('users/userList.pug',{
-              user: user
-            })
           });
           res.redirect('/users/userList')
         }
@@ -305,16 +302,18 @@ module.exports.postChangeUser = function(req, res, next){
 }
 
 module.exports.userDelete = function(req, res, next){
-  if(req.body.emailToDelete){
-    connection.query(`DELETE FROM giangvien WHERE email = '${req.body.emailToDelete}'`, function (err, user){
-      if (err) throw err;
+  if(req.body.userToDelete){
+    connection.query(`DELETE FROM decuong WHERE magv = '${req.body.userToDelete}'`, function (err, delFile){
+      connection.query(`DELETE FROM giangvien WHERE magv = '${req.body.userToDelete}'`, function (err, delUser){
+        if (err) throw err;
+        console.log("Successful delete");
+      })
     })
-    console.log("Successful delete");
-    res.redirect('/users/userList/');
+  res.redirect('/users/userList/');
   }
   
-  if(req.body.emailToChangeRole){
-    connection.query(`UPDATE giangvien SET role = '${req.body.roleToChange}' WHERE email = '${req.body.emailToChangeRole}'`, function (err, user){
+  if(req.body.userToChangeRole){
+    connection.query(`UPDATE giangvien SET role = '${req.body.roleToChange}' WHERE magv = '${req.body.userToChangeRole}'`, function (err, user){
       if (err) throw err;
     })
     console.log("Successful change role");

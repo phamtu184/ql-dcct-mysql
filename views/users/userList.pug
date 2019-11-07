@@ -16,30 +16,30 @@ block content
           .modal-body
             form(action="/users/userList", method="POST")
               div.form-group.form-inline   
-                label(for="emailToDelete").mb-2.mr-sm-2 Tên đăng nhập muốn xóa:
-                select(name="emailToDelete").form-control.mb-2.mr-sm-2
+                label(for="userToDelete").mb-2.mr-sm-2 Tên đăng nhập muốn xóa:
+                select(name="userToDelete").form-control.mb-2.mr-sm-2
                   each user in users
-                    option(value= user.email)= user.email
+                    option(value= user.magv)= user.email
               button.btn.btn-primary.mb-2.mr-sm-2 Xóa
               button.btn.btn-secondary(type='button', data-dismiss='modal', style='float: right') Đóng
     button.btn.btn-primary.mr-2(type='button', data-toggle='modal', data-target='#changeRoleModal')
-      | Thay đổi vai trò
+      | Phân quyền
     // The Modal
     #changeRoleModal.modal.fade
       .modal-dialog.modal-md
         .modal-content
           // Modal Header
           .modal-header
-            h4.modal-title Thay đổi vai trò
+            h4.modal-title Phân quyền
             button.close(type='button', data-dismiss='modal') &times;
           // Modal body
           .modal-body
             form(action="/users/userList", method="POST")
               div.form-group.form-inline
-                label(for="emailToChangeRole").mb-2.mr-sm-2 Tên đăng nhập:
-                select(name="emailToChangeRole").form-control.mb-2.mr-sm-2
+                label(for="userToChangeRole").mb-2.mr-sm-2 Tên đăng nhập:
+                select(name="userToChangeRole").form-control.mb-2.mr-sm-2
                   each user in users
-                    option(value= user.email)= user.email
+                    option(value= user.magv)= user.email
               div.form-group.form-inline  
                 label(for="roleToChange").mb-2.mr-sm-2 Vai trò:
                 select(name="roleToChange").form-control.mb-2.mr-sm-2

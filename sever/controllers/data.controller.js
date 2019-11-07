@@ -108,7 +108,7 @@ module.exports.postData = async function(req, res){
                     if (err) throw err;
                   })
                   res.redirect('/data/updateData')
-                }
+                  }
                 })
               }
           
@@ -131,7 +131,7 @@ module.exports.postData = async function(req, res){
                       if (err) throw err;  
                     })
                     res.redirect('/data/updateData')
-                }
+                  }
                 })                
               }
           
@@ -154,7 +154,7 @@ module.exports.postData = async function(req, res){
                       if (err) throw err;
                     })
                     res.redirect('/data/updateData')
-                }
+                  }
                 })                 
 
               }
@@ -178,7 +178,7 @@ module.exports.postData = async function(req, res){
                       if (err) throw err; 
                     })
                     res.redirect('/data/updateData')
-                }
+                  }
                 })                
               }    
           
@@ -201,7 +201,7 @@ module.exports.postData = async function(req, res){
                       if (err) throw err;  
                     })
                     res.redirect('/data/updateData')
-                }
+                  }
                 })                   
               }
               
@@ -224,7 +224,7 @@ module.exports.postData = async function(req, res){
                       if (err) throw err;  
                     })
                     res.redirect('/data/updateData')
-                }
+                  }
                 })                
               }     
               
@@ -247,7 +247,7 @@ module.exports.postData = async function(req, res){
                       if (err) throw err;  
                     })
                     res.redirect('/data/updateData')
-                }
+                  }
                 })                
               }     
           
@@ -270,7 +270,7 @@ module.exports.postData = async function(req, res){
                       if (err) throw err; 
                     })
                     res.redirect('/data/updateData')
-                }
+                  }
                 })                
               }      
           
@@ -293,14 +293,13 @@ module.exports.postData = async function(req, res){
                       if (err) throw err;
                     })
                     res.redirect('/data/updateData')
-                }
+                  }
                 })                
               }        
-            })
             })
           })
         })
       })
     })
-
+  })
 }

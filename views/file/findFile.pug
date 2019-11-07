@@ -6,16 +6,16 @@ block content
       each infos in info
         .alert.alert-info= infos    
     form(action="/file/findFile", method="POST").mt-4
-      //- div.form-group.form-inline.float-left.mr-2
-      //-   label(for="gvtofind").mb-2.mr-sm-2 Giảng viên:
-      //-   select(name="gvtofind").form-control.mb-2.mr-sm-2
-      //-     option(value=" ") 
-      //-     each gvs in gv
-      //-       option(value="gvtofind")= gvs.tengv
+      div.form-group.form-inline.float-left.mr-2
+        label(for="gvtofind").mb-2.mr-sm-2 Giảng viên:
+        select(name="gvtofind").form-control.mb-2.mr-sm-2
+          option() 
+          each gvs in gv
+            option(value= gvs.magv)= gvs.tengv
       div.form-group.form-inline.float-left 
         label(for="hktofind").mb-2.mr-sm-2 Học kì:
         select(name="hktofind").form-control.mb-2.mr-sm-2
-          option(value=" ") 
+          option() 
           each hks in hk
             option(value= hks.mahk)= hks.tenhk        
       button.btn.btn-primary.mb-2.mr-sm-2.ml-2 Thống kê

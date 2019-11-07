@@ -86,22 +86,63 @@ module.exports.postFindFile = async function(req, res, next){
   const gvtofind = req.body.gvtofind;
   const hktofind = req.body.hktofind;
   connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
-    connection.query(`SELECT tenhk FROM hocki WHERE mahk = '${hktofind}'`, function (err, tenhocki){
-      info.push(`Thống kê những đề cương của học kì: ${tenhocki[0].tenhk}`);
-      connection.query(`SELECT * FROM giangvien`, function (err, gv){
-        connection.query(`SELECT * FROM hocki`, function (err, hk){        
-          connection.query(`SELECT decuong.linkfile AS linkfile, decuong.ngaytai AS ngaytai, lop.tenlop AS tenlop, monhoc.tenmh AS tenmh, giangvien.tengv AS tengv, hocki.tenhk AS tenhk
-          FROM decuong JOIN lop ON decuong.malop = lop.malop JOIN monhoc ON decuong.mamh = monhoc.mamh JOIN giangvien ON decuong.magv = giangvien.magv JOIN hocki ON decuong.mahk = hocki.mahk
-          WHERE hocki.mahk='${hktofind}'`, function (err, file){
-            res.render('file/findFile.pug',{
-              user: user,
-              file: file,
-              gv: gv,
-              hk: hk,
-              info: info
-            });          
+    connection.query(`SELECT * FROM giangvien`, function (err, gv){
+      connection.query(`SELECT * FROM hocki`, function (err, hk){
+        if(!hktofind && !gvtofind){
+          res.redirect('/file/findFile')
+        }
+        else if(hktofind && gvtofind){
+          connection.query(`SELECT tenhk FROM hocki WHERE mahk = '${hktofind}'`, function (err, tenhocki){
+            connection.query(`SELECT tengv FROM giangvien WHERE magv = '${gvtofind}'`, function (err, tengiangvien){
+              info.push(`Thống kê đề cương của học kì: ${tenhocki[0].tenhk} và giảng viên: ${tengiangvien[0].tengv}`);
+              connection.query(`SELECT decuong.linkfile AS linkfile, decuong.ngaytai AS ngaytai, lop.tenlop AS tenlop, monhoc.tenmh AS tenmh, giangvien.tengv AS tengv, hocki.tenhk AS tenhk
+              FROM decuong JOIN lop ON decuong.malop = lop.malop JOIN monhoc ON decuong.mamh = monhoc.mamh JOIN giangvien ON decuong.magv = giangvien.magv JOIN hocki ON decuong.mahk = hocki.mahk
+              WHERE hocki.mahk='${hktofind}' AND giangvien.magv='${gvtofind}'`, function (err, file){
+                res.render('file/findFile.pug',{
+                  user: user,
+                  file: file,
+                  gv: gv,
+                  hk: hk,
+                  info: info
+                });          
+              })
+            })
           })
-        })
+        }
+        else{
+          if(!gvtofind){
+            connection.query(`SELECT tenhk FROM hocki WHERE mahk = '${hktofind}'`, function (err, tenhocki){
+              info.push(`Thống kê đề cương của học kì: ${tenhocki[0].tenhk}`);
+              connection.query(`SELECT decuong.linkfile AS linkfile, decuong.ngaytai AS ngaytai, lop.tenlop AS tenlop, monhoc.tenmh AS tenmh, giangvien.tengv AS tengv, hocki.tenhk AS tenhk
+              FROM decuong JOIN lop ON decuong.malop = lop.malop JOIN monhoc ON decuong.mamh = monhoc.mamh JOIN giangvien ON decuong.magv = giangvien.magv JOIN hocki ON decuong.mahk = hocki.mahk
+              WHERE hocki.mahk='${hktofind}'`, function (err, file){
+                res.render('file/findFile.pug',{
+                  user: user,
+                  file: file,
+                  gv: gv,
+                  hk: hk,
+                  info: info
+                });          
+              })
+            })
+          }
+          if(!hktofind){
+            connection.query(`SELECT tengv FROM giangvien WHERE magv = '${gvtofind}'`, function (err, tengiangvien){
+              info.push(`Thống kê đề cương của giảng viên: ${tengiangvien[0].tengv}`);
+              connection.query(`SELECT decuong.linkfile AS linkfile, decuong.ngaytai AS ngaytai, lop.tenlop AS tenlop, monhoc.tenmh AS tenmh, giangvien.tengv AS tengv, hocki.tenhk AS tenhk
+              FROM decuong JOIN lop ON decuong.malop = lop.malop JOIN monhoc ON decuong.mamh = monhoc.mamh JOIN giangvien ON decuong.magv = giangvien.magv JOIN hocki ON decuong.mahk = hocki.mahk
+              WHERE giangvien.magv='${gvtofind}'`, function (err, file){
+                res.render('file/findFile.pug',{
+                  user: user,
+                  file: file,
+                  gv: gv,
+                  hk: hk,
+                  info: info
+                });          
+              })
+            })
+          }
+        }
       })
     })
   })

@@ -35,3 +35,5 @@ router.get('/delFile/:id', controller.deleteFile);
 router.get('/findFile', controller.findFile);
 
 router.post('/myFile', upload.single('linkFile'), controller.postListFile);
+
+router.post('/findFile', controller.postFindFile);

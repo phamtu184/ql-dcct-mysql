@@ -1,7 +1,7 @@
 extends ../layouts/commons.pug
 block content
   .container
-    h1 Đề cương của #{user[0].tengv}
+    h2.d-flex.justify-content-center Đề cương của #{user[0].tengv}
     button.btn.btn-primary.mr-2(type='button', data-toggle='modal', data-target='#addFileModal')
       | Tải file mới
     // The Modal

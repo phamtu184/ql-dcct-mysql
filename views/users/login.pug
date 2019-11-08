@@ -6,13 +6,11 @@ block content
         .alert.alert-danger= error
     form.was-validated(action='/users/login', method="POST")
       .form-group
-        label(for='email') Tên đăng nhập:
-        input#email.form-control(type='text', placeholder='Enter email', name='email', required='')
-        .valid-feedback Tốt.
-        .invalid-feedback Vui lòng điền vào trường này.
+        label(for="email") Email:
+        .input-group-prepend
+          input(type="text", name="email", placeholder='Nhập email', required).form-control
+          .input-group-text @tvu.edu.vn
       .form-group
         label(for='password') Password:
         input#password.form-control(type='password', placeholder='Enter password', name='password', required='')
-        .valid-feedback Tốt.
-        .invalid-feedback Vui lòng điền vào trường này.
       button.btn.btn-primary(type='submit') Đăng nhập

@@ -85,7 +85,7 @@ module.exports.changeUser = function(req, res){
 //-----------------POST----------------------
 
 module.exports.postUserLogin = async function(req, res){
-  const email = req.body.email;
+  const email = req.body.email + "@tvu.edu.vn";
   const password = req.body.password;
   connection.query(`SELECT * FROM giangvien WHERE email = '${email}'`, function (err, user) {
   if (!user.length) {
@@ -116,7 +116,7 @@ module.exports.postUserSignup = async function(req, res){
   let errors = [];
   const password = req.body.password;
   const passwordConf = req.body.passwordConf;
-  const email = req.body.email;
+  const email = req.body.email + "@tvu.edu.vn";
   const tengv = req.body.tengv;
   const sdt = req.body.sdt;
   const magv = req.signedCookies.magv;
@@ -134,6 +134,9 @@ module.exports.postUserSignup = async function(req, res){
   }
   if (sdt.length < 10 || sdt.length > 10){
     errors.push("Số điện thoại phải có 10 chữ số!");
+  }
+  if (req.body.magv.length > 15) {
+    errors.push("Mã giảng viên không được quá 15 kí tự!");
   }
   if (errors.length) {
     connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
@@ -153,7 +156,7 @@ module.exports.postUserSignup = async function(req, res){
     "magv":req.body.magv,
     "tengv": req.body.tengv,
     "sdt" : req.body.sdt,
-    "email": req.body.email,
+    "email": req.body.email+ "@tvu.edu.vn",
     "password": bcrypt.hashSync(req.body.password, salt),
     "passwordConf": bcrypt.hashSync(req.body.passwordConf, salt),
     "role": req.body.role,
@@ -205,7 +208,7 @@ module.exports.postChangeUser = function(req, res, next){
   let errors = [];
   const password = req.body.password;
   const passwordConf = req.body.passwordConf;
-  const email = req.body.email;
+  const email = req.body.email + "@tvu.edu.vn";
   const tengv = req.body.tengv;
   const sdt = req.body.sdt;
   const magv = req.signedCookies.magv;
@@ -245,7 +248,7 @@ module.exports.postChangeUser = function(req, res, next){
     "magv":req.body.magv,
     "tengv": req.body.tengv,
     "sdt" : req.body.sdt,
-    "email": req.body.email,
+    "email": req.body.email + "@tvu.edu.vn",
     "password": bcrypt.hashSync(req.body.password, salt),
     "passwordConf": bcrypt.hashSync(req.body.passwordConf, salt),
     "role": req.body.role,
@@ -307,9 +310,9 @@ module.exports.userDelete = function(req, res, next){
       connection.query(`DELETE FROM giangvien WHERE magv = '${req.body.userToDelete}'`, function (err, delUser){
         if (err) throw err;
         console.log("Successful delete");
+        res.redirect('/users/userList/');
       })
     })
-  res.redirect('/users/userList/');
   }
   
   if(req.body.userToChangeRole){

@@ -1,2 +1,35 @@
 extends ./layouts/commons.pug
 block content
+  #demo.carousel.slide(data-ride='carousel')
+    ul.carousel-indicators
+      li.active(data-target='#demo', data-slide-to='0')
+      li(data-target='#demo', data-slide-to='1')
+      li(data-target='#demo', data-slide-to='2')
+    .carousel-inner
+      .carousel-item.active
+        .overlay
+        img.d-block.w-100.image-top(src='./image/background-1.jpg', alt='')
+        .carousel-caption
+          h5.animated.flipInY(style='animation-delay: 0.4s; animation-duration: 2s') N&abreve;m h&#x1ECD;c m&#x1EDB;i b&#x1EAF;t &dstrok;&#x1EA7;u...
+          h1.animated.flipInY(style='animation-delay: 0.4s; animation-duration: 2s') &Dstrok;&abreve;ng k&iacute; ngay
+          button.btn.btn-outline-light.animated.flipInY(style='animation-delay: 0.4s; animation-duration: 2s') Ph&#x1B0;&#x1A1;ng th&#x1EE9;c 1
+          button.btn.btn-outline-light.animated.flipInY(style='animation-delay: 0.4s; animation-duration: 2s') Ph&#x1B0;&#x1A1;ng th&#x1EE9;c 2
+          button.btn.btn-outline-light.animated.flipInY(style='animation-delay: 0.4s; animation-duration: 2s') T&igrave;m hi&#x1EC3;u th&ecirc;m
+      .carousel-item
+        .overlay
+        img.d-block.w-100(src='./image/tvu_trencao_dhtv.png', alt='')
+        .carousel-caption
+          h5.animated.fadeInLeft Tr&#x1B0;&#x1EDD;ng &Dstrok;&#x1EA1;i H&#x1ECD;c Tr&agrave; Vinh
+          p.animated.fadeInLeft(style='animation-delay: 0.4s; animation-duration: 2s') Mang &dstrok;&#x1EBF;n m&ocirc;i tr&#x1B0;&#x1EDD;ng h&#x1ECD;c t&#x1EAD;p &dstrok;&#x1EC9;nh cao
+          button.btn.btn-outline-light.animated.fadeInLeft Xem th&ecirc;m
+      .carousel-item
+        .overlay
+        img.d-block.w-100(src='./image/background-2.jpg', alt='')
+        .carousel-caption
+          h5.animated.slideInDown B&#x1EC7;nh Vi&#x1EC7;n Tr&#x1B0;&#x1EDD;ng &Dstrok;&#x1EA1;i H&#x1ECD;c Tr&agrave; Vinh
+          p.animated.slideInDown Ch&#x1EA5;t L&#x1B0;&#x1EE3;ng Cao
+          button.btn.btn-outline-light.animated.fadeInLeft T&igrave;m Hi&#x1EC3;u Th&ecirc;m
+    a.carousel-control-prev(href='#demo', data-slide='prev')
+      span.carousel-control-prev-icon
+    a.carousel-control-next(href='#demo', data-slide='next')
+      span.carousel-control-next-icon

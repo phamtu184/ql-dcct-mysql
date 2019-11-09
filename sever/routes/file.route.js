@@ -30,9 +30,9 @@ var upload = multer({ storage: storage });
 
 router.get('/myFile', auth.stillLogin, controller.listFile);
 
-router.get('/delFile/:id', controller.deleteFile);
+router.get('/delFile/:id', auth.stillLogin, controller.deleteFile);
 
-router.get('/findFile', controller.findFile);
+router.get('/findFile', auth.permissionAdmin, controller.findFile);
 
 router.post('/myFile', upload.single('linkFile'), controller.postListFile);
 

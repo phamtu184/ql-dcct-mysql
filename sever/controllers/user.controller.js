@@ -120,11 +120,17 @@ module.exports.postUserSignup = async function(req, res){
   const tengv = req.body.tengv;
   const sdt = req.body.sdt;
   const magv = req.signedCookies.magv;
-  if (email.length < 4){
-    errors.push("Tên đăng nhập phải có từ 5 kí tự trở lên!")
+  if (email.length < 3){
+    errors.push("Email có từ 4 kí tự trở lên!")
+  }
+  if (email.length > 50){
+    errors.push("Email không được quá 50 kí tự!")
   }
   if (tengv.length < 4){
     errors.push("Họ và tên giáo viên phải có từ 5 kí tự trở lên!");
+  }
+  if (tengv.length > 50){
+    errors.push("Họ và tên giáo viên không được quá 50 kí tự!");
   }
   if (password !== passwordConf){
     errors.push("Mật khẩu và xác nhận mật khẩu không giống nhau!");
@@ -135,8 +141,8 @@ module.exports.postUserSignup = async function(req, res){
   if (sdt.length < 10 || sdt.length > 10){
     errors.push("Số điện thoại phải có 10 chữ số!");
   }
-  if (req.body.magv.length > 15) {
-    errors.push("Mã giảng viên không được quá 15 kí tự!");
+  if (req.body.magv.length > 5 || req.body.magv.length < 5) {
+    errors.push("Mã giảng viên phải có 5 kí tự!");
   }
   if (errors.length) {
     connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
@@ -212,11 +218,17 @@ module.exports.postChangeUser = function(req, res, next){
   const tengv = req.body.tengv;
   const sdt = req.body.sdt;
   const magv = req.signedCookies.magv;
-  if (email.length < 4){
-    errors.push("Tên đăng nhập phải có từ 5 kí tự trở lên!")
+  if (email.length < 3){
+    errors.push("Email có từ 4 kí tự trở lên!")
+  }
+  if (email.length > 50){
+    errors.push("Email không được quá 50 kí tự!")
   }
   if (tengv.length < 4){
     errors.push("Họ và tên giáo viên phải có từ 5 kí tự trở lên!");
+  }
+  if (tengv.length > 50){
+    errors.push("Họ và tên giáo viên không được quá 50 kí tự!");
   }
   if (password !== passwordConf){
     errors.push("Mật khẩu và xác nhận mật khẩu không giống nhau!");
@@ -226,6 +238,9 @@ module.exports.postChangeUser = function(req, res, next){
   }
   if (sdt.length < 10 || sdt.length > 10){
     errors.push("Số điện thoại phải có 10 chữ số!");
+  }
+  if (req.body.magv.length > 5 || req.body.magv.length < 5) {
+    errors.push("Mã giảng viên phải có 5 kí tự!");
   }
   if (errors.length) {
     connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){

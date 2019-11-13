@@ -4,10 +4,11 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
   host: process.env.HOST,
   user: process.env.USER,
-  database: process.env.DATABASE
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
+  port: process.env.PORT
 });
 connection.connect();
-
 module.exports.userLogin = async function(req, res){
     res.render('users/login')
 }
@@ -30,16 +31,16 @@ module.exports.userList = async function(req, res){
   const magv = req.signedCookies.magv;
   connection.query(`SELECT giangvien.tengv AS tengv, giangvien.magv AS magv, giangvien.sdt AS sdt, giangvien.email AS email, giangvien.role AS role,
   bomon.tenbm AS tenbm FROM giangvien JOIN bomon ON giangvien.mabm = bomon.mabm`, function (err, userss){
-      connection.query(`SELECT * FROM giangvien WHERE role = 'admin' OR role ='user'`, function (err, users) {
-        connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
-          res.render('users/userList.pug',{
-            magv: magv,
-            user: user,
-            users: users,
-            userss: userss
-          })
+    connection.query(`SELECT * FROM giangvien WHERE role = 'Cán bộ khoa' OR role ='Giảng viên'`, function (err, users) {
+      connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
+        res.render('users/userList.pug',{
+          magv: magv,
+          user: user,
+          users: users,
+          userss: userss
         })
-      });
+      })
+    });
   })
 }
 

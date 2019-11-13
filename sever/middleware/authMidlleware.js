@@ -2,10 +2,11 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
   host: process.env.HOST,
   user: process.env.USER,
-  database: process.env.DATABASE
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
+  port: process.env.PORT
 });
 connection.connect();
-
 
 module.exports.stillLogin = async function isLoggedIn(req, res, next) {
   const magv = req.signedCookies.magv;
@@ -25,7 +26,7 @@ module.exports.stillLogin = async function isLoggedIn(req, res, next) {
 module.exports.permissionQtv = async function(req, res , next){
   const magv = req.signedCookies.magv;
   connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
-    if(user[0].role !== "qtv"){
+    if(user[0].role !== "Quản trị viên"){
       res.redirect("/");
       return;
     }
@@ -36,7 +37,7 @@ module.exports.permissionQtv = async function(req, res , next){
 module.exports.permissionAdmin = async function(req, res , next){
   const magv = req.signedCookies.magv;
   connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
-    if(user[0].role !== "admin" && user[0].role !== "qtv"){
+    if(user[0].role !== "Cán bộ khoa" && user[0].role !== "Quản trị viên"){
       res.redirect("/");
       return;
     }

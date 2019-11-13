@@ -3,10 +3,11 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
   host: process.env.HOST,
   user: process.env.USER,
-  database: process.env.DATABASE
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
+  port: process.env.PORT
 });
 connection.connect();
-
 module.exports.listFile = async function(req, res){
   const magv = req.signedCookies.magv;
   connection.query(`SELECT decuong.madc AS madc ,decuong.linkfile AS linkfile, decuong.ngaytai AS ngaytai, lop.tenlop AS tenlop, monhoc.tenmh AS tenmh, hocki.tenhk AS tenhk

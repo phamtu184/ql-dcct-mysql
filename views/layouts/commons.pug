@@ -25,11 +25,11 @@ html
             li.nav-item.dropdown
               a.nav-link(href='/file/myFile/') Đề cương   
           if user
-            if user[0].role == "qtv" || user[0].role == "admin"
+            if user[0].role == "Quản trị viên" || user[0].role == "Cán bộ khoa"
               li.nav-item.dropdown
                 a.nav-link(href='/file/findFile/') Thống kê     
           if user                 
-            if user[0].role == "qtv"
+            if user[0].role == "Quản trị viên"
               li.nav-item.dropdown
                 a#navbardrop.nav-link.dropdown-toggle(data-toggle='dropdown') Quản trị viên
                 ul.dropdown-menu.animated.fadeIn

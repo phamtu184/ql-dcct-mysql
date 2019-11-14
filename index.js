@@ -10,7 +10,6 @@ const dbconfig = require('./sever/database/dbconfig');
 const port = process.env.PORT || 4000;
 var mysql = require('mysql');
 var connection = mysql.createConnection(dbconfig.connection);
-// connection.connect();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

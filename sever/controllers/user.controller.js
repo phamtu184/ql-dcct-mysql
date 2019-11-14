@@ -31,7 +31,7 @@ module.exports.userList = async function(req, res){
   const magv = req.signedCookies.magv;
   connection.query(`SELECT giangvien.tengv AS tengv, giangvien.magv AS magv, giangvien.sdt AS sdt, giangvien.email AS email, giangvien.role AS role,
   bomon.tenbm AS tenbm FROM giangvien JOIN bomon ON giangvien.mabm = bomon.mabm`, function (err, userss){
-    connection.query(`SELECT * FROM giangvien WHERE role = 'Cán bộ khoa' OR role ='Giảng viên'`, function (err, users) {
+    connection.query(`SELECT * FROM giangvien WHERE role = 'Lãnh đạo khoa' OR role ='Giảng viên'`, function (err, users) {
       connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
         res.render('users/userList.pug',{
           magv: magv,

@@ -25,7 +25,7 @@ html
             li.nav-item.dropdown
               a.nav-link(href='/file/myFile/') Đề cương   
           if user
-            if user[0].role == "Quản trị viên" || user[0].role == "Cán bộ khoa"
+            if user[0].role == "Quản trị viên" || user[0].role == "Lãnh đạo khoa"
               li.nav-item.dropdown
                 a.nav-link(href='/file/findFile/') Thống kê     
           if user                 

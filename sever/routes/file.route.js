@@ -9,9 +9,6 @@ const auth = require('../middleware/authMidlleware');
 module.exports = router;
 
 var storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, `D:/UploadFile`);
-  },
   filename: function (req, file, cb) {
     let math = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
     if (math.indexOf(file.mimetype) === -1) {

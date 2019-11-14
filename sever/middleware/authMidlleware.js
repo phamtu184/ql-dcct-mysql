@@ -37,7 +37,7 @@ module.exports.permissionQtv = async function(req, res , next){
 module.exports.permissionAdmin = async function(req, res , next){
   const magv = req.signedCookies.magv;
   connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
-    if(user[0].role !== "Cán bộ khoa" && user[0].role !== "Quản trị viên"){
+    if(user[0].role !== "Lãnh đạo khoa" && user[0].role !== "Quản trị viên"){
       res.redirect("/");
       return;
     }

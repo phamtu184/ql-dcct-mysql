@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 13, 2019 lúc 02:46 PM
+-- Thời gian đã tạo: Th10 14, 2019 lúc 09:04 AM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.3
 
@@ -115,12 +115,12 @@ CREATE TABLE `giangvien` (
 
 INSERT INTO `giangvien` (`magv`, `mabm`, `tengv`, `sdt`, `email`, `password`, `role`, `passwordConf`) VALUES
 ('00245', 'BMCNTT', 'Nguyễn Bảo Ân', '9089616326', 'annb@tvu.edu.vn', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06', 'Giảng viên', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06'),
-('00248', 'BMCNTT', 'Phạm Minh Đương', '8685672686', 'duongminh@tvu.edu.vn', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06', 'Cán bộ khoa', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06'),
+('00248', 'BMCNTT', 'Phạm Minh Đương', '8685672686', 'duongminh@tvu.edu.vn', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06', 'Lãnh đạo khoa', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06'),
 ('00250', 'BMCNTT', 'Võ Thành	C', '0909119657', 'vothanhc@tvu.edu.vn', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG', 'Giảng viên', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG'),
 ('00253', 'BMCNTT', 'Đoàn Phước Miền', '0978962954', 'phuocmien@tvu.edu.vn', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG', 'Giảng viên', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG'),
 ('00257', 'BMCNTT', 'Nguyễn Mộng	Hiền', '0975999579', 'hientvu@tvu.edu.vn', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG', 'Giảng viên', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG'),
 ('00258', 'BMCNTT', 'Nhan Minh Phúc', '0918603819', 'nhanminhphuc@tvu.edu.vn', '$2a$10$X3dIBZAInAcs.P65zYXtLeV59rDFDr1AIKi1VU4l5j4Gl.R5XvJ5m', 'Giảng viên', '$2a$10$X3dIBZAInAcs.P65zYXtLeV59rDFDr1AIKi1VU4l5j4Gl.R5XvJ5m'),
-('03562', 'BMCNTT', 'Nguyễn Khắc Quốc', '9180851804', 'nkquoc@tvu.edu.vn', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06', 'Cán bộ khoa', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06'),
+('03562', 'BMCNTT', 'Nguyễn Khắc Quốc', '9180851804', 'nkquoc@tvu.edu.vn', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06', 'Lãnh đạo khoa', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06'),
 ('14204', 'BMCNTT', 'Nguyễn Bá Nhiệm', '4651239874', 'nhiemnb@tvu.edu.vn', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG', 'Giảng viên', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG'),
 ('yV_csgao', 'BMCNTT', 'Quản trị viên', '0123456789', 'qtv@tvu.edu.vn', '$2a$10$oAnOKu.tRChcW17lR3sQw.q5vpfIMzVv165DpZFlH9CeI/sB50GEK', 'Quản trị viên', '$2a$10$oAnOKu.tRChcW17lR3sQw.q5vpfIMzVv165DpZFlH9CeI/sB50GEK');
 

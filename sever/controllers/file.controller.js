@@ -1,12 +1,7 @@
 const cloudinary = require('cloudinary');
 const mysql = require('mysql');
-const connection = mysql.createConnection({
-  host: process.env.HOST,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
-  port: process.env.PORT
-});
+const dbconfig = require('../database/dbconfig');
+const connection = mysql.createConnection(dbconfig.connection);
 connection.connect();
 module.exports.listFile = async function(req, res){
   const magv = req.signedCookies.magv;

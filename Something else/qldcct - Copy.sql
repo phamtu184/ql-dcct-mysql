@@ -31,8 +31,8 @@ drop table if exists NGANH;
 /*==============================================================*/
 create table BACHOC
 (
-   mabh                varchar(15) not null,
-   tenbh                varchar(50),
+   mabh                varchar(10) not null,
+   tenbh                varchar(20),
    primary key (mabh)
 );
 
@@ -41,9 +41,9 @@ create table BACHOC
 /*==============================================================*/
 create table BOMON
 (
-   mabm                 varchar(20) not null,
-   makhoa               varchar(20) not null,
-   tenbm                varchar(50),
+   mabm                 varchar(10) not null,
+   makhoa               varchar(10) not null,
+   tenbm                varchar(30),
    primary key (mabm)
 );
 
@@ -52,13 +52,13 @@ create table BOMON
 /*==============================================================*/
 create table DECUONG
 (
-   madc                 varchar(20) not null,
-   malop                varchar(20) not null,
-   magv                 varchar(20) not null,
-   mamh                 varchar(20) not null,
-   mahk                 varchar(20) not null,
+   madc                 int(10) not null AUTO_INCREMENT,
+   malop                varchar(10) not null,
+   magv                 varchar(5) not null,
+   mamh                 varchar(6) not null,
+   mahk                 varchar(7) not null,
    linkfile             varchar(120),
-   ngaytai              varchar(20),
+   ngaytai              varchar(10),
    primary key (madc)
 );
 
@@ -67,13 +67,13 @@ create table DECUONG
 /*==============================================================*/
 create table GIANGVIEN
 (
-   magv                 varchar(20) not null,
-   mabm                 varchar(20) not null,
+   magv                 varchar(5) not null,
+   mabm                 varchar(10) not null,
    tengv                varchar(50),
-   sdt                  varchar(20),
-   email                varchar(50),
+   sdt                  varchar(10),
+   email                varchar(30),
    password              varchar(100),
-   role                varchar(10),
+   role                varchar(15),
    passwordConf            varchar(100),
    primary key (magv)
 );
@@ -83,8 +83,8 @@ create table GIANGVIEN
 /*==============================================================*/
 create table HEDAOTAO
 (
-   mahdt                varchar(15) not null,
-   tenhdt               varchar(50),
+   mahdt                varchar(10) not null,
+   tenhdt               varchar(20),
    primary key (mahdt)
 );
 
@@ -93,9 +93,9 @@ create table HEDAOTAO
 /*==============================================================*/
 create table HOCKI
 (
-   mahk                 varchar(20) not null,
-   manh                 varchar(20) not null,
-   tenhk                varchar(50),
+   mahk                 varchar(7) not null,
+   namhoc                 varchar(4) not null,
+   tenhk                varchar(21),
    primary key (mahk)
 );
 
@@ -104,8 +104,8 @@ create table HOCKI
 /*==============================================================*/
 create table KHOA
 (
-   makhoa               varchar(20) not null,
-   tenkhoa              varchar(50),
+   makhoa               varchar(10) not null,
+   tenkhoa              varchar(30),
    primary key (makhoa)
 );
 
@@ -114,10 +114,10 @@ create table KHOA
 /*==============================================================*/
 create table LOP
 (
-   malop                varchar(20) not null,
-   mahdt                varchar(15) not null,
-   manganh              varchar(20) not null,
-   tenlop               varchar(50),
+   malop                varchar(10) not null,
+   mahdt                varchar(10) not null,
+   manganh              varchar(10) not null,
+   tenlop               varchar(30),
    primary key (malop)
 );
 
@@ -126,8 +126,8 @@ create table LOP
 /*==============================================================*/
 create table MONHOC
 (
-   mamh                 varchar(20) not null,
-   tenmh                varchar(50),
+   mamh                 varchar(6) not null,
+   tenmh                varchar(30),
    tclythuyet           int,
    tcthuchanh           int,
    primary key (mamh)
@@ -138,9 +138,8 @@ create table MONHOC
 /*==============================================================*/
 create table NAMHOC
 (
-   manh                 varchar(20) not null,
-   namhoc               varchar(50),
-   primary key (manh)
+   namhoc		varchar(4) not null,
+   primary key (namhoc)
 );
 
 /*==============================================================*/
@@ -148,9 +147,9 @@ create table NAMHOC
 /*==============================================================*/
 create table NGANH
 (
-   manganh              varchar(20) not null,
-   mabh                 varchar(15) not null,
-   tennganh             varchar(50),
+   manganh              varchar(10) not null,
+   mabh                 varchar(10) not null,
+   tennganh             varchar(30),
    primary key (manganh)
 );
 
@@ -172,8 +171,8 @@ alter table DECUONG add constraint FK_THUOC foreign key (mahk)
 alter table GIANGVIEN add constraint FK_PHANCONG foreign key (mabm)
       references BOMON (mabm) on delete restrict on update restrict;
 
-alter table HOCKI add constraint FK_TRONG foreign key (manh)
-      references NAMHOC (manh) on delete restrict on update restrict;
+alter table HOCKI add constraint FK_TRONG foreign key (namhoc)
+      references NAMHOC (namhoc) on delete restrict on update restrict;
 
 alter table LOP add constraint FK_CHITHUOC foreign key (mahdt)
       references HEDAOTAO (mahdt) on delete restrict on update restrict;

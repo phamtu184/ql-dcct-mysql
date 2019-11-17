@@ -14,9 +14,12 @@ block content
           option(value="bachoc") Bậc học
           option(value="nganhhoc") Ngành học
           option(value="lop") Lớp
-    if errors
-      each error in errors
-        .alert.alert-danger= error
+      .container.mt-2
+        .row
+          .col-md-6.ml-auto.mr-auto 
+            if errors
+              each error in errors
+                .alert.alert-danger= error
     .panel#khoa
       .container.mt-2
         .row
@@ -77,11 +80,6 @@ block content
                   .col-md-8.ml-auto.mr-auto     
                     form(action="/data/updateData", method="POST").was-validated
                       .form-group
-                        label(for="manh") Mã năm học:
-                        input(type="text", name="manh", placeholder='Nhập mã năm học', required).form-control
-                        .valid-feedback Tốt.
-                        .invalid-feedback Xin điền trường này
-                      .form-group
                         label(for="namhoc") Năm học:
                         input(type="text", name="namhoc", placeholder='Nhập năm học', required).form-control
                         .valid-feedback Tốt.
@@ -98,23 +96,17 @@ block content
                   .col-md-8.ml-auto.mr-auto     
                     form(action="/data/updateData", method="POST").was-validated
                       .form-group
-                        label(for="mahk") Mã học kì:
-                        input(type="text", name="mahk", placeholder='Nhập mã học kì', required).form-control
-                        .valid-feedback Tốt.
-                        .invalid-feedback Xin điền trường này
+                        label(for="tenhk") Học kì:
+                        select(name="tenhk").form-control.mb-2.mr-sm-2
+                          option(value="1") 1
+                          option(value="2") 2
+                          option(value="3") 3
                       .form-group
-                        label(for="tenhk") Tên học kì:
-                        input(type="text", name="tenhk", placeholder='Nhập tên học kì', required).form-control
-                        .valid-feedback Tốt.
-                        .invalid-feedback Xin điền trường này
-                      .form-group
-                        label(for="knmanh") Năm học:
-                        select(name="knmanh").form-control.mb-2.mr-sm-2
+                        label(for="knnamhoc") Năm học:
+                        select(name="knnamhoc").form-control.mb-2.mr-sm-2
                           if namhoc
                             each namhocs in namhoc
-                              option(value= namhocs.manh)= namhocs.namhoc
-                        .valid-feedback Tốt.
-                        .invalid-feedback Xin điền trường này
+                              option(value= namhocs.namhoc)= namhocs.namhoc
                       button.btn.btn-primary Thêm học kì
 
     .panel#monhoc

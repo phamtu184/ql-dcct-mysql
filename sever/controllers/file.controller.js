@@ -2,7 +2,6 @@ const cloudinary = require('cloudinary');
 const mysql = require('mysql');
 const dbconfig = require('../database/dbconfig');
 const connection = mysql.createConnection(dbconfig.connection);
-connection.connect();
 module.exports.listFile = async function(req, res){
   const magv = req.signedCookies.magv;
   connection.query(`SELECT decuong.madc AS madc ,decuong.linkfile AS linkfile, decuong.ngaytai AS ngaytai, lop.tenlop AS tenlop, monhoc.tenmh AS tenmh, hocki.tenhk AS tenhk

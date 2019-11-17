@@ -43,13 +43,12 @@ module.exports.postData = async function(req, res){
     "makhoa": req.body.knmakhoa
   }
   let nnamhoc={
-    "manh": req.body.manh,
     "namhoc":req.body.namhoc
   }
   let nhocki ={
-    "mahk":req.body.mahk,
-    "tenhk":req.body.tenhk,
-    "manh": req.body.knmanh
+    "mahk":"hk"+req.body.tenhk + req.body.knnamhoc,
+    "tenhk":"Học kì " + req.body.tenhk + " năm học " + req.body.knnamhoc,
+    "namhoc": req.body.knnamhoc
   }
   let nmonhoc ={
     "mamh":req.body.mamh,
@@ -82,12 +81,19 @@ module.exports.postData = async function(req, res){
         connection.query(`SELECT * FROM bachoc`, function (err, bachoc){
           connection.query(`SELECT * FROM hedaotao`, function (err, hedaotao){
             connection.query(`SELECT * FROM nganh`, function (err, nganh){
-              if (err) throw err;
               let errors = [];
               if(req.body.makhoa){
                 connection.query(`SELECT * FROM khoa WHERE makhoa = '${req.body.makhoa}'`, function(err, errInput){
+                  if(req.body.makhoa.length > 10){
+                    errors.push("Mã khoa không được quá 10 kí tự!");
+                  }
+                  if(req.body.tenkhoa.length > 30){
+                    errors.push("Tên khoa không được quá 30 kí tự!");
+                  }
                   if(errInput.length){
                     errors.push("Mã khoa đã tồn tại!");
+                  }
+                  if(errors.length){
                     res.render('data/updateData.pug',{
                       user: user,
                       errors: errors,
@@ -109,8 +115,16 @@ module.exports.postData = async function(req, res){
           
               if(req.body.mabm){
                 connection.query(`SELECT * FROM bomon WHERE mabm = '${req.body.mabm}'`, function(err, errInput){
+                  if(req.body.mabm.length > 10){
+                    errors.push("Mã bộ môn không được quá 10 kí tự!");
+                  }
+                  if(req.body.tenbm.length > 30){
+                    errors.push("Tên bộ môn không được quá 30 kí tự!");
+                  }
                   if(errInput.length){
                     errors.push("Mã bộ môn đã tồn tại!");
+                  }
+                  if(errors.length){
                     res.render('data/updateData.pug',{
                       user: user,
                       errors: errors,
@@ -130,10 +144,10 @@ module.exports.postData = async function(req, res){
                 })                
               }
           
-              if(req.body.manh){
-                connection.query(`SELECT * FROM namhoc WHERE manh = '${req.body.manh}'`, function(err, errInput){
+              if(req.body.namhoc){
+                connection.query(`SELECT * FROM namhoc WHERE namhoc = '${req.body.namhoc}'`, function(err, errInput){
                   if(errInput.length){
-                    errors.push("Mã năm học đã tồn tại!");
+                    errors.push("Năm học đã tồn tại!");
                     res.render('data/updateData.pug',{
                       user: user,
                       errors: errors,
@@ -154,10 +168,12 @@ module.exports.postData = async function(req, res){
 
               }
           
-              if(req.body.mahk){
-                connection.query(`SELECT * FROM hocki WHERE mahk = '${req.body.mahk}'`, function(err, errInput){
+              if(req.body.tenhk){
+                connection.query(`SELECT * FROM hocki WHERE mahk = '${"hk"+req.body.tenhk + req.body.knnamhoc}'`, function(err, errInput){
                   if(errInput.length){
-                    errors.push("Mã học kì đã tồn tại!");
+                    errors.push("Học kì đã tồn tại!");
+                  }
+                  if(errors.length){
                     res.render('data/updateData.pug',{
                       user: user,
                       errors: errors,
@@ -179,8 +195,16 @@ module.exports.postData = async function(req, res){
           
               if(req.body.mamh){
                 connection.query(`SELECT * FROM monhoc WHERE mamh = '${req.body.mamh}'`, function(err, errInput){
+                  if(req.body.mamh.length > 6 || req.body.mamh.length < 6){
+                    errors.push("Mã môn học phải bằng 6 kí tự!");
+                  }
+                  if(req.body.tenmh.length > 30){
+                    errors.push("Tên môn học không được quá 30 kí tự!");
+                  }
                   if(errInput.length){
                     errors.push("Mã môn học đã tồn tại!");
+                  }
+                  if(errors.length){
                     res.render('data/updateData.pug',{
                       user: user,
                       errors: errors,
@@ -202,8 +226,16 @@ module.exports.postData = async function(req, res){
               
               if(req.body.mahdt){
                 connection.query(`SELECT * FROM hedaotao WHERE mahdt = '${req.body.mahdt}'`, function(err, errInput){
+                  if(req.body.mahdt.length > 10 || req.body.mahdt.length < 10){
+                    errors.push("Mã hệ đào tạo phải bằng 10 kí tự!");
+                  }
+                  if(req.body.tenhdt.length > 20){
+                    errors.push("Tên môn học không được quá 20 kí tự!");
+                  }
                   if(errInput.length){
                     errors.push("Mã hệ đào tạo đã tồn tại!");
+                  }
+                  if(errors.length){
                     res.render('data/updateData.pug',{
                       user: user,
                       errors: errors,
@@ -225,8 +257,16 @@ module.exports.postData = async function(req, res){
               
               if(req.body.mabh){
                 connection.query(`SELECT * FROM bachoc WHERE mabh = '${req.body.mabh}'`, function(err, errInput){
+                  if(req.body.mabh.length > 10 || req.body.mabh.length < 10){
+                    errors.push("Mã bậc học phải bằng 10 kí tự!");
+                  }
+                  if(req.body.tenbh.length > 20){
+                    errors.push("Tên bậc học không được quá 20 kí tự!");
+                  }
                   if(errInput.length){
                     errors.push("Mã bậc học đã tồn tại!");
+                  }
+                  if(errors.length){
                     res.render('data/updateData.pug',{
                       user: user,
                       errors: errors,
@@ -248,8 +288,16 @@ module.exports.postData = async function(req, res){
           
               if(req.body.manganh){
                 connection.query(`SELECT * FROM nganh WHERE manganh = '${req.body.manganh}'`, function(err, errInput){
+                  if(req.body.manganh.length > 10 || req.body.manh.length < 10){
+                    errors.push("Mã ngành học phải bằng 10 kí tự!");
+                  }
+                  if(req.body.tennganh.length > 30){
+                    errors.push("Tên ngành không được quá 30 kí tự!");
+                  }
                   if(errInput.length){
                     errors.push("Mã ngành đã tồn tại!");
+                  }
+                  if(errors.length){
                     res.render('data/updateData.pug',{
                       user: user,
                       errors: errors,
@@ -271,8 +319,16 @@ module.exports.postData = async function(req, res){
           
               if(req.body.malop){
                 connection.query(`SELECT * FROM lop WHERE malop = '${req.body.malop}'`, function(err, errInput){
+                  if(req.body.malop.length > 10 || req.body.malop.length < 10){
+                    errors.push("Mã lớp phải bằng 10 kí tự!");
+                  }
+                  if(req.body.tenlop.length > 30){
+                    errors.push("Tên lớp không được quá 30 kí tự!");
+                  }
                   if(errInput.length){
                     errors.push("Mã lớp đã tồn tại!");
+                  }
+                  if(errors.length){
                     res.render('data/updateData.pug',{
                       user: user,
                       errors: errors,

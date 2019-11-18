@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 14, 2019 lúc 09:04 AM
+-- Thời gian đã tạo: Th10 17, 2019 lúc 08:56 AM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.3
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `bachoc` (
-  `mabh` varchar(15) COLLATE utf8_vietnamese_ci NOT NULL,
-  `tenbh` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL
+  `mabh` varchar(10) COLLATE utf8_vietnamese_ci NOT NULL,
+  `tenbh` varchar(20) COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
@@ -38,8 +38,8 @@ CREATE TABLE `bachoc` (
 --
 
 INSERT INTO `bachoc` (`mabh`, `tenbh`) VALUES
-('BHCD', 'Cao đẳng'),
-('BHDH', 'Đại học');
+('bhdh', 'Đại học'),
+('bqcd', 'Cao đẳng');
 
 -- --------------------------------------------------------
 
@@ -48,9 +48,9 @@ INSERT INTO `bachoc` (`mabh`, `tenbh`) VALUES
 --
 
 CREATE TABLE `bomon` (
-  `mabm` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `makhoa` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `tenbm` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL
+  `mabm` varchar(10) COLLATE utf8_vietnamese_ci NOT NULL,
+  `makhoa` varchar(10) COLLATE utf8_vietnamese_ci NOT NULL,
+  `tenbm` varchar(30) COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
@@ -58,7 +58,8 @@ CREATE TABLE `bomon` (
 --
 
 INSERT INTO `bomon` (`mabm`, `makhoa`, `tenbm`) VALUES
-('BMCNTT', 'KTCN', 'Công nghệ thông tin');
+('bmcntt', 'ktcn', 'Công nghệ thông tin'),
+('bmxd', 'ktcn', 'Xây dựng');
 
 -- --------------------------------------------------------
 
@@ -67,30 +68,14 @@ INSERT INTO `bomon` (`mabm`, `makhoa`, `tenbm`) VALUES
 --
 
 CREATE TABLE `decuong` (
-  `madc` varchar(60) COLLATE utf8_vietnamese_ci NOT NULL,
-  `malop` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `magv` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `mamh` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `mahk` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
+  `madc` int(10) NOT NULL,
+  `malop` varchar(10) COLLATE utf8_vietnamese_ci NOT NULL,
+  `magv` varchar(5) COLLATE utf8_vietnamese_ci NOT NULL,
+  `mamh` varchar(6) COLLATE utf8_vietnamese_ci NOT NULL,
+  `mahk` varchar(7) COLLATE utf8_vietnamese_ci NOT NULL,
   `linkfile` varchar(120) COLLATE utf8_vietnamese_ci DEFAULT NULL,
-  `ngaytai` varchar(15) COLLATE utf8_vietnamese_ci DEFAULT NULL
+  `ngaytai` varchar(10) COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
-
---
--- Đang đổ dữ liệu cho bảng `decuong`
---
-
-INSERT INTO `decuong` (`madc`, `malop`, `magv`, `mamh`, `mahk`, `linkfile`, `ngaytai`) VALUES
-('baocao_lgg24d.doc', 'DA17TT', '03562', '220283', 'hk22019', 'http://res.cloudinary.com/ntwayd/raw/upload/v1573650781/baocao_lgg24d.doc', '2019-11-13'),
-('baocao_yw9nvc.doc', 'DA17TT', '00245', '220078', 'hk12019', 'http://res.cloudinary.com/ntwayd/raw/upload/v1573473694/baocao_yw9nvc.doc', '2019-11-11'),
-('BC_PTTKHTTT_brbqul.docx', 'DA17TT', '00245', '410261', 'hk22019', 'http://res.cloudinary.com/ntwayd/raw/upload/v1573473718/BC_PTTKHTTT_brbqul.docx', '2019-11-11'),
-('BC_PTTKHTTT_qer9ce.docx', 'DA17TT', '03562', '220220', 'hk12019', 'http://res.cloudinary.com/ntwayd/raw/upload/v1573650760/BC_PTTKHTTT_qer9ce.docx', '2019-11-13'),
-('C__9_QL_KhachSan_hhj8sq.doc', 'DA17QTM', '00248', '220078', 'hk22018', 'http://res.cloudinary.com/ntwayd/raw/upload/v1573650942/C__9_QL_KhachSan_hhj8sq.doc', '2019-11-13'),
-('CSDL_cqaj47.docx', 'DA17TT', '00248', '220037', 'hk12019', 'http://res.cloudinary.com/ntwayd/raw/upload/v1573650868/CSDL_cqaj47.docx', '2019-11-13'),
-('My_Edit_14-4-19_yb4bir.docx', 'DA17QTM', '00245', '220054', 'hk22019', 'http://res.cloudinary.com/ntwayd/raw/upload/v1573473668/My_Edit_14-4-19_yb4bir.docx', '2019-11-11'),
-('Nhom_13_tuan_3_-_Copy_k11lai.docx', 'DA17QTM', '00248', '220220', 'hk22019', 'http://res.cloudinary.com/ntwayd/raw/upload/v1573650888/Nhom_13_tuan_3_-_Copy_k11lai.docx', '2019-11-13'),
-('Nhom_13_tuan_6_ubob5x.docx', 'DA17TT', '00248', '220283', 'hk12019', 'http://res.cloudinary.com/ntwayd/raw/upload/v1573650912/Nhom_13_tuan_6_ubob5x.docx', '2019-11-13'),
-('V3_Bao_cao_Cao_Mong_Ngan_1_szwnrb.docx', 'DA17TT', 'yV_csgao', '220037', 'hk22018', 'http://res.cloudinary.com/ntwayd/raw/upload/v1573473593/V3_Bao_cao_Cao_Mong_Ngan_1_szwnrb.docx', '2019-11-11');
 
 -- --------------------------------------------------------
 
@@ -99,13 +84,13 @@ INSERT INTO `decuong` (`madc`, `malop`, `magv`, `mamh`, `mahk`, `linkfile`, `nga
 --
 
 CREATE TABLE `giangvien` (
-  `magv` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `mabm` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
+  `magv` varchar(5) COLLATE utf8_vietnamese_ci NOT NULL,
+  `mabm` varchar(10) COLLATE utf8_vietnamese_ci NOT NULL,
   `tengv` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL,
-  `sdt` varchar(20) COLLATE utf8_vietnamese_ci DEFAULT NULL,
-  `email` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `sdt` varchar(10) COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `email` varchar(30) COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `password` varchar(100) COLLATE utf8_vietnamese_ci DEFAULT NULL,
-  `role` varchar(20) COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `role` varchar(15) COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `passwordConf` varchar(100) COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
@@ -114,15 +99,7 @@ CREATE TABLE `giangvien` (
 --
 
 INSERT INTO `giangvien` (`magv`, `mabm`, `tengv`, `sdt`, `email`, `password`, `role`, `passwordConf`) VALUES
-('00245', 'BMCNTT', 'Nguyễn Bảo Ân', '9089616326', 'annb@tvu.edu.vn', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06', 'Giảng viên', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06'),
-('00248', 'BMCNTT', 'Phạm Minh Đương', '8685672686', 'duongminh@tvu.edu.vn', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06', 'Lãnh đạo khoa', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06'),
-('00250', 'BMCNTT', 'Võ Thành	C', '0909119657', 'vothanhc@tvu.edu.vn', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG', 'Giảng viên', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG'),
-('00253', 'BMCNTT', 'Đoàn Phước Miền', '0978962954', 'phuocmien@tvu.edu.vn', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG', 'Giảng viên', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG'),
-('00257', 'BMCNTT', 'Nguyễn Mộng	Hiền', '0975999579', 'hientvu@tvu.edu.vn', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG', 'Giảng viên', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG'),
-('00258', 'BMCNTT', 'Nhan Minh Phúc', '0918603819', 'nhanminhphuc@tvu.edu.vn', '$2a$10$X3dIBZAInAcs.P65zYXtLeV59rDFDr1AIKi1VU4l5j4Gl.R5XvJ5m', 'Giảng viên', '$2a$10$X3dIBZAInAcs.P65zYXtLeV59rDFDr1AIKi1VU4l5j4Gl.R5XvJ5m'),
-('03562', 'BMCNTT', 'Nguyễn Khắc Quốc', '9180851804', 'nkquoc@tvu.edu.vn', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06', 'Lãnh đạo khoa', '$2a$10$0g9ty8z2FUhpVmoRpbOPKejQgjjMNXITFD9immv31.HTG6CRycG06'),
-('14204', 'BMCNTT', 'Nguyễn Bá Nhiệm', '4651239874', 'nhiemnb@tvu.edu.vn', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG', 'Giảng viên', '$2a$10$X3dIBZAInAcs.P65zYXtLeRarhytroPQwBQkh6aLKYf2JyfkDOJsG'),
-('yV_csgao', 'BMCNTT', 'Quản trị viên', '0123456789', 'qtv@tvu.edu.vn', '$2a$10$oAnOKu.tRChcW17lR3sQw.q5vpfIMzVv165DpZFlH9CeI/sB50GEK', 'Quản trị viên', '$2a$10$oAnOKu.tRChcW17lR3sQw.q5vpfIMzVv165DpZFlH9CeI/sB50GEK');
+('00666', 'bmcntt', 'Quản trị viên', '0453156897', 'qtv@tvu.edu.vn', '$2a$10$oAnOKu.tRChcW17lR3sQw.q5vpfIMzVv165DpZFlH9CeI/sB50GEK', 'Quản trị viên', '$2a$10$oAnOKu.tRChcW17lR3sQw.q5vpfIMzVv165DpZFlH9CeI/sB50GEK');
 
 -- --------------------------------------------------------
 
@@ -131,8 +108,8 @@ INSERT INTO `giangvien` (`magv`, `mabm`, `tengv`, `sdt`, `email`, `password`, `r
 --
 
 CREATE TABLE `hedaotao` (
-  `mahdt` varchar(15) COLLATE utf8_vietnamese_ci NOT NULL,
-  `tenhdt` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL
+  `mahdt` varchar(10) COLLATE utf8_vietnamese_ci NOT NULL,
+  `tenhdt` varchar(20) COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
@@ -140,7 +117,7 @@ CREATE TABLE `hedaotao` (
 --
 
 INSERT INTO `hedaotao` (`mahdt`, `tenhdt`) VALUES
-('HDTCQ', 'Chính quy');
+('hdtcq', 'Chính quy');
 
 -- --------------------------------------------------------
 
@@ -149,20 +126,20 @@ INSERT INTO `hedaotao` (`mahdt`, `tenhdt`) VALUES
 --
 
 CREATE TABLE `hocki` (
-  `mahk` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `manh` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `tenhk` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL
+  `mahk` varchar(7) COLLATE utf8_vietnamese_ci NOT NULL,
+  `namhoc` varchar(4) COLLATE utf8_vietnamese_ci NOT NULL,
+  `tenhk` varchar(21) COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `hocki`
 --
 
-INSERT INTO `hocki` (`mahk`, `manh`, `tenhk`) VALUES
-('hk12018', '18', 'Học kì 1 năm 2018'),
-('hk12019', '19', 'Học kì 1 năm 2019'),
-('hk22018', '18', 'Học kì 2 năm 2018'),
-('hk22019', '19', 'Học kì 2 năm 2019');
+INSERT INTO `hocki` (`mahk`, `namhoc`, `tenhk`) VALUES
+('hk12017', '2017', 'Học kì 1 năm học 2017'),
+('hk12018', '2018', 'Học kì 1 năm học 2018'),
+('hk12019', '2019', 'Học kì 1 năm học 2019'),
+('hk22019', '2019', 'Học kì 2 năm học 2019');
 
 -- --------------------------------------------------------
 
@@ -171,8 +148,8 @@ INSERT INTO `hocki` (`mahk`, `manh`, `tenhk`) VALUES
 --
 
 CREATE TABLE `khoa` (
-  `makhoa` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `tenkhoa` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL
+  `makhoa` varchar(10) COLLATE utf8_vietnamese_ci NOT NULL,
+  `tenkhoa` varchar(30) COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
@@ -180,7 +157,8 @@ CREATE TABLE `khoa` (
 --
 
 INSERT INTO `khoa` (`makhoa`, `tenkhoa`) VALUES
-('KTCN', 'Kĩ thuật và công nghệ');
+('ktcn', 'Kĩ thuật và công nghệ'),
+('yd', 'Y dược');
 
 -- --------------------------------------------------------
 
@@ -189,10 +167,10 @@ INSERT INTO `khoa` (`makhoa`, `tenkhoa`) VALUES
 --
 
 CREATE TABLE `lop` (
-  `malop` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `mahdt` varchar(15) COLLATE utf8_vietnamese_ci NOT NULL,
-  `manganh` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `tenlop` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL
+  `malop` varchar(10) COLLATE utf8_vietnamese_ci NOT NULL,
+  `mahdt` varchar(10) COLLATE utf8_vietnamese_ci NOT NULL,
+  `manganh` varchar(10) COLLATE utf8_vietnamese_ci NOT NULL,
+  `tenlop` varchar(30) COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
@@ -200,8 +178,8 @@ CREATE TABLE `lop` (
 --
 
 INSERT INTO `lop` (`malop`, `mahdt`, `manganh`, `tenlop`) VALUES
-('DA17QTM', 'HDTCQ', '7480201', 'Đại học Quản trị mạng 2017'),
-('DA17TT', 'HDTCQ', '7480201', 'Đại học Công nghệ Thông tin 2017');
+('DA17QTM', 'hdtcq', 'nqtm', 'Đại học quản trị mạng'),
+('DA17TT', 'hdtcq', 'ncntt', 'Đại học công nghệ thông tin');
 
 -- --------------------------------------------------------
 
@@ -210,8 +188,8 @@ INSERT INTO `lop` (`malop`, `mahdt`, `manganh`, `tenlop`) VALUES
 --
 
 CREATE TABLE `monhoc` (
-  `mamh` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `tenmh` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `mamh` varchar(6) COLLATE utf8_vietnamese_ci NOT NULL,
+  `tenmh` varchar(30) COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `tclythuyet` int(11) DEFAULT NULL,
   `tcthuchanh` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
@@ -221,12 +199,8 @@ CREATE TABLE `monhoc` (
 --
 
 INSERT INTO `monhoc` (`mamh`, `tenmh`, `tclythuyet`, `tcthuchanh`) VALUES
-('220037', 'Kỹ thuật lập trình', 1, 2),
-('220054', 'Lập trình web', 1, 2),
-('220078', 'Quản trị dự án công nghệ thông tin', 1, 2),
-('220220', 'Tin học ứng dụng cơ bản', 1, 2),
-('220283', 'Phát triển hệ thống thông tin', 1, 2),
-('410261', 'Thiết kế web cơ bản', 1, 2);
+('220037', 'Kỹ thuật lập trình', 2, 1),
+('410261', 'Thiết kế web cơ bản', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -235,18 +209,17 @@ INSERT INTO `monhoc` (`mamh`, `tenmh`, `tclythuyet`, `tcthuchanh`) VALUES
 --
 
 CREATE TABLE `namhoc` (
-  `manh` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `namhoc` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL
+  `namhoc` varchar(4) COLLATE utf8_vietnamese_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `namhoc`
 --
 
-INSERT INTO `namhoc` (`manh`, `namhoc`) VALUES
-('18', '2018'),
-('19', '2019'),
-('2017', '2017');
+INSERT INTO `namhoc` (`namhoc`) VALUES
+('2017'),
+('2018'),
+('2019');
 
 -- --------------------------------------------------------
 
@@ -255,9 +228,9 @@ INSERT INTO `namhoc` (`manh`, `namhoc`) VALUES
 --
 
 CREATE TABLE `nganh` (
-  `manganh` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `mabh` varchar(15) COLLATE utf8_vietnamese_ci NOT NULL,
-  `tennganh` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL
+  `manganh` varchar(10) COLLATE utf8_vietnamese_ci NOT NULL,
+  `mabh` varchar(10) COLLATE utf8_vietnamese_ci NOT NULL,
+  `tennganh` varchar(30) COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
@@ -265,7 +238,8 @@ CREATE TABLE `nganh` (
 --
 
 INSERT INTO `nganh` (`manganh`, `mabh`, `tennganh`) VALUES
-('7480201', 'BHDH', 'ĐH Công nghệ thông tin');
+('ncntt', 'bhdh', 'Công nghệ thông tin'),
+('nqtm', 'bhdh', 'Quản trị mạng');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -312,7 +286,7 @@ ALTER TABLE `hedaotao`
 --
 ALTER TABLE `hocki`
   ADD PRIMARY KEY (`mahk`),
-  ADD KEY `FK_TRONG` (`manh`);
+  ADD KEY `FK_TRONG` (`namhoc`);
 
 --
 -- Chỉ mục cho bảng `khoa`
@@ -338,7 +312,7 @@ ALTER TABLE `monhoc`
 -- Chỉ mục cho bảng `namhoc`
 --
 ALTER TABLE `namhoc`
-  ADD PRIMARY KEY (`manh`);
+  ADD PRIMARY KEY (`namhoc`);
 
 --
 -- Chỉ mục cho bảng `nganh`
@@ -346,6 +320,16 @@ ALTER TABLE `namhoc`
 ALTER TABLE `nganh`
   ADD PRIMARY KEY (`manganh`),
   ADD KEY `FK_CHO` (`mabh`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `decuong`
+--
+ALTER TABLE `decuong`
+  MODIFY `madc` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -376,7 +360,7 @@ ALTER TABLE `giangvien`
 -- Các ràng buộc cho bảng `hocki`
 --
 ALTER TABLE `hocki`
-  ADD CONSTRAINT `FK_TRONG` FOREIGN KEY (`manh`) REFERENCES `namhoc` (`manh`);
+  ADD CONSTRAINT `FK_TRONG` FOREIGN KEY (`namhoc`) REFERENCES `namhoc` (`namhoc`);
 
 --
 -- Các ràng buộc cho bảng `lop`

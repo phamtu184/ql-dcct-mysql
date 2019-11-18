@@ -28,7 +28,7 @@ module.exports.deleteFile = async function(req, res, next){
   const id = req.params.id;
   connection.query(`SELECT * FROM decuong WHERE madc = '${id}'`, function (err, file){
     if(file){
-      cloudinary.uploader.destroy(file[0].madc, function(result) { console.log(result) }, {invalidate: true, resource_type: "raw"});
+      cloudinary.uploader.destroy(file[0].publicId, function(result) { console.log(result) }, {invalidate: true, resource_type: "raw"});
       connection.query(`DELETE FROM decuong WHERE madc = '${id}'`, function (err, deldecuong){
         if (err) throw err;
         console.log("infoful delete");
@@ -55,22 +55,32 @@ module.exports.findFile = async function(req, res, next){
 }
 
 module.exports.postListFile = async function(req, res){
+  let errors = [];
   if(req.body.knmalop){
     cloudinary.uploader.upload(req.file.path, async function(result){
       let date = result.created_at.slice(0,10);
+      let madecuong = req.body.knmalop+req.body.knmamh+req.body.knmahk;
       let decuong ={
-        "madc": result.public_id,
+        "madc": madecuong,
         "malop": req.body.knmalop,
         "mamh": req.body.knmamh,
         "mahk": req.body.knmahk,
         "magv": req.signedCookies.magv,
         "linkfile": result.url,
-        "ngaytai": date
+        "ngaytai": date,
+        "publicId": result.public_id
       }
-      connection.query('INSERT INTO decuong SET ?', decuong, function (err, decuong){
-        if (err) throw err;
-      });
-      res.redirect('/file/myFile')
+      connection.query(`SELECT * FROM decuong WHERE madc = '${madecuong}'`, function(err, errInput){
+        if (errInput.length){
+          res.send("Đề cương đã tồn tại");
+        }
+        else{
+          connection.query('INSERT INTO decuong SET ?', decuong, function (err, decuong){
+            if (err) throw err;
+          });
+          res.redirect('/file/myFile')
+        }
+      })
     }, {resource_type: "raw", use_filename:true, unique_filename: true});
   }
 }

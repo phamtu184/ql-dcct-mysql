@@ -3,32 +3,52 @@ const dbconfig = require('../database/dbconfig');
 const connection = mysql.createConnection(dbconfig.connection);
 module.exports.getData = async function(req, res){
   const magv = req.signedCookies.magv;
-  if (magv){
-    connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user) {
-      if (err) throw err;
-      connection.query(`SELECT * FROM khoa`, function (err, khoa){
-        connection.query(`SELECT * FROM namhoc`, function (err, namhoc){
-          connection.query(`SELECT * FROM bachoc`, function (err, bachoc){
-            connection.query(`SELECT * FROM hedaotao`, function (err, hedaotao){
-              connection.query(`SELECT * FROM nganh`, function (err, nganh){
-                res.render('data/updateData',{
-                  user: user,
-                  khoa: khoa,
-                  namhoc: namhoc,
-                  bachoc: bachoc,
-                  hedaotao: hedaotao,
-                  nganh: nganh
-                })
+  connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user) {
+    if (err) throw err;
+    connection.query(`SELECT * FROM khoa`, function (err, khoa){
+      connection.query(`SELECT * FROM namhoc`, function (err, namhoc){
+        connection.query(`SELECT * FROM bachoc`, function (err, bachoc){
+          connection.query(`SELECT * FROM hedaotao`, function (err, hedaotao){
+            connection.query(`SELECT * FROM nganh`, function (err, nganh){
+              res.render('data/updateData',{
+                user: user,
+                khoa: khoa,
+                namhoc: namhoc,
+                bachoc: bachoc,
+                hedaotao: hedaotao,
+                nganh: nganh
               })
             })
           })
         })
       })
-    });
-  }
-  else {
-      res.render('index.pug')
-  }
+    })
+  });
+}
+
+module.exports.viewData = async function(req, res){
+  const magv = req.signedCookies.magv;
+  connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user) {
+    if (err) throw err;
+    connection.query(`SELECT * FROM khoa`, function (err, khoa){
+      connection.query(`SELECT * FROM namhoc`, function (err, namhoc){
+        connection.query(`SELECT * FROM bachoc`, function (err, bachoc){
+          connection.query(`SELECT * FROM hedaotao`, function (err, hedaotao){
+            connection.query(`SELECT * FROM nganh`, function (err, nganh){
+              res.render('data/viewData',{
+                user: user,
+                khoa: khoa,
+                namhoc: namhoc,
+                bachoc: bachoc,
+                hedaotao: hedaotao,
+                nganh: nganh
+              })
+            })
+          })
+        })
+      })
+    })
+  });
 }
 
 module.exports.postData = async function(req, res){
@@ -146,8 +166,13 @@ module.exports.postData = async function(req, res){
           
               if(req.body.namhoc){
                 connection.query(`SELECT * FROM namhoc WHERE namhoc = '${req.body.namhoc}'`, function(err, errInput){
+                  if(req.body.namhoc.length<4 || req.body.namhoc.length>4){
+                    errors.push("Năm học phải có 4 kí tự!")
+                  }
                   if(errInput.length){
                     errors.push("Năm học đã tồn tại!");
+                  }
+                  if(errors.length){
                     res.render('data/updateData.pug',{
                       user: user,
                       errors: errors,
@@ -257,8 +282,8 @@ module.exports.postData = async function(req, res){
               
               if(req.body.mabh){
                 connection.query(`SELECT * FROM bachoc WHERE mabh = '${req.body.mabh}'`, function(err, errInput){
-                  if(req.body.mabh.length > 10 || req.body.mabh.length < 10){
-                    errors.push("Mã bậc học phải bằng 10 kí tự!");
+                  if(req.body.mabh.length > 10){
+                    errors.push("Mã bậc học không được quá 10 kí tự!");
                   }
                   if(req.body.tenbh.length > 20){
                     errors.push("Tên bậc học không được quá 20 kí tự!");

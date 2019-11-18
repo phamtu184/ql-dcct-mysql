@@ -20,30 +20,28 @@ block content
                 input(type="file", name="linkFile", required).form-control-file
               .form-group
                 label(for="knmalop") Tên lớp:
-                select(name="knmalop").form-control.mb-2.mr-sm-2
+                select(name="knmalop").form-control.mb-2.mr-sm-2.custom-select
                   if lop
                     each lops in lop
                       option(value= lops.malop)= lops.tenlop
               .form-group
                 label(for="knmamh") Tên môn học:
-                select(name="knmamh").form-control.mb-2.mr-sm-2
+                select(name="knmamh").form-control.mb-2.mr-sm-2.custom-select
                   if monhoc
                     each monhocs in monhoc
                       option(value= monhocs.mamh)= monhocs.tenmh
               .form-group
                 label(for="knmahk") Tên học kì:
-                select(name="knmahk").form-control.mb-2.mr-sm-2
+                select(name="knmahk").form-control.mb-2.mr-sm-2.custom-select
                   if hocki
                     each hockis in hocki
                       option(value= hockis.mahk)= hockis.tenhk                     
                 div.valid-feedback Tốt.
                 div.invalid-feedback Xin điền trường này                      
-                div.valid-feedback Tốt.
-                div.invalid-feedback Xin điền trường này
               button.btn.btn-primary.mb-2.mr-sm-2 Xác nhận
               button.btn.btn-secondary(type='button', data-dismiss='modal', style='float: right') Đóng    
-    table.table.mt-4
-      thead
+    table.table.mt-4.table-bordered
+      thead.thead-light
         tr
           th Ngày tải
           th Học kì

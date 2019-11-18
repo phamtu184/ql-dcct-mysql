@@ -252,7 +252,6 @@ module.exports.postChangeUser = function(req, res, next){
         })
       })
   })
-
 }
   let giangvien ={
     "magv":req.body.magv,

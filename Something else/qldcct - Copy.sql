@@ -59,6 +59,7 @@ create table DECUONG
    mahk                 varchar(7) not null,
    linkfile             varchar(120),
    ngaytai              varchar(10),
+   publicId		varchar(50),
    primary key (madc)
 );
 

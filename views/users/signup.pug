@@ -32,13 +32,13 @@ block content
       .form-row.mt-2
         .col
           label(for="knmabm") Tên bộ môn:
-          select(name="knmabm").form-control.mb-2.mr-sm-2
+          select(name="knmabm").form-control.mb-2.mr-sm-2.custom-select
             if bomon
               each bomons in bomon
                 option(value= bomons.mabm)= bomons.tenbm
         .col
           label(for="role") Vai Trò:
-          select(name="role").form-control
+          select(name="role").form-control.custom-select
             option(value="Giảng viên") Giảng viên
             option(value="Lãnh đạo khoa") Lãnh đạo khoa
       button.btn.btn-primary.mt-2 Đăng kí

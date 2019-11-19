@@ -32,7 +32,7 @@ app.get('/', async function(req, res){
     });
   }
   else {
-      res.render('index.pug')
+      res.render('index.pug',)
   }
 });
 

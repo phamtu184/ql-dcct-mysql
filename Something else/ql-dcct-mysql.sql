@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 17, 2019 lúc 08:56 AM
+-- Thời gian đã tạo: Th10 19, 2019 lúc 02:05 PM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.3
 
@@ -68,14 +68,22 @@ INSERT INTO `bomon` (`mabm`, `makhoa`, `tenbm`) VALUES
 --
 
 CREATE TABLE `decuong` (
-  `madc` int(10) NOT NULL,
+  `madc` varchar(30) COLLATE utf8_vietnamese_ci NOT NULL,
   `malop` varchar(10) COLLATE utf8_vietnamese_ci NOT NULL,
   `magv` varchar(5) COLLATE utf8_vietnamese_ci NOT NULL,
   `mamh` varchar(6) COLLATE utf8_vietnamese_ci NOT NULL,
   `mahk` varchar(7) COLLATE utf8_vietnamese_ci NOT NULL,
   `linkfile` varchar(120) COLLATE utf8_vietnamese_ci DEFAULT NULL,
-  `ngaytai` varchar(10) COLLATE utf8_vietnamese_ci DEFAULT NULL
+  `ngaytai` varchar(10) COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `publicId` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `decuong`
+--
+
+INSERT INTO `decuong` (`madc`, `malop`, `magv`, `mamh`, `mahk`, `linkfile`, `ngaytai`, `publicId`) VALUES
+('DA17QTM220037hk12017', 'DA17QTM', '00666', '220037', 'hk12017', 'http://res.cloudinary.com/ntwayd/raw/upload/v1574083687/BC_PTTKHTTT_DeCuongChiTiet_rh2zrl.docx', '2019-11-18', 'BC_PTTKHTTT_DeCuongChiTiet_rh2zrl.docx');
 
 -- --------------------------------------------------------
 
@@ -99,7 +107,10 @@ CREATE TABLE `giangvien` (
 --
 
 INSERT INTO `giangvien` (`magv`, `mabm`, `tengv`, `sdt`, `email`, `password`, `role`, `passwordConf`) VALUES
-('00666', 'bmcntt', 'Quản trị viên', '0453156897', 'qtv@tvu.edu.vn', '$2a$10$oAnOKu.tRChcW17lR3sQw.q5vpfIMzVv165DpZFlH9CeI/sB50GEK', 'Quản trị viên', '$2a$10$oAnOKu.tRChcW17lR3sQw.q5vpfIMzVv165DpZFlH9CeI/sB50GEK');
+('00245', 'bmcntt', 'Nguyễn Bảo Ân', '0908961632', 'annb@tvu.edu.vn', '$2a$10$cRyaN6qPBSXBs8bcxoSfqOjK4Ycq5xnNsEVO7B8KTK0ywa2gN9CTq', 'Giảng viên', '$2a$10$cRyaN6qPBSXBs8bcxoSfqOjK4Ycq5xnNsEVO7B8KTK0ywa2gN9CTq'),
+('00248', 'bmcntt', 'Phạm Minh Đương', '0868567268', 'duongminh@tvu.edu.vn', '$2a$10$cRyaN6qPBSXBs8bcxoSfqOjK4Ycq5xnNsEVO7B8KTK0ywa2gN9CTq', 'Giảng viên', '$2a$10$cRyaN6qPBSXBs8bcxoSfqOjK4Ycq5xnNsEVO7B8KTK0ywa2gN9CTq'),
+('00666', 'bmcntt', 'Quản trị viên', '0453156897', 'qtv@tvu.edu.vn', '$2a$10$oAnOKu.tRChcW17lR3sQw.q5vpfIMzVv165DpZFlH9CeI/sB50GEK', 'Quản trị viên', '$2a$10$oAnOKu.tRChcW17lR3sQw.q5vpfIMzVv165DpZFlH9CeI/sB50GEK'),
+('03562', 'bmcntt', 'Nguyễn Khắc Quốc', '0918085180', 'nkquoc@tvu.edu.vn', '$2a$10$cRyaN6qPBSXBs8bcxoSfqOjK4Ycq5xnNsEVO7B8KTK0ywa2gN9CTq', 'Giảng viên', '$2a$10$cRyaN6qPBSXBs8bcxoSfqOjK4Ycq5xnNsEVO7B8KTK0ywa2gN9CTq');
 
 -- --------------------------------------------------------
 
@@ -320,16 +331,6 @@ ALTER TABLE `namhoc`
 ALTER TABLE `nganh`
   ADD PRIMARY KEY (`manganh`),
   ADD KEY `FK_CHO` (`mabh`);
-
---
--- AUTO_INCREMENT cho các bảng đã đổ
---
-
---
--- AUTO_INCREMENT cho bảng `decuong`
---
-ALTER TABLE `decuong`
-  MODIFY `madc` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

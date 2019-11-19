@@ -9,19 +9,19 @@ block content
       .form-row.mt-2
         .col-3
           label(for="magv") Mã giảng viên:
-          input(type="text", name="magv", placeholder='Nhập mã giảng viên', required).form-control       
+          input(type="text", name="magv", placeholder='Nhập mã giảng viên',value=values ? values.magv : "", required).form-control       
         .col
           label(for="tengv") Họ và tên giảng viên:
-          input(type="text", name="tengv", placeholder='Nhập họ và tên', required).form-control  
+          input(type="text", name="tengv", placeholder='Nhập họ và tên',value=values ? values.tengv : "", required).form-control  
       .form-row.mt-2     
         .col-4
           label(for="email") Email:
           .input-group-prepend
-            input(type="text", name="email", placeholder='Nhập email', required).form-control
+            input(type="text", name="email", placeholder='Nhập email',value=values ? values.email : "", required).form-control
             .input-group-text @tvu.edu.vn
         .col
           label(for="sdt") Số điện thoại:
-          input(type="text", name="sdt", placeholder='Nhập số điện thoại', required).form-control      
+          input(type="text", name="sdt", placeholder='Nhập số điện thoại',value=values ? values.sdt : "", required).form-control      
       .form-row.mt-2
         .col
           label(for="password") Mật khẩu:

@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const dbconfig = require('../database/dbconfig').default.default;
+const dbconfig = require('../database/dbconfig');
 const connection = mysql.createConnection(dbconfig.connection);
 
 module.exports.stillLogin = async function isLoggedIn(req, res, next) {

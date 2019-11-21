@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const dbconfig = require('../database/dbconfig').default;
+const dbconfig = require('../database/dbconfig');
 const connection = mysql.createConnection(dbconfig.connection);
 const util = require('util');
 const query = util.promisify(connection.query).bind(connection);

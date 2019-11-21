@@ -1,41 +1,38 @@
 const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(10);
 const mysql = require('mysql');
-const dbconfig = require('../database/dbconfig');
+const dbconfig = require('../database/dbconfig').default.default;
 const connection = mysql.createConnection(dbconfig.connection);
+const util = require('util');
+const query = util.promisify(connection.query).bind(connection);
 module.exports.userLogin = async function(req, res){
     res.render('users/login')
 }
 
 module.exports.userSignup = async function(req, res){
   const magv = req.signedCookies.magv;
-  connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user) {
-    connection.query(`SELECT * FROM bomon`, function (err, bomon){
-      if (err) throw err;
-      res.render('users/signup.pug',{
-        magv: magv,
-        user: user,
-        bomon: bomon
-      })
-    })
-  });
+  const user = await query(`SELECT * FROM giangvien WHERE magv = '${magv}'`);
+  const bomon = await query(`SELECT * FROM bomon`);
+  res.render('users/signup.pug',{
+    magv: magv,
+    user: user,
+    bomon: bomon
+  })
 }
 
 module.exports.userList = async function(req, res){
   const magv = req.signedCookies.magv;
+  const user = await query(`SELECT * FROM giangvien WHERE magv = '${magv}'`);
+  const users = await query(`SELECT * FROM giangvien WHERE role = 'Lãnh đạo khoa' OR role ='Giảng viên'`);
   connection.query(`SELECT giangvien.tengv AS tengv, giangvien.magv AS magv, giangvien.sdt AS sdt, giangvien.email AS email, giangvien.role AS role,
   bomon.tenbm AS tenbm FROM giangvien JOIN bomon ON giangvien.mabm = bomon.mabm`, function (err, userss){
-    connection.query(`SELECT * FROM giangvien WHERE role = 'Lãnh đạo khoa' OR role ='Giảng viên'`, function (err, users) {
-      connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
-        res.render('users/userList.pug',{
-          magv: magv,
-          user: user,
-          users: users,
-          userss: userss
-        })
-      })
-    });
+  res.render('users/userList.pug',{
+    magv: magv,
+    user: user,
+    users: users,
+    userss: userss
   })
+})
 }
 
 module.exports.userLogout = function(req, res){
@@ -60,21 +57,17 @@ module.exports.deletegv = function(req, res){
     })
 }
 
-module.exports.changeUser = function(req, res){
+module.exports.changeUser = async function(req, res){
   const magv = req.signedCookies.magv;
-  connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user) {
-    connection.query(`SELECT * FROM giangvien`, function (err, users){
-      connection.query(`SELECT * FROM bomon`, function (err, bomon){
-        if (err) throw err;
-        res.render('users/changeUser.pug',{
-          magv: magv,
-          user: user,
-          bomon: bomon,
-          users: users
-        })
-      })
-    })
-  });
+  const user = await query(`SELECT * FROM giangvien WHERE magv = '${magv}'`);
+  const users = await query(`SELECT * FROM giangvien`);
+  const bomon = await query(`SELECT * FROM bomon`);
+  res.render('users/changeUser.pug',{
+    magv: magv,
+    user: user,
+    bomon: bomon,
+    users: users
+  })
 }
 
 //-----------------POST----------------------
@@ -164,48 +157,38 @@ module.exports.postUserSignup = async function(req, res){
     "mabm": req.body.knmabm
   }
   if(!errors.length){
-    connection.query(`SELECT * FROM giangvien WHERE email = '${req.body.email}'`, function (err, emailbd){
-      connection.query(`SELECT * FROM giangvien WHERE magv = '${req.body.magv}'`, function (err, magvbd){
-        if(magvbd.length){
-          errors.push("Mã giảng viên đã tồn tại!");
-          connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
-            connection.query(`SELECT * FROM bomon`, function (err, bomon){
-              res.render("users/signup", {
-                errors: errors,
-                values: req.body,
-                user: user,
-                bomon: bomon
-              });
-              return;
-            })
-          })
-        }
-        else if(emailbd.length){
-          errors.push("Email này đã được đăng ký!");
-          connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
-            connection.query(`SELECT * FROM bomon`, function (err, bomon){
-              res.render("users/signup", {
-                errors: errors,
-                values: req.body,
-                user: user,
-                bomon: bomon
-              });
-              return;
-            })
-          })
-        }
-        else{
-          connection.query('INSERT INTO giangvien SET ?', giangvien, function (err, user){
-            if (err) throw err;
-          });
-          res.redirect('/users/userList')
-        }
-    })
-  })
+    const user = await query(`SELECT * FROM giangvien WHERE magv = '${magv}'`);
+    const emailbd = await query(`SELECT * FROM giangvien WHERE email = '${req.body.email + '@tvu.edu.vn'}'`);
+    const magvbd = await query(`SELECT * FROM giangvien WHERE magv = '${req.body.magv}'`);
+    const bomon = await query(`SELECT * FROM bomon`);
+    if(magvbd.length){
+      errors.push("Mã giảng viên đã tồn tại!");
+      res.render("users/signup", {
+        errors: errors,
+        values: req.body,
+        user: user,
+        bomon: bomon
+      });
+    }
+    else if(emailbd.length){
+      errors.push("Email này đã được đăng ký!");
+      res.render("users/signup", {
+        errors: errors,
+        values: req.body,
+        user: user,
+        bomon: bomon
+      });
+    }
+    else{
+      connection.query('INSERT INTO giangvien SET ?', giangvien, function (err, user){
+        if (err) throw err;
+      });
+      res.redirect('/users/userList')
+    }
   }
 }
 
-module.exports.postChangeUser = function(req, res, next){
+module.exports.postChangeUser = async function(req, res, next){
   let errors = [];
   const password = req.body.password;
   const passwordConf = req.body.passwordConf;
@@ -264,52 +247,36 @@ module.exports.postChangeUser = function(req, res, next){
     "mabm": req.body.knmabm
   }
   if(!errors.length){
-    connection.query(`SELECT * FROM giangvien WHERE email = '${req.body.email}'`, function (err, emailbd){
-      connection.query(`SELECT * FROM giangvien WHERE magv = '${req.body.magv}'`, function (err, magvbd){
-        if(magvbd.length){
-          errors.push("Mã giảng viên đã tồn tại!");
-          connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
-            connection.query(`SELECT * FROM bomon`, function (err, bomon){
-              res.render("users/changeUser", {
-                errors: errors,
-                values: req.body,
-                user: user,
-                bomon: bomon
-              });
-              return;
-            })
-          })
-        }
-        if(emailbd.length){
-          errors.push("Email này đã được đăng ký!");
-          connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
-            connection.query(`SELECT * FROM giangvien`, function (err, users){
-              connection.query(`SELECT * FROM bomon`, function (err, bomon){
-                res.render("users/changeUser", {
-                  errors: errors,
-                  values: req.body,
-                  user: user,
-                  bomon: bomon,
-                  users: users
-                });
-                return;
-              })
-            })
-          })
-        }
-        else{
-          connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
-            connection.query(`UPDATE giangvien SET ? WHERE magv ='${req.body.magvchange}'`, giangvien, function (err, changeuser){
-              if (err) throw err;
-              res.render('users/userList.pug',{
-                user: user
-              })
-            });
-          })
-          res.redirect('/users/userList')
-        }
-    })
-  })
+    if(!errors.length){
+      const user = await query(`SELECT * FROM giangvien WHERE magv = '${magv}'`);
+      const emailbd = await query(`SELECT * FROM giangvien WHERE email = '${req.body.email + '@tvu.edu.vn'}'`);
+      const magvbd = await query(`SELECT * FROM giangvien WHERE magv = '${req.body.magv}'`);
+      const bomon = await query(`SELECT * FROM bomon`);
+      if(magvbd.length){
+        errors.push("Mã giảng viên đã tồn tại!");
+        res.render("users/signup", {
+          errors: errors,
+          values: req.body,
+          user: user,
+          bomon: bomon
+        });
+      }
+      else if(emailbd.length){
+        errors.push("Email này đã được đăng ký!");
+        res.render("users/signup", {
+          errors: errors,
+          values: req.body,
+          user: user,
+          bomon: bomon
+        });
+      }
+      else{
+        connection.query('INSERT INTO giangvien SET ?', giangvien, function (err, user){
+          if (err) throw err;
+        });
+        res.redirect('/users/userList')
+      }
+    }
   }
 }
 

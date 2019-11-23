@@ -2,7 +2,7 @@ extends ../layouts/commons.pug
 block content
   .container
     h2.d-flex.justify-content-center Đề cương của #{user[0].tengv}
-    button.btn.btn-primary.mr-2(type='button', data-toggle='modal', data-target='#addFileModal')
+    button.btn.btn-primary.mr-2.mb-2(type='button', data-toggle='modal', data-target='#addFileModal')
       | Tải đề cương mới
     // The Modal
     #addFileModal.modal.fade
@@ -40,7 +40,7 @@ block content
                 div.invalid-feedback Xin điền trường này                      
               button.btn.btn-primary.mb-2.mr-sm-2 Xác nhận
               button.btn.btn-secondary(type='button', data-dismiss='modal', style='float: right') Đóng    
-    table.table.mt-4.table-bordered
+    table.table.mt-4.table-bordered#myFileTable
       thead.thead-light
         tr
           th Ngày tải
@@ -56,17 +56,38 @@ block content
           td= files.tenlop
           td
             a(href= files.linkfile).btn.btn-info.fas.fa-download.mr-2
-            a(href="/file/delFile/" + files.madc ).btn.btn-danger.fas.fa-trash-alt
-            //- #deleteFileModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
-            //-   .modal-dialog(role='document')
-            //-     .modal-content
-            //-       .modal-header
-            //-         h5#exampleModalLabel.modal-title Xóa file
-            //-         button.close(type='button', data-dismiss='modal', aria-label='Close')
-            //-           span(aria-hidden='true') &times;
-            //-       .modal-body
-            //-         | Bạn có đồng ý xóa file?
-            //-       .modal-footer
-            //-         a(href="/file/delFile/" + files.madc ).btn.btn-primary Xác nhận
-            //-         button.btn.btn-secondary(type='button', data-dismiss='modal') Đóng  
-            //- button.btn.btn-danger.fas.fa-trash-alt(type='button', data-toggle='modal', data-target='#deleteFileModal').mr-2          
+            a(href="/file/delFile/" + files.madc ).btn.btn-danger.fas.fa-trash-alt    
+
+  script(src='https://code.jquery.com/jquery-3.3.1.js')
+  script(src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js')
+  script(src='https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js')
+  script(src='https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js')
+  script(src='https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js')
+  script(src='https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js')
+  script.
+    $(document).ready(function() {
+    $('#myFileTable').DataTable( {
+    dom: 'Bfrtip',
+    buttons: [
+    {
+    extend: 'excelHtml5',
+    title: 'Danh sách đề cương excel',
+    messageTop: 'Danh sách đề cương chi tiết',
+    exportOptions: {
+    columns: [ 0, 1, 2, 3 ]
+    }
+    },
+    {
+    extend: 'pdfHtml5',
+    title: 'Danh sách đề cương pdf',
+    messageTop: 'Danh sách đề cương chi tiết',
+    exportOptions: {
+    columns: [ 0, 1, 2, 3 ]
+    }
+    }
+    ]
+    } );
+    } );

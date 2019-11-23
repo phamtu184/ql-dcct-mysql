@@ -4,3 +4,4 @@ $('#sectionChooser').change(function(){
       myID === $(this).attr('id') ? $(this).show() : $(this).hide();
   });
 });
+

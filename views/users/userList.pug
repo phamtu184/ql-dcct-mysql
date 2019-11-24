@@ -56,6 +56,7 @@ block content
           th Email
           th Bộ môn
           th Quyền
+          th Thao tác
       each user in userss
         tr
           td= user.magv
@@ -64,3 +65,7 @@ block content
           td= user.email
           td= user.tenbm
           td= user.role
+          td  
+            button(data-href="", data-toggle="modal", data-target="#confirm-delete" ).btn.btn-danger.fas.fa-trash-alt.mr-2
+            button(data-href="", data-toggle="modal", data-target="#confirm-delete" ).btn.btn-info.fas.fa-wrench 
+  script(src='https://code.jquery.com/jquery-3.3.1.js')

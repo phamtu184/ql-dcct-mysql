@@ -82,6 +82,17 @@ block content
     $(document).ready(function() {
     $('#myFileTable').DataTable( {
     dom: 'Bfrtip',
+    "language": {
+      "info": "Hiện _START_ trên _END_ tổng _TOTAL_ trường",
+      "search": "Tìm kiếm:",
+      "paginate": {
+        "first":    "Đầu",
+        "last":    "Cuối",
+        "next":    ">",
+        "previous": "<"
+      },
+      "lengthMenu": "Hiện _MENU_ trường",
+    },    
     buttons: [
     {
     extend: 'excelHtml5',

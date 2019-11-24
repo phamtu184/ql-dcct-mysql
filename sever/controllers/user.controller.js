@@ -41,20 +41,16 @@ module.exports.userLogout = function(req, res){
   res.redirect('/')
 }
 
-module.exports.deletegv = function(req, res){
-  const id = req.params.id;
-    connection.query(`SELECT * FROM giangvien WHERE magv = '${req.signedCookies.magv}'`, function (err, user){
-      if(user[0].magv == "qtv"){
-        connection.query(`DELETE FROM giangvien WHERE magv = '${id}'`, function (err, user){
-          if (err) throw err;
-        })
-        console.log("Successful delete");
-        res.redirect('/users/userList/');
-      }
-      else{
-        res.redirect('/users/userList/');
-      }
-    })
+module.exports.deletegv = async function(req, res){
+  const id = req.params.idgv;
+  connection.query(`DELETE FROM decuong WHERE magv = '${id}'`, function (err, user){
+    if (err) throw err;
+  })
+  connection.query(`DELETE FROM giangvien WHERE magv = '${id}'`, function (err, user){
+    if (err) throw err;
+  })
+  console.log("Successful delete");
+  res.redirect('/users/userList/');
 }
 
 module.exports.changeUser = async function(req, res){
@@ -280,22 +276,10 @@ module.exports.postChangeUser = async function(req, res, next){
   }
 }
 
-module.exports.userDelete = function(req, res, next){
-  if(req.body.userToDelete){
-    connection.query(`DELETE FROM decuong WHERE magv = '${req.body.userToDelete}'`, function (err, delFile){
-      connection.query(`DELETE FROM giangvien WHERE magv = '${req.body.userToDelete}'`, function (err, delUser){
-        if (err) throw err;
-        console.log("Successful delete");
-        res.redirect('/users/userList/');
-      })
-    })
-  }
-  
-  if(req.body.userToChangeRole){
-    connection.query(`UPDATE giangvien SET role = '${req.body.roleToChange}' WHERE magv = '${req.body.userToChangeRole}'`, function (err, user){
-      if (err) throw err;
-    })
-    console.log("Successful change role");
-    res.redirect('/users/userList/');
-  }
+module.exports.userChangeRole = function(req, res, next){
+  connection.query(`UPDATE giangvien SET role = '${req.body.roleToChange}' WHERE magv = '${req.body.userToChangeRole}'`, function (err, user){
+    if (err) throw err;
+  })
+  console.log("Successful change role");
+  res.redirect('/users/userList/');
 }

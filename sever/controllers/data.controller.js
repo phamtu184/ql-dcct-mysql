@@ -335,8 +335,8 @@ module.exports.postData = async function(req, res){
       if(req.body.malop.length > 10){
         errors.push("Mã lớp không quá 10 kí tự!");
       }
-      if(req.body.tenlop.length > 30){
-        errors.push("Tên lớp không được quá 30 kí tự!");
+      if(req.body.tenlop.length > 40){
+        errors.push("Tên lớp không được quá 40 kí tự!");
       }
       if(errInput.length){
         errors.push("Mã lớp đã tồn tại!");

@@ -26,14 +26,16 @@ module.exports.listFile = async function(req, res){
 module.exports.deleteFile = async function(req, res, next){
   const id = req.params.id;
   connection.query(`SELECT * FROM decuong WHERE madc = '${id}'`, function (err, file){
-    if(file){
+    try{
       cloudinary.uploader.destroy(file[0].publicId, function(result) { console.log(result) }, {invalidate: true, resource_type: "raw"});
       connection.query(`DELETE FROM decuong WHERE madc = '${id}'`, function (err, deldecuong){
         if (err) throw err;
         res.redirect('/file/myFile');
       })
     }
-    else{res.redirect('/file/myFile')}
+    catch{
+      res.redirect('/file/myFile')
+    }
   })
 }
 

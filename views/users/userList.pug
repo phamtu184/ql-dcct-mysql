@@ -2,27 +2,7 @@ extends ../layouts/commons.pug
 block content
   .container
     h2.d-flex.justify-content-center Danh sách tài khoản
-    button.btn.btn-primary.mr-2(type='button', data-toggle='modal', data-target='#deleteModal')
-      | Xóa tài khoản
-    // The Modal
-    #deleteModal.modal.fade
-      .modal-dialog.modal-md
-        .modal-content
-          // Modal Header
-          .modal-header
-            h4.modal-title Xóa tài khoản
-            button.close(type='button', data-dismiss='modal') &times;
-          // Modal body
-          .modal-body
-            form(action="/users/userList", method="POST")
-              div.form-group.form-inline   
-                label(for="userToDelete").mb-2.mr-sm-2 Tên đăng nhập muốn xóa:
-                select(name="userToDelete").form-control.mb-2.mr-sm-2
-                  each user in users
-                    option(value= user.magv)= user.email
-              button.btn.btn-primary.mb-2.mr-sm-2 Xóa
-              button.btn.btn-secondary(type='button', data-dismiss='modal', style='float: right') Đóng
-    button.btn.btn-primary.mr-2(type='button', data-toggle='modal', data-target='#changeRoleModal')
+    button.btn.btn-primary.mr-2.mb-2(type='button', data-toggle='modal', data-target='#changeRoleModal')
       | Phân quyền
     // The Modal
     #changeRoleModal.modal.fade
@@ -47,7 +27,7 @@ block content
                   option(value="Lãnh đạo khoa") Lãnh đạo khoa
               button.btn.btn-primary.mb-2.mr-sm-2 Xác nhận
               button.btn.btn-secondary(type='button', data-dismiss='modal', style='float: right') Đóng
-    table.table.mt-4.table-bordered
+    table.table.mt-4.table-bordered#userTable
       thead.thead-light
         tr
           th Mã giảng viên
@@ -65,7 +45,38 @@ block content
           td= user.email
           td= user.tenbm
           td= user.role
-          td  
-            button(data-href="", data-toggle="modal", data-target="#confirm-delete" ).btn.btn-danger.fas.fa-trash-alt.mr-2
+          td 
+            if user.role != "Quản trị viên" 
+              button(data-href="/users/deletegv/" + user.magv, data-toggle="modal", data-target="#confirm-delete" ).btn.btn-danger.fas.fa-trash-alt.mr-2
             button(data-href="", data-toggle="modal", data-target="#confirm-delete" ).btn.btn-info.fas.fa-wrench 
+  #confirm-delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        h3.modal-header
+          | Xóa
+        .modal-body
+          | Bạn chắc chắn muốn xóa giảng viên này?
+        .modal-footer
+          a.btn.btn-danger.btn-ok Delete 
+          button.btn.btn-default(type='button', data-dismiss='modal') Cancel
   script(src='https://code.jquery.com/jquery-3.3.1.js')
+  script(src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js')
+  script.
+    $('#confirm-delete').on('show.bs.modal', function(e) {
+    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+    });
+    $(document).ready(function() {
+    $('#userTable').DataTable( {
+    "language": {
+      "info": "Hiện _START_ trên _END_ tổng _TOTAL_ trường",
+      "search": "Tìm kiếm:",
+      "paginate": {
+        "first":    "Đầu",
+        "last":    "Cuối",
+        "next":    ">",
+        "previous": "<"
+      },
+      "lengthMenu": "Hiện _MENU_ trường",
+    }
+    } );
+    } );

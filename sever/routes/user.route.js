@@ -13,7 +13,7 @@ router.get('/userlist', auth.permissionQtv, controller.userList);
 
 router.get('/logout', controller.userLogout);
 
-router.get('/deletegv', auth.permissionQtv, controller.deletegv);
+router.get('/deletegv/:idgv', auth.permissionQtv, controller.deletegv);
 
 router.get('/changeuser', auth.permissionQtv, controller.changeUser);
 
@@ -23,4 +23,4 @@ router.post('/signup', controller.postUserSignup);
 
 router.post('/changeuser', auth.permissionQtv, controller.postChangeUser);
 
-router.post('/userlist', auth.permissionQtv, controller.userDelete);
+router.post('/userlist', auth.permissionQtv, controller.userChangeRole);

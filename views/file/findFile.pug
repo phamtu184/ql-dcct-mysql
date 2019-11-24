@@ -6,13 +6,13 @@ block content
       div.form-group.form-inline.float-left.mr-2
         label(for="gvtofind").mb-2.mr-sm-2 Giảng viên:
         select(name="gvtofind").form-control.mb-2.mr-sm-2.custom-select
-          option() 
+          option(value="null") Tất cả
           each gvs in gv
             option(value= gvs.magv)= gvs.tengv
       div.form-group.form-inline.float-left 
         label(for="hktofind").mb-2.mr-sm-2 Học kì:
         select(name="hktofind").form-control.mb-2.mr-sm-2.custom-select
-          option() 
+          option(value="null") Tất cả
           each hks in hk
             option(value= hks.mahk)= hks.tenhk        
       button.btn.btn-primary.mb-2.mr-sm-2.ml-2 Thống kê
@@ -39,8 +39,7 @@ block content
             td= files.tenmh
             td= files.tenlop
             td
-              a(href= files.linkfile).btn.btn-info.fas.fa-download.mr-2
-
+              a(href= files.linkfile, target="_blank").btn.btn-info.fas.fa-download.mr-2
 
   script(src='https://code.jquery.com/jquery-3.3.1.js')
   script(src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js')
@@ -65,7 +64,10 @@ block content
         "previous": "<"
       },
       "lengthMenu": "Hiện _MENU_ trường",
-    },    
+    },
+    scrollY:        '60vh',
+    scrollCollapse: true,
+    paging:         false,     
     buttons: [
     {
     extend: 'excelHtml5',

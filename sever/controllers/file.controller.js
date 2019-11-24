@@ -93,10 +93,20 @@ module.exports.postFindFile = async function(req, res, next){
   const tenhocki = await query(`SELECT tenhk FROM hocki WHERE mahk = '${hktofind}'`);
   const tengiangvien = await query(`SELECT tengv FROM giangvien WHERE magv = '${gvtofind}'`);
 
-  if(!hktofind && !gvtofind){
-    res.redirect('/file/findFile')
+  if(hktofind == "null" && gvtofind == "null" ){
+    info.push(`Thống kê đề cương của tất cả học kì và giảng viên`);
+    connection.query(`SELECT decuong.linkfile AS linkfile, decuong.ngaytai AS ngaytai, lop.tenlop AS tenlop, monhoc.tenmh AS tenmh, giangvien.tengv AS tengv, hocki.tenhk AS tenhk
+    FROM decuong JOIN lop ON decuong.malop = lop.malop JOIN monhoc ON decuong.mamh = monhoc.mamh JOIN giangvien ON decuong.magv = giangvien.magv JOIN hocki ON decuong.mahk = hocki.mahk`, function (err, file){
+      res.render('file/findFile.pug',{
+        user: user,
+        file: file,
+        gv: gv,
+        hk: hk,
+        info: info
+      });  
+    })
   }
-  else if(hktofind && gvtofind){
+  else if(hktofind != "null" && gvtofind != "null"){
     info.push(`Thống kê đề cương của học kì: ${tenhocki[0].tenhk} và giảng viên: ${tengiangvien[0].tengv}`);
     connection.query(`SELECT decuong.linkfile AS linkfile, decuong.ngaytai AS ngaytai, lop.tenlop AS tenlop, monhoc.tenmh AS tenmh, giangvien.tengv AS tengv, hocki.tenhk AS tenhk
     FROM decuong JOIN lop ON decuong.malop = lop.malop JOIN monhoc ON decuong.mamh = monhoc.mamh JOIN giangvien ON decuong.magv = giangvien.magv JOIN hocki ON decuong.mahk = hocki.mahk
@@ -111,7 +121,7 @@ module.exports.postFindFile = async function(req, res, next){
     })
   }
   else{
-    if(!gvtofind){
+    if(gvtofind == "null" ){
       info.push(`Thống kê đề cương của học kì: ${tenhocki[0].tenhk}`);
       connection.query(`SELECT decuong.linkfile AS linkfile, decuong.ngaytai AS ngaytai, lop.tenlop AS tenlop, monhoc.tenmh AS tenmh, giangvien.tengv AS tengv, hocki.tenhk AS tenhk
       FROM decuong JOIN lop ON decuong.malop = lop.malop JOIN monhoc ON decuong.mamh = monhoc.mamh JOIN giangvien ON decuong.magv = giangvien.magv JOIN hocki ON decuong.mahk = hocki.mahk
@@ -125,7 +135,7 @@ module.exports.postFindFile = async function(req, res, next){
         }); 
       })
     }
-    if(!hktofind){
+    if(hktofind == "null" ){
       info.push(`Thống kê đề cương của giảng viên: ${tengiangvien[0].tengv}`);
       connection.query(`SELECT decuong.linkfile AS linkfile, decuong.ngaytai AS ngaytai, lop.tenlop AS tenlop, monhoc.tenmh AS tenmh, giangvien.tengv AS tengv, hocki.tenhk AS tenhk
       FROM decuong JOIN lop ON decuong.malop = lop.malop JOIN monhoc ON decuong.mamh = monhoc.mamh JOIN giangvien ON decuong.magv = giangvien.magv JOIN hocki ON decuong.mahk = hocki.mahk

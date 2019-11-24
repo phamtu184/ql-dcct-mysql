@@ -48,7 +48,6 @@ block content
           td 
             if user.role != "Quản trị viên" 
               button(data-href="/users/deletegv/" + user.magv, data-toggle="modal", data-target="#confirm-delete" ).btn.btn-danger.fas.fa-trash-alt.mr-2
-            button(data-href="", data-toggle="modal", data-target="#confirm-delete" ).btn.btn-info.fas.fa-wrench 
   #confirm-delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
     .modal-dialog
       .modal-content

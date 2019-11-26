@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 24, 2019 lúc 10:33 AM
+-- Thời gian đã tạo: Th10 26, 2019 lúc 02:10 PM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.3
 
@@ -83,6 +83,7 @@ CREATE TABLE `decuong` (
 --
 
 INSERT INTO `decuong` (`madc`, `malop`, `magv`, `mamh`, `mahk`, `linkfile`, `ngaytai`, `publicId`) VALUES
+('DA15TT220037hk12017', 'DA15TT', '00666', '220037', 'hk12017', 'http://res.cloudinary.com/ntwayd/raw/upload/v1574768702/CSDL_ryvjdd.docx', '2019-11-26', 'CSDL_ryvjdd.docx'),
 ('DA15TT220069hk12017', 'DA15TT', '00258', '220069', 'hk12017', 'http://res.cloudinary.com/ntwayd/raw/upload/v1574585434/PL2_Java_CA16TT_HK1_xzndoa.pdf', '2019-11-24', 'PL2_Java_CA16TT_HK1_xzndoa.pdf'),
 ('DA15TT220073hk12017', 'DA15TT', '00242', '220073', 'hk12017', 'http://res.cloudinary.com/ntwayd/raw/upload/v1574586085/Hk2.DCCT_ThietKeHTM_DA15QTM_oe75pa.pdf', '2019-11-24', 'Hk2.DCCT_ThietKeHTM_DA15QTM_oe75pa.pdf'),
 ('DA15TT220092hk12017', 'DA15TT', '03562', '220092', 'hk12017', 'http://res.cloudinary.com/ntwayd/raw/upload/v1574585295/DA15TT_muslb2.pdf', '2019-11-24', 'DA15TT_muslb2.pdf'),

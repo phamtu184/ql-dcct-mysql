@@ -53,6 +53,11 @@ module.exports.findFile = async function(req, res, next){
 
 module.exports.postListFile = async function(req, res){
   let errors = [];
+  const magv = req.signedCookies.magv;
+  const user = await query(`SELECT * FROM giangvien WHERE magv = '${magv}'`);
+  const lop = await query(`SELECT * FROM lop`);
+  const monhoc = await query(`SELECT * FROM monhoc`);
+  const hocki = await query(`SELECT * FROM hocki`);
   if(req.body.knmalop){
     cloudinary.uploader.upload(req.file.path, async function(result){
       let date = result.created_at.slice(0,10);
@@ -67,17 +72,41 @@ module.exports.postListFile = async function(req, res){
         "ngaytai": date,
         "publicId": result.public_id
       }
-      connection.query(`SELECT * FROM decuong WHERE madc = '${madecuong}'`, function(err, errInput){
-        if (errInput.length){
-          res.send("Đề cương đã tồn tại");
-        }
-        else{
-          connection.query('INSERT INTO decuong SET ?', decuong, function (err, decuong){
-            if (err) throw err;
+      const errInput = await query(`SELECT * FROM decuong WHERE madc = '${madecuong}'`);
+      if (errInput.length){
+        errors.push("Đề cương đã tồn tại, vui lòng tải lại!");
+        connection.query(`SELECT decuong.madc AS madc ,decuong.linkfile AS linkfile, decuong.ngaytai AS ngaytai, lop.tenlop AS tenlop, monhoc.tenmh AS tenmh, hocki.tenhk AS tenhk
+        FROM decuong JOIN lop ON decuong.malop = lop.malop JOIN monhoc ON decuong.mamh = monhoc.mamh JOIN hocki ON decuong.mahk = hocki.mahk WHERE decuong.magv='${magv}'`, function (err, file){
+          res.render('file/myFile.pug',{
+            user: user,
+            file: file,
+            lop: lop,
+            monhoc: monhoc,
+            hocki: hocki,
+            errors: errors
           });
-          res.redirect('/file/myFile')
-        }
-      })
+        })
+      }
+      else if(result.url.length>150){
+        errors.push("Tên file quá dài, vui lòng tải lại!");
+        connection.query(`SELECT decuong.madc AS madc ,decuong.linkfile AS linkfile, decuong.ngaytai AS ngaytai, lop.tenlop AS tenlop, monhoc.tenmh AS tenmh, hocki.tenhk AS tenhk
+        FROM decuong JOIN lop ON decuong.malop = lop.malop JOIN monhoc ON decuong.mamh = monhoc.mamh JOIN hocki ON decuong.mahk = hocki.mahk WHERE decuong.magv='${magv}'`, function (err, file){
+          res.render('file/myFile.pug',{
+            user: user,
+            file: file,
+            lop: lop,
+            monhoc: monhoc,
+            hocki: hocki,
+            errors: errors
+          });
+        })
+      }
+      else{
+        connection.query('INSERT INTO decuong SET ?', decuong, function (err, decuong){
+          if (err) throw err;
+        });
+        res.redirect('/file/myFile')
+      }
     }, {resource_type: "raw", use_filename:true, unique_filename: true});
   }
 }

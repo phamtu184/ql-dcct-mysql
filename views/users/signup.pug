@@ -4,7 +4,9 @@ block content
     h2.d-flex.justify-content-center Tạo tài khoản
     if errors
       each error in errors
-        .alert.alert-danger= error
+        .alert.alert-danger
+          span.closebtn(onclick="this.parentElement.style.display='none';") &times;
+          = error  
     form(action="/users/signup", method="POST").was-validated
       .form-row.mt-2
         .col-3

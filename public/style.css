@@ -177,4 +177,17 @@ body{
   }
 }
 
+.closebtn {
+  margin-left: 15px;
+  color: rgb(139, 25, 25);
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.closebtn:hover {
+  color: black;
+}
 

@@ -3,7 +3,13 @@ block content
   .container
     h2.d-flex.justify-content-center Đề cương của #{user[0].tengv}
     button.btn.btn-primary.mr-2.mb-2(type='button', data-toggle='modal', data-target='#addFileModal')
-      | Tải đề cương mới
+      i.fas.fa-plus.fa-spin.mr-2
+      a Tải đề cương mới
+    if errors
+      each error in errors
+        .alert.alert-danger
+          span.closebtn(onclick="this.parentElement.style.display='none';") &times;
+          = error        
     // The Modal
     #addFileModal.modal.fade
       .modal-dialog.modal-md

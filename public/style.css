@@ -44,16 +44,16 @@ body{
 }
 .navbar .navbar-nav .dropdown-menu a{
   color: #222222;
-  margin: 35px 35px;
-  line-height: 2.0;
+  margin: 0px 35px;
+  line-height: 1.5;
   text-transform: capitalize;
   font-size: 1.1rem;
+  padding: 0;
 }
 .navbar .navbar-nav .dropdown-menu a:hover{
   text-decoration: none;
   color: rgb(0, 84, 209);
 }
-
 /* ---------------------home top-------------- */
 .carousel{
   margin-top: 154px;

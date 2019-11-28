@@ -2,10 +2,13 @@ html
   head
     meta(charset='UTF-8')
     title Quản lý đề cương chi tiết
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css')
-    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
+    link(rel='icon', href='img/mdb-favicon.ico', type='image/x-icon')
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.11.2/css/all.css')
+    link(rel='stylesheet', href='/MDB-Free/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/MDB-Free/css/mdb.min.css')
     link(rel='stylesheet', href='/style.css')
-    link(rel='stylesheet', href='/fontawesome-free/css/all.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css')
     link(rel='stylesheet', href='https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css')
     link(rel='stylesheet', href='https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css')
 
@@ -18,7 +21,7 @@ html
               li.nav-item
                 a.navbar-brand(href='#')
                   img(src='/image/logo-light.png', alt='logo')  
-      nav.navbar.navbar-expand-md.navbar-dark(style='background: rgba(202, 201, 201, 0.7); ')
+      nav.navbar.navbar-expand-md.navbar-light.bg-light(style='background: rgba(202, 201, 201, 0.7); ')
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsibleNavbar')
           span.navbar-toggler-icon
         ul#collapsibleNavbar.navbar-nav.collapse.navbar-collapse.justify-content-center
@@ -37,7 +40,7 @@ html
                 a#navbardrop.nav-link.dropdown-toggle(data-toggle='dropdown') Quản trị viên
                 ul.dropdown-menu.animated.fadeIn
                   li
-                    .row(style='width: 250px;')
+                    .row(style='width: 260px;')
                       ul.list-unstyled.col-md-12
                         li
                           a(href='/users/signup') Tạo tài khoản
@@ -58,10 +61,9 @@ html
     div(style='margin-top: 164px')
                    
     block content
-
   
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
-  script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM', crossorigin='anonymous')
-
+  script(type='text/javascript', src='/MDB-Free/js/popper.min.js')
+  script(type='text/javascript', src='/MDB-Free/js/bootstrap.min.js')
+  script(type='text/javascript', src='/MDB-Free/js/mdb.min.js')
   script(src='/script/script.js')
   script(src='/script/fillerPanel.js')

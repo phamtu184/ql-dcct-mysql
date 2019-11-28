@@ -15,10 +15,12 @@ block content
           option(value="null") Tất cả
           each hks in hk
             option(value= hks.mahk)= hks.tenhk        
-      button.btn.btn-primary.mb-2.mr-sm-2.ml-2 Thống kê
+      button.btn.btn-mdb-color.mb-2.mr-sm-2.ml-2 Thống kê
     if info
       each infos in info
-        .alert.alert-info= infos 
+        //.alert.alert-info= infos 
+        nav.navbar.navbar-dark.mdb-color.mb-2
+          span.navbar-text.white-text=infos 
     if file
       //- button#btnExport(onclick='fnExcelReport();').btn.btn-success  Xuất File
       //- iframe#txtArea1(style='display:none')
@@ -39,7 +41,7 @@ block content
             td= files.tenmh
             td= files.tenlop
             td
-              a(href= files.linkfile, target="_blank").btn.btn-info.fas.fa-download.mr-2
+              a(href= files.linkfile, target="_blank").btn.btn-info.fas.fa-download.mr-2.btn-md
 
   script(src='https://code.jquery.com/jquery-3.3.1.js')
   script(src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js')

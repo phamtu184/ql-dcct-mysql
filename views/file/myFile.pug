@@ -64,15 +64,16 @@ block content
             a(href= files.linkfile).btn.btn-info.fas.fa-download.mr-2.btn-md
             button(data-href="/file/delFile/" + files.madc, data-toggle="modal", data-target="#confirm-delete" ).btn.btn-danger.fas.fa-trash-alt.btn-md
   #confirm-delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
-    .modal-dialog
-      .modal-content
-        h3.modal-header
-          | Xóa
+    .modal-dialog.modal-sm.modal-notify.modal-danger(role='document')
+      .modal-content.text-center
+        .modal-header.d-flex.justify-content-center
+          p.heading Are you sure?
         .modal-body
-          | Bạn chắc chắn muốn xóa file?
+          i.fas.fa-times.fa-4x.animated.rotateIn
         .modal-footer
-          a.btn.btn-danger.btn-ok Delete 
-          button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+          .modal-footer.flex-center
+          a.btn.btn-outline-danger.btn-ok Yes
+          button.btn.btn-danger.waves-effect(type='button', data-dismiss='modal') Cancel
             
 
   script(src='https://code.jquery.com/jquery-3.3.1.js')

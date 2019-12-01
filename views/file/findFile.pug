@@ -1,22 +1,21 @@
 extends ../layouts/commons.pug
 block content
-  .container
-    div.wow.fadeInUp
-      h2.d-flex.justify-content-center Thống kê
-      form(action="/file/findFile", method="POST").mt-4
-        div.form-group.form-inline.float-left.mr-2
-          label(for="gvtofind").mb-2.mr-sm-2 Giảng viên:
-          select(name="gvtofind").form-control.mb-2.mr-sm-2.custom-select
-            option(value="null") Tất cả
-            each gvs in gv
-              option(value= gvs.magv)= gvs.tengv
-        div.form-group.form-inline.float-left 
-          label(for="hktofind").mb-2.mr-sm-2 Học kì:
-          select(name="hktofind").form-control.mb-2.mr-sm-2.custom-select
-            option(value="null") Tất cả
-            each hks in hk
-              option(value= hks.mahk)= hks.tenhk        
-        button.btn.btn-mdb-color.mb-2.mr-sm-2.ml-2 Thống kê
+  .container(style='margin-top: 170px')
+    h2.d-flex.justify-content-center Thống kê
+    form(action="/file/findFile", method="POST").mt-4
+      div.form-group.form-inline.float-left.mr-2
+        label(for="gvtofind").mb-2.mr-sm-2 Giảng viên:
+        select(name="gvtofind").form-control.mb-2.mr-sm-2.custom-select
+          option(value="null") Tất cả
+          each gvs in gv
+            option(value= gvs.magv)= gvs.tengv
+      div.form-group.form-inline.float-left 
+        label(for="hktofind").mb-2.mr-sm-2 Học kì:
+        select(name="hktofind").form-control.mb-2.mr-sm-2.custom-select
+          option(value="null") Tất cả
+          each hks in hk
+            option(value= hks.mahk)= hks.tenhk        
+      button.btn.btn-mdb-color.mb-2.mr-sm-2.ml-2 Thống kê
     if info
       each infos in info
         //.alert.alert-info= infos 
@@ -25,7 +24,7 @@ block content
     if file
       //- button#btnExport(onclick='fnExcelReport();').btn.btn-success  Xuất File
       //- iframe#txtArea1(style='display:none')
-      table.table.mt-2.table-bordered#thongkeTable.wow.fadeInRight
+      table.table.mt-2.table-bordered#thongkeTable.wow.fadeInRight.table-hover
         thead.thead-light
           tr
             th Giáo viên
@@ -42,7 +41,7 @@ block content
             td= files.tenmh
             td= files.tenlop
             td
-              a(href= files.linkfile, target="_blank").btn.btn-info.fas.fa-download.mr-2.btn-md
+              a(href= files.linkfile, target="_blank").btn.blue-gradient.fas.fa-download.mr-2.btn-md
 
   script(src='https://code.jquery.com/jquery-3.3.1.js')
   script(src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js')
@@ -91,3 +90,6 @@ block content
     ]
     } );
     } );
+
+
+

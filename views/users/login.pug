@@ -1,30 +1,49 @@
 extends ../layouts/commons.pug
 block content
-  .container.mt-5
-    .row
-      .col-md-6.ml-auto.mr-auto
-        .card
-          h5.card-header.mdb-color.white-text.text-center.py-4
-            strong Đăng nhập
-          // Card content
-          .card-body.px-lg-5
+  .view(style="background-image: url('/image/backgroud.jpeg'); background-repeat: no-repeat; background-size: cover; background-position: center center;")
+    // Mask & flexbox options
+    .mask.rgba-gradient.align-items-center
+      // Content
+      .container(style='margin-top: 240px')
+        // Grid row
+        .row.mt-5
+          // Grid column
+          .col-md-6.mb-5.mt-md-0.mt-5.white-text.text-center.text-md-left
+            h1.h1-responsive.font-weight-bold.wow.fadeInLeft(data-wow-delay='0.3s') Chào mừng đến với hệ thống quản lý đề cương chi tiết
+            hr.hr-light.wow.fadeInLeft(data-wow-delay='0.3s')
+            h6.mb-3.wow.fadeInLeft(data-wow-delay='0.3s')
+              | Vui lòng đăng nhập, hoặc quay về trang chủ!
+            a.btn.btn-outline-white.wow.fadeInLeft(data-wow-delay='0.3s', href='/') Trang chủ
+          .col-md-6.col-xl-5.mb-4
             // Form
-            form.text-center.was-validated(style='color: #757575;', action='/users/login', method="POST")
-              p Chào mừng đến với hệ thống quản lý đề cương chi tiết
-              if errors
-                each error in errors
-                  .alert.alert-danger
-                    span.closebtn(onclick="this.parentElement.style.display='none';") &times;
-                    = error                
-              // Name
-              .md-form.mt-3
-                input#materialSubscriptionFormPasswords.form-control(type="text", name="email", value=values ? values.email : "", required='')
-                label(for='email') Email:
-              // E-mai
-              .md-form
-                input#materialSubscriptionFormEmail.form-control(type='password', name='password', required='')
-                label(for='password') Mật khẩu:
-              // Sign in button
-              button.btn.btn-mdb-color.btn-block(type='submit') Đăng nhập 
+            .card.wow.fadeInRight(data-wow-delay='0.3s', style="background-color: rgba(126, 123, 215, 0.2);")
+              .card-body
+                // Header
+                .text-center
+                  h3.white-text
+                    i.fas.fa-user.white-text
+                    |  Đăng nhập
+                  hr.hr-light
+                  if errors
+                    each error in errors
+                      .alert.alert-danger
+                        span.closebtn(onclick="this.parentElement.style.display='none';") &times;
+                        = error  
+                form.was-validated(action='/users/login', method="POST")
+                  .md-form
+                    i.fas.fa-envelope.prefix.white-text.active
+                    input#form2.white-text.form-control(type="text", name="email", value=values ? values.email : "", required='')
+                    label.active(for='form2') Email
+                  .md-form
+                    i.fas.fa-lock.prefix.white-text.active
+                    input#form4.white-text.form-control(type='password', name='password', required='')
+                    label(for='form4') Mật khẩu
+                  .text-center.mt-4
+                    button.btn.btn-indigo.btn-block.btn-rounded.z-depth-1 Đăng nhập
+                    hr.hr-light.mb-3.mt-4
+                  
+  script(src='https://code.jquery.com/jquery-3.3.1.js')
+
+
 
 

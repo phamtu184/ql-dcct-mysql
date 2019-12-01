@@ -1,6 +1,6 @@
 extends ../layouts/commons.pug
 block content
-  .container
+  .container(style='margin-top: 170px')
     h2.d-flex.justify-content-center Danh sách tài khoản
     button.btn.btn-primary.mr-2.mb-2(type='button', data-toggle='modal', data-target='#changeRoleModal')
       | Phân quyền
@@ -52,13 +52,13 @@ block content
     .modal-dialog.modal-sm.modal-notify.modal-danger(role='document')
       .modal-content.text-center
         .modal-header.d-flex.justify-content-center
-          p.heading Are you sure?
+          p.heading Bạn chắc chắn muốn xóa?
         .modal-body
           i.fas.fa-times.fa-4x.animated.rotateIn
         .modal-footer
           .modal-footer.flex-center
-          a.btn.btn-outline-danger.btn-ok Yes
-          button.btn.btn-danger.waves-effect(type='button', data-dismiss='modal') Cancel
+          a.btn.btn-ok.btn-danger Đúng
+          button.btn.btn-outline-danger.waves-effect(type='button', data-dismiss='modal') Hủy
   script(src='https://code.jquery.com/jquery-3.3.1.js')
   script(src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js')
   script.

@@ -12,19 +12,10 @@ body{
   transition: top 1.5s;
   z-index: 1000;
 }
-.two-navbar .nav-item .fas-seft{
-  font-size: 20px;
-  color: #222222;
-  margin-left: 30px;
-}
 
-.two-navbar .nav-item .fas-seft:hover{
-  color:  rgb(0, 84, 209);
-}
 .two-navbar .navbar .navbar-nav .nav-item .nav-link{
-  color: #222222;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 400;
   margin: 0 15px;
 }
 .two-navbar .navbar-brand img{
@@ -33,27 +24,8 @@ body{
 .dropdown:hover>.dropdown-menu{
   display: block;
 }
-.navbar .navbar-nav .dropdown-menu{
-  background-clip: unset;
-  padding: 0 0; 
-  margin: 0 0;
-  
-}
-.navbar .navbar-nav .dropdown-menu ul{
-  padding: 0;
-}
-.navbar .navbar-nav .dropdown-menu a{
-  color: #222222;
-  margin: 0px 35px;
-  line-height: 1.5;
-  text-transform: capitalize;
-  font-size: 1.1rem;
-  padding: 0;
-}
-.navbar .navbar-nav .dropdown-menu a:hover{
-  text-decoration: none;
-  color: rgb(0, 84, 209);
-}
+
+
 /* ---------------------home top-------------- */
 .carousel{
   margin-top: 154px;
@@ -189,10 +161,4 @@ body{
 }
 .closebtn:hover {
   color: black;
-}
-
-tfoot input {
-  width: 100%;
-  padding: 3px;
-  box-sizing: border-box;
 }

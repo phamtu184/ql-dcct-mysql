@@ -1,51 +1,60 @@
 extends ../layouts/commons.pug
 block content
-  .container
-    h2.d-flex.justify-content-center Sửa tài khoản
-    if errors
-      each error in errors
-        .alert.alert-danger
-          span.closebtn(onclick="this.parentElement.style.display='none';") &times;
-          = error  
-    form(action="/users/changeuser", method="POST").was-validated
-      div.form-group
-        label(for="magvchange") Họ và tên giảng viên cần thay đổi:
-        select(name="magvchange").form-control.mb-2.mr-sm-2.custom-select
-          each user in users
-            option(value= user.magv)= user.tengv   
-      .form-row.mt-2
-        .col-3
-          label(for="magv") Mã giảng viên:
-          input(type="text", name="magv", placeholder='Nhập mã giảng viên', value=values ? values.magv : "",required).form-control       
-        .col
-          label(for="tengv") Họ và tên giảng viên:
-          input(type="text", name="tengv", placeholder='Nhập họ và tên', value=values ? values.tengv : "", required).form-control  
-      .form-row.mt-2     
-        .col-4
-          label(for="email") Email:
-          .input-group-prepend
-            input(type="text", name="email", placeholder='Nhập email', value=values ? values.email: "", required).form-control
-            .input-group-text @tvu.edu.vn
-        .col
-          label(for="sdt") Số điện thoại:
-          input(type="text", name="sdt", placeholder='Nhập số điện thoại', value=values ? values.sdt : "", required).form-control      
-      .form-row.mt-2
-        .col
-          label(for="password") Mật khẩu:
-          input(type="password", name="password", placeholder='Nhập mật khẩu', required).form-control
-        .col
-          label(for="passwordConf") Xác nhận mật khẩu:
-          input(type="password", name="passwordConf", placeholder='Xác nhận mật khẩu', required).form-control
-      .form-row.mt-2
-        .col
-          label(for="knmabm") Tên bộ môn:
-          select(name="knmabm").form-control.mb-2.mr-sm-2.custom-select
-            if bomon
-              each bomons in bomon
-                option(value= bomons.mabm)= bomons.tenbm
-        .col
-          label(for="role") Vai Trò:
-          select(name="role").form-control.custom-select
-            option(value="Giảng viên") Giảng viên
-            option(value="Lãnh đạo khoa") Lãnh đạo khoa
-      button.btn.btn-primary.mt-2 Xác nhận
+  .container(style='margin-top: 170px')
+    .card(style="background-color: rgba(158, 158, 158, 0.1);").labelColor
+      .card-body
+        form(action="/users/changeuser", method="POST").was-validated
+          p.h4.text-center.py-4 Sửa tài khoản
+          if errors
+            each error in errors
+              .alert.alert-danger
+                span.closebtn(onclick="this.parentElement.style.display='none';") &times;
+                = error  
+          div.form-group
+            label(for="magvchange") Họ và tên giảng viên cần thay đổi:
+            select(name="magvchange").form-control.mb-2.mr-sm-2.custom-select
+              each user in users
+                option(value= user.magv)= user.tengv                         
+          .md-form
+            i.fa.fa-user.prefix
+            input.form-control(type="text", name="magv",value=values ? values.magv : "", required)
+            label.font-weight-light(for="magv") Mã giảng viên:
+          .md-form
+            i.fa.fa-user.prefix
+            input.form-control(type="text", name="tengv",value=values ? values.tengv : "", required)
+            label.font-weight-light(for="tengv") Họ và tên giảng viên:
+          .md-form
+            .row
+              .col-3
+                i.fa.fa-envelope.prefix
+                input.form-control(type="text", name="email",value=values ? values.email : "", required)
+                label.font-weight-light(for="email") &nbsp; &nbsp; Email:
+              .col
+                input.form-control(type='text', disabled='')
+                label.disabled(for='inputDisabledEx') @tvu.edu.vn          
+          .md-form
+            i.fa.fa-phone.prefix
+            input.form-control(type="text", name="sdt",value=values ? values.sdt : "", required)
+            label.font-weight-light(for="sdt") Số điện thoại:
+          .md-form
+            i.fa.fa-lock.prefix
+            input.form-control(type="password", name="password", required)
+            label.font-weight-light(for="password") Mật khẩu:
+          .md-form
+            i.fa.fa-lock.prefix
+            input.form-control(type="password", name="passwordConf", required)
+            label.font-weight-light(for="passwordConf") Xác nhận mật khẩu:
+          .form-row.mt-2  
+            .col
+              label(for="knmabm") Tên bộ môn:
+              select(name="knmabm").form-control.mb-2.mr-sm-2.custom-select
+                if bomon
+                  each bomons in bomon
+                    option(value= bomons.mabm)= bomons.tenbm      
+            .col
+              label(for="role") Vai Trò:
+              select(name="role").form-control.custom-select
+                option(value="Giảng viên") Giảng viên
+                option(value="Lãnh đạo khoa") Lãnh đạo khoa
+          button.btn.btn-primary.mt-2 Xác nhận
+  script(src='https://code.jquery.com/jquery-3.3.1.js')         

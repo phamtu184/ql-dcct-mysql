@@ -56,8 +56,25 @@ html
             ul.navbar-nav.ml-auto
               if user
                 li.nav-item
-                  a.nav-link(href='/users/logout') Đăng xuất                         
+                  a.nav-link(href='/users/logout') Đăng xuất
+
     block content
+
+  footer.page-footer.font-small.pt-4.stylish-color-dark.mt-4
+    .container.text-center.text-md-left
+      .row
+        .col-md-8.mt-md-0.mt-3
+          h5.text-uppercase.font-weight-bold TRƯỜNG ĐẠI HỌC TRÀ VINH
+          p
+            | Số 126 Nguyễn Thiện Thành – Khóm 4, Phường 5, Thành phố Trà Vinh, Tỉnh Trà Vinh
+            | Điện thoại: (+84).294.3855246 * Fax: (+84).294.3855217
+            | Email: banbientapwebsite@tvu.edu.vn
+            | Giấy phép trang Thông tin điện tử số 02/GP-TTĐT cấp ngày 18/12/2018, Sở TT&TT tỉnh Trà Vinh
+        hr.clearfix.w-100.d-md-none.pb-3
+
+    .footer-copyright.text-center.py-3
+      | &copy; 2019 Copyright: VT
+
   
   script(type='text/javascript', src='/MDB-Free/js/popper.min.js')
   script(type='text/javascript', src='/MDB-Free/js/bootstrap.min.js')

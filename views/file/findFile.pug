@@ -18,7 +18,6 @@ block content
       button.btn.btn-mdb-color.mb-2.mr-sm-2.ml-2 Thống kê
     if info
       each infos in info
-        //.alert.alert-info= infos 
         nav.navbar.navbar-dark.mdb-color.mb-2.wow.fadeInLeft
           span.navbar-text.white-text=infos 
     if file
@@ -69,22 +68,26 @@ block content
     scrollCollapse: true,
     paging:         false,     
     buttons: [
-    {
-    extend: 'excelHtml5',
-    title: 'Danh sách đề cương excel',
-    messageTop: 'Danh sách đề cương chi tiết',
-    exportOptions: {
-    columns: [ 0, 1, 2, 3, 4 ]
-    }
-    },
-    {
-    extend: 'pdfHtml5',
-    title: 'Danh sách đề cương pdf',
-    messageTop: 'Danh sách đề cương chi tiết',
-    exportOptions: {
-    columns: [ 0, 1, 2, 3, 4 ]
-    }
-    }
+      {
+        extend: 'excelHtml5',
+        autoFilter: true,
+        title: 'Danh sách đề cương excel',
+        messageTop: 'Danh sách đề cương chi tiết',
+        messageBottom: 'Chữ kí lãnh đạo khoa',
+        exportOptions: {
+          columns: [ 0, 1, 2, 3, 4 ]
+        },
+        className: 'btn'
+      },
+      {
+        extend: 'pdfHtml5',
+        title: 'Danh sách đề cương pdf',
+        messageTop: 'Danh sách đề cương chi tiết',
+        exportOptions: {
+          columns: [ 0, 1, 2, 3, 4 ]
+        },
+        className: 'btn'
+      }
     ]
     } );
     } );

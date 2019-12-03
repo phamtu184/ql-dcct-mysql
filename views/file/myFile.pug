@@ -10,16 +10,15 @@ block content
         .alert.alert-danger
           span.closebtn(onclick="this.parentElement.style.display='none';") &times;
           = error        
-    // The Modal
     #addFileModal.modal.fade
-      .modal-dialog.modal-md
+      .modal-dialog.modal-notify.modal-info
         .modal-content
-          // Modal Header
           .modal-header
-            h4.modal-title Tải đề cương mới
-            button.close(type='button', data-dismiss='modal') &times;
-          // Modal body
+            h4.heading.lead Tải đề cương mới
+            button.close.white-text(type='button', data-dismiss='modal') &times;
           .modal-body
+            .text-center
+              .fas.fa-file-alt.fa-4x.mb-3.animated.rotateIn
             form(action= "/file/myFile", method="POST", enctype="multipart/form-data")
               .form-group
                 label(for="linkFile") File:
@@ -42,10 +41,9 @@ block content
                   if hocki
                     each hockis in hocki
                       option(value= hockis.mahk)= hockis.tenhk                     
-                div.valid-feedback Tốt.
-                div.invalid-feedback Xin điền trường này                      
-              button.btn.btn-primary.mb-2.mr-sm-2 Xác nhận
-              button.btn.btn-secondary(type='button', data-dismiss='modal', style='float: right') Đóng    
+              .modal-footer.justify-content-center               
+                button.btn.btn-primary.mb-2.mr-sm-2 Xác nhận 
+                button.btn.btn-outline-primary.waves-effect(type='button', data-dismiss='modal', style='float: right') Đóng    
     table.table.mt-4.table-bordered#myFileTable
       thead.thead-light
         tr

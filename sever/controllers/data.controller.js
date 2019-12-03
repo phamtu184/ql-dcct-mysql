@@ -8,35 +8,25 @@ module.exports.getData = async function(req, res){
   const magv = req.signedCookies.magv;
   const user = await query(`SELECT * FROM giangvien WHERE magv = '${magv}'`);
   const khoa = await query(`SELECT * FROM khoa`);
+  const bomon = await query(`SELECT * FROM bomon`);
   const namhoc = await query(`SELECT * FROM namhoc`);
+  const hocki = await query(`SELECT * FROM hocki`);
+  const monhoc = await query(`SELECT * FROM monhoc`);
   const bachoc = await query(`SELECT * FROM bachoc`);
   const hedaotao = await query(`SELECT * FROM hedaotao`);
   const nganh = await query(`SELECT * FROM nganh`);
+  const lop = await query(`SELECT * FROM lop`);
   res.render('data/updateData',{
     user: user,
     khoa: khoa,
+    bomon: bomon,
     namhoc: namhoc,
+    hocki: hocki,
+    monhoc: monhoc,
     bachoc: bachoc,
     hedaotao: hedaotao,
-    nganh: nganh
-  })
-}
-
-module.exports.viewData = async function(req, res){
-  const magv = req.signedCookies.magv;
-  const user = await query(`SELECT * FROM giangvien WHERE magv = '${magv}'`);
-  const khoa = await query(`SELECT * FROM khoa`);
-  const namhoc = await query(`SELECT * FROM namhoc`);
-  const bachoc = await query(`SELECT * FROM bachoc`);
-  const hedaotao = await query(`SELECT * FROM hedaotao`);
-  const nganh = await query(`SELECT * FROM nganh`);
-  res.render('data/viewData',{
-    user: user,
-    khoa: khoa,
-    namhoc: namhoc,
-    bachoc: bachoc,
-    hedaotao: hedaotao,
-    nganh: nganh
+    nganh: nganh,
+    lop: lop
   })
 }
 
@@ -86,10 +76,14 @@ module.exports.postData = async function(req, res){
   const magv = req.signedCookies.magv;
   const user = await query(`SELECT * FROM giangvien WHERE magv = '${magv}'`);
   const khoa = await query(`SELECT * FROM khoa`);
+  const bomon = await query(`SELECT * FROM bomon`);
   const namhoc = await query(`SELECT * FROM namhoc`);
+  const hocki = await query(`SELECT * FROM hocki`);
+  const monhoc = await query(`SELECT * FROM monhoc`);
   const bachoc = await query(`SELECT * FROM bachoc`);
   const hedaotao = await query(`SELECT * FROM hedaotao`);
   const nganh = await query(`SELECT * FROM nganh`);
+  const lop = await query(`SELECT * FROM lop`);
   let errors = [];
   if(req.body.makhoa){
     connection.query(`SELECT * FROM khoa WHERE makhoa = '${req.body.makhoa}'`, function(err, errInput){
@@ -107,10 +101,14 @@ module.exports.postData = async function(req, res){
           user: user,
           errors: errors,
           khoa: khoa,
+          bomon: bomon,
           namhoc: namhoc,
+          hocki: hocki,
+          monhoc: monhoc,
           bachoc: bachoc,
           hedaotao: hedaotao,
-          nganh: nganh
+          nganh: nganh,
+          lop: lop
         })              
       }
       else{
@@ -138,10 +136,14 @@ module.exports.postData = async function(req, res){
           user: user,
           errors: errors,
           khoa: khoa,
+          bomon: bomon,
           namhoc: namhoc,
+          hocki: hocki,
+          monhoc: monhoc,
           bachoc: bachoc,
           hedaotao: hedaotao,
-          nganh: nganh
+          nganh: nganh,
+          lop: lop
         })              
       }
       else{
@@ -166,10 +168,14 @@ module.exports.postData = async function(req, res){
           user: user,
           errors: errors,
           khoa: khoa,
+          bomon: bomon,
           namhoc: namhoc,
+          hocki: hocki,
+          monhoc: monhoc,
           bachoc: bachoc,
           hedaotao: hedaotao,
-          nganh: nganh
+          nganh: nganh,
+          lop: lop
         })              
       }
       else{
@@ -191,10 +197,14 @@ module.exports.postData = async function(req, res){
           user: user,
           errors: errors,
           khoa: khoa,
+          bomon: bomon,
           namhoc: namhoc,
+          hocki: hocki,
+          monhoc: monhoc,
           bachoc: bachoc,
           hedaotao: hedaotao,
-          nganh: nganh
+          nganh: nganh,
+          lop: lop
         })              
       }
       else{
@@ -222,10 +232,14 @@ module.exports.postData = async function(req, res){
           user: user,
           errors: errors,
           khoa: khoa,
+          bomon: bomon,
           namhoc: namhoc,
+          hocki: hocki,
+          monhoc: monhoc,
           bachoc: bachoc,
           hedaotao: hedaotao,
-          nganh: nganh
+          nganh: nganh,
+          lop: lop
         })              
       }
       else{
@@ -253,10 +267,14 @@ module.exports.postData = async function(req, res){
           user: user,
           errors: errors,
           khoa: khoa,
+          bomon: bomon,
           namhoc: namhoc,
+          hocki: hocki,
+          monhoc: monhoc,
           bachoc: bachoc,
           hedaotao: hedaotao,
-          nganh: nganh
+          nganh: nganh,
+          lop: lop
         })              
       }
       else{
@@ -284,10 +302,14 @@ module.exports.postData = async function(req, res){
           user: user,
           errors: errors,
           khoa: khoa,
+          bomon: bomon,
           namhoc: namhoc,
+          hocki: hocki,
+          monhoc: monhoc,
           bachoc: bachoc,
           hedaotao: hedaotao,
-          nganh: nganh
+          nganh: nganh,
+          lop: lop
         })              
       }
       else{
@@ -315,10 +337,14 @@ module.exports.postData = async function(req, res){
           user: user,
           errors: errors,
           khoa: khoa,
+          bomon: bomon,
           namhoc: namhoc,
+          hocki: hocki,
+          monhoc: monhoc,
           bachoc: bachoc,
           hedaotao: hedaotao,
-          nganh: nganh
+          nganh: nganh,
+          lop: lop
         })              
       }
       else{
@@ -346,10 +372,14 @@ module.exports.postData = async function(req, res){
           user: user,
           errors: errors,
           khoa: khoa,
+          bomon: bomon,
           namhoc: namhoc,
+          hocki: hocki,
+          monhoc: monhoc,
           bachoc: bachoc,
           hedaotao: hedaotao,
-          nganh: nganh
+          nganh: nganh,
+          lop: lop
         })              
       }
       else{

@@ -4,29 +4,29 @@ block content
     h2.d-flex.justify-content-center Danh sách tài khoản
     button.btn.btn-primary.mr-2.mb-2(type='button', data-toggle='modal', data-target='#changeRoleModal')
       | Phân quyền
-    // The Modal
     #changeRoleModal.modal.fade
-      .modal-dialog.modal-md
+      .modal-dialog.modal-notify.modal-info
         .modal-content
-          // Modal Header
           .modal-header
-            h4.modal-title Phân quyền
-            button.close(type='button', data-dismiss='modal') &times;
-          // Modal body
+            h4.heading.lead Phân quyền
+            button.close.white-text(type='button', data-dismiss='modal') &times;
           .modal-body
+            .text-center
+              .fas.fa-users-cog.fa-4x.mb-3.animated.rotateIn          
             form(action="/users/userList", method="POST")
-              div.form-group.form-inline
+              .form-group.form-inline
                 label(for="userToChangeRole").mb-2.mr-sm-2 Tên đăng nhập:
                 select(name="userToChangeRole").form-control.mb-2.mr-sm-2
                   each user in users
                     option(value= user.magv)= user.email
-              div.form-group.form-inline  
+              .form-group.form-inline  
                 label(for="roleToChange").mb-2.mr-sm-2 Quyền:
                 select(name="roleToChange").form-control.mb-2.mr-sm-2
                   option(value="Giảng viên") Giảng viên
                   option(value="Lãnh đạo khoa") Lãnh đạo khoa
-              button.btn.btn-primary.mb-2.mr-sm-2 Xác nhận
-              button.btn.btn-secondary(type='button', data-dismiss='modal', style='float: right') Đóng
+              .modal-footer.justify-content-center   
+                button.btn.btn-primary.mb-2.mr-sm-2 Xác nhận
+                button.btn.btn-outline-primary.waves-effect(type='button', data-dismiss='modal', style='float: right') Đóng
     table.table.mt-4.table-bordered#userTable
       thead.thead-light
         tr

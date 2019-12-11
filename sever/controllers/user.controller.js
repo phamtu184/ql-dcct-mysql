@@ -98,12 +98,13 @@ module.exports.postUserLogin = async function(req, res){
 
 module.exports.postUserSignup = async function(req, res){
   let errors = [];
+  const magv = req.signedCookies.magv;
+  const user = await query(`SELECT * FROM giangvien WHERE magv = '${magv}'`);
   const password = req.body.password;
   const passwordConf = req.body.passwordConf;
   const email = req.body.email + "@tvu.edu.vn";
   const tengv = req.body.tengv;
   const sdt = req.body.sdt;
-  const magv = req.signedCookies.magv;
   if (email.length < 3){
     errors.push("Email có từ 4 kí tự trở lên!")
   }
@@ -129,19 +130,18 @@ module.exports.postUserSignup = async function(req, res){
     errors.push("Mã giảng viên phải có 5 kí tự!");
   }
   if (errors.length) {
-    connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
+    connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err){
       connection.query(`SELECT * FROM bomon`, function (err, bomon){
         res.render("users/signup", {
           errors: errors,
           values: req.body,
-          user: user,
-          bomon: bomon
+          bomon: bomon,
+          user: user
         });
         return;
       })
-  })
-
-}
+    })
+  }
   let giangvien ={
     "magv":req.body.magv,
     "tengv": req.body.tengv,
@@ -153,7 +153,6 @@ module.exports.postUserSignup = async function(req, res){
     "mabm": req.body.knmabm
   }
   if(!errors.length){
-    const user = await query(`SELECT * FROM giangvien WHERE magv = '${magv}'`);
     const emailbd = await query(`SELECT * FROM giangvien WHERE email = '${req.body.email + '@tvu.edu.vn'}'`);
     const magvbd = await query(`SELECT * FROM giangvien WHERE magv = '${req.body.magv}'`);
     const bomon = await query(`SELECT * FROM bomon`);
@@ -162,8 +161,8 @@ module.exports.postUserSignup = async function(req, res){
       res.render("users/signup", {
         errors: errors,
         values: req.body,
-        user: user,
-        bomon: bomon
+        bomon: bomon,
+        user: user
       });
     }
     else if(emailbd.length){
@@ -171,8 +170,8 @@ module.exports.postUserSignup = async function(req, res){
       res.render("users/signup", {
         errors: errors,
         values: req.body,
-        user: user,
-        bomon: bomon
+        bomon: bomon,
+        user: user
       });
     }
     else{
@@ -186,12 +185,16 @@ module.exports.postUserSignup = async function(req, res){
 
 module.exports.postChangeUser = async function(req, res, next){
   let errors = [];
+  const magv = req.signedCookies.magv;
+  const user = await query(`SELECT * FROM giangvien WHERE magv = '${magv}'`);
   const password = req.body.password;
   const passwordConf = req.body.passwordConf;
   const email = req.body.email + "@tvu.edu.vn";
   const tengv = req.body.tengv;
   const sdt = req.body.sdt;
-  const magv = req.signedCookies.magv;
+  const users = await query(`SELECT * FROM giangvien`);
+  const bomon = await query(`SELECT * FROM bomon`);
+  const emailbd = await query(`SELECT * FROM giangvien WHERE email = '${req.body.email + '@tvu.edu.vn'}'`);
   if (email.length < 3){
     errors.push("Email có từ 4 kí tự trở lên!")
   }
@@ -213,27 +216,20 @@ module.exports.postChangeUser = async function(req, res, next){
   if (sdt.length < 10 || sdt.length > 10){
     errors.push("Số điện thoại phải có 10 chữ số!");
   }
-  if (req.body.magv.length > 5 || req.body.magv.length < 5) {
-    errors.push("Mã giảng viên phải có 5 kí tự!");
+  if (!req.body.magvchange || req.body.magvchange == " "){
+    errors.push("Vui lòng chọn giáo viên!");
   }
   if (errors.length) {
-    connection.query(`SELECT * FROM giangvien WHERE magv = '${magv}'`, function (err, user){
-      connection.query(`SELECT * FROM giangvien`, function (err, users){
-        connection.query(`SELECT * FROM bomon`, function (err, bomon){
-          res.render("users/changeUser", {
-            errors: errors,
-            values: req.body,
-            user: user,
-            bomon: bomon,
-            users: users
-          });
-          return;
-        })
-      })
-  })
-}
+    res.render("users/changeUser", {
+      errors: errors,
+      values: req.body,
+      bomon: bomon,
+      users: users,
+      user: user
+    });
+    return;
+  }
   let giangvien ={
-    "magv":req.body.magv,
     "tengv": req.body.tengv,
     "sdt" : req.body.sdt,
     "email": req.body.email + "@tvu.edu.vn",
@@ -243,35 +239,21 @@ module.exports.postChangeUser = async function(req, res, next){
     "mabm": req.body.knmabm
   }
   if(!errors.length){
-    if(!errors.length){
-      const user = await query(`SELECT * FROM giangvien WHERE magv = '${magv}'`);
-      const emailbd = await query(`SELECT * FROM giangvien WHERE email = '${req.body.email + '@tvu.edu.vn'}'`);
-      const magvbd = await query(`SELECT * FROM giangvien WHERE magv = '${req.body.magv}'`);
-      const bomon = await query(`SELECT * FROM bomon`);
-      if(magvbd.length){
-        errors.push("Mã giảng viên đã tồn tại!");
-        res.render("users/signup", {
-          errors: errors,
-          values: req.body,
-          user: user,
-          bomon: bomon
-        });
-      }
-      else if(emailbd.length){
-        errors.push("Email này đã được đăng ký!");
-        res.render("users/signup", {
-          errors: errors,
-          values: req.body,
-          user: user,
-          bomon: bomon
-        });
-      }
-      else{
-        connection.query('INSERT INTO giangvien SET ?', giangvien, function (err, user){
-          if (err) throw err;
-        });
-        res.redirect('/users/userList')
-      }
+    if( emailbd[0] && emailbd[0].email != req.body.email){
+      errors.push("Email này đã được đăng ký!");
+      res.render("users/changeUser", {
+        errors: errors,
+        values: req.body,
+        users: users,
+        bomon: bomon,
+        user: user
+      });
+    }
+    else{
+      connection.query(`UPDATE giangvien SET ? WHERE magv = '${req.body.magv}'`, giangvien, function (err){
+        if (err) throw err;
+      });
+      res.redirect('/users/userList')
     }
   }
 }

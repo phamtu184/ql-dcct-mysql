@@ -41,13 +41,20 @@ module.exports.deleteFile = async function(req, res, next){
 
 module.exports.findFile = async function(req, res, next){
   const magv = req.signedCookies.magv;
+  let info = [];
   const user = await query(`SELECT * FROM giangvien WHERE magv = '${magv}'`);
   const gv = await query(`SELECT * FROM giangvien`);
   const hk = await query(`SELECT * FROM hocki`);
-  res.render('file/findFile.pug',{
-    user: user,
-    gv: gv,
-    hk: hk
+  info.push(`Thống kê đề cương của tất cả học kì và giảng viên`);
+  connection.query(`SELECT decuong.linkfile AS linkfile, decuong.ngaytai AS ngaytai, lop.tenlop AS tenlop, monhoc.tenmh AS tenmh, giangvien.tengv AS tengv, hocki.tenhk AS tenhk
+  FROM decuong JOIN lop ON decuong.malop = lop.malop JOIN monhoc ON decuong.mamh = monhoc.mamh JOIN giangvien ON decuong.magv = giangvien.magv JOIN hocki ON decuong.mahk = hocki.mahk`, function (err, file){
+    res.render('file/findFile.pug',{
+      user: user,
+      file: file,
+      gv: gv,
+      hk: hk,
+      info: info
+    });  
   })
 }
 

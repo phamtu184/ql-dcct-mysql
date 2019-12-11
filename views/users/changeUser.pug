@@ -12,29 +12,29 @@ block content
                 = error  
           div.form-group
             label(for="magvchange") Họ và tên giảng viên cần thay đổi:
-            select(name="magvchange").form-control.mb-2.mr-sm-2.custom-select
-              each user in users
-                option(value= user.magv)= user.tengv                         
+            select(name="magvchange", id="mySelect", onchange="infoUser()").form-control.mb-2.mr-sm-2.custom-select
+              option(value=" ") Chọn...
+              each user in users  
+                option(value= user.magv + "-" + user.tengv + "-" + user.email + "-" + user.sdt)= user.tengv
+          .form-group.form-inline
+            label.font-weight-light(for="magv").mr-2 Mã giảng viên:
+            input.form-control(type="text", name="magv", required, readonly="true")#magv
           .md-form
             i.fa.fa-user.prefix
-            input.form-control(type="text", name="magv",value=values ? values.magv : "", required)
-            label.font-weight-light(for="magv") Mã giảng viên:
-          .md-form
-            i.fa.fa-user.prefix
-            input.form-control(type="text", name="tengv",value=values ? values.tengv : "", required)
+            input.form-control(type="text", name="tengv",value=values ? values.tengv : "", required, placeholder="Họ tên")#tengv
             label.font-weight-light(for="tengv") Họ và tên giảng viên:
           .md-form
             .row
               .col-3
                 i.fa.fa-envelope.prefix
-                input.form-control(type="text", name="email",value=values ? values.email : "", required)
+                input.form-control(type="text", name="email",value=values ? values.email : "", required, placeholder="Email")#email
                 label.font-weight-light(for="email") &nbsp; &nbsp; Email:
               .col
                 input.form-control(type='text', disabled='')
                 label.disabled(for='inputDisabledEx') @tvu.edu.vn          
           .md-form
             i.fa.fa-phone.prefix
-            input.form-control(type="text", name="sdt",value=values ? values.sdt : "", required)
+            input.form-control(type="text", name="sdt",value=values ? values.sdt : "", required, placeholder="Số điện thoại")#sdt
             label.font-weight-light(for="sdt") Số điện thoại:
           .md-form
             i.fa.fa-lock.prefix
@@ -57,4 +57,16 @@ block content
                 option(value="Giảng viên") Giảng viên
                 option(value="Lãnh đạo khoa") Lãnh đạo khoa
           button.btn.btn-primary.mt-2 Xác nhận
-  script(src='https://code.jquery.com/jquery-3.3.1.js')         
+    #demo     
+  script(src='https://code.jquery.com/jquery-3.3.1.js')  
+  script.
+    function infoUser(){
+      var x = document.getElementById("mySelect").value;
+      var values = x.split('-');
+      var vlEmail = values[2].split("@");
+      document.getElementById("magv").value = values[0];
+      document.getElementById("tengv").value = values[1];
+      document.getElementById("email").value = vlEmail[0];
+      document.getElementById("sdt").value = values[3];
+    }
+    

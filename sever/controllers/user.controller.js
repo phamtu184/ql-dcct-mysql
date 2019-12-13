@@ -239,22 +239,10 @@ module.exports.postChangeUser = async function(req, res, next){
     "mabm": req.body.knmabm
   }
   if(!errors.length){
-    if( emailbd[0] && emailbd[0].email != req.body.email){
-      errors.push("Email này đã được đăng ký!");
-      res.render("users/changeUser", {
-        errors: errors,
-        values: req.body,
-        users: users,
-        bomon: bomon,
-        user: user
-      });
-    }
-    else{
-      connection.query(`UPDATE giangvien SET ? WHERE magv = '${req.body.magv}'`, giangvien, function (err){
-        if (err) throw err;
-      });
-      res.redirect('/users/userList')
-    }
+    connection.query(`UPDATE giangvien SET ? WHERE magv = '${req.body.magv}'`, giangvien, function (err){
+      if (err) throw err;
+    });
+    res.redirect('/users/userList')
   }
 }
 

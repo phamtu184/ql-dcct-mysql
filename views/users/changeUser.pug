@@ -18,7 +18,7 @@ block content
                 option(value= user.magv + "-" + user.tengv + "-" + user.email + "-" + user.sdt)= user.tengv
           .form-group.form-inline
             label.font-weight-light(for="magv").mr-2 Mã giảng viên:
-            input.form-control(type="text", name="magv", required, readonly="true")#magv
+            input.form-control(type="text", name="magv", required, readonly="true", value=values ? values.magv : "")#magv
           .md-form
             i.fa.fa-user.prefix
             input.form-control(type="text", name="tengv",value=values ? values.tengv : "", required, placeholder="Họ tên")#tengv

@@ -157,8 +157,8 @@ module.exports.postData = async function(req, res){
           
   if(req.body.namhoc){
     connection.query(`SELECT * FROM namhoc WHERE namhoc = '${req.body.namhoc}'`, function(err, errInput){
-      if(req.body.namhoc.length<4 || req.body.namhoc.length>4){
-        errors.push("Năm học phải có 4 kí tự!")
+      if(req.body.namhoc.length<4 || req.body.namhoc.length>4 || /[a-z]/.test(req.body.namhoc) ){
+        errors.push("Năm học không hợp lệ (phải chứa 4 kí tự và không có kí tự chữ)!")
       }
       if(errInput.length){
         errors.push("Năm học đã tồn tại!");
@@ -226,6 +226,9 @@ module.exports.postData = async function(req, res){
       }
       if(errInput.length){
         errors.push("Mã môn học đã tồn tại!");
+      }
+      if(req.body.tclythuyet == "0" && req.body.tcthuchanh == "0"){
+        errors.push("Tổng số tín chỉ phải lớn hơn 0!");
       }
       if(errors.length){
         res.render('data/updateData.pug',{

@@ -9,7 +9,7 @@ block content
             each error in errors
               .alert.alert-danger
                 span.closebtn(onclick="this.parentElement.style.display='none';") &times;
-                = error  
+                = error
           div.form-group
             label(for="magvchange") Họ và tên giảng viên cần thay đổi:
             select(name="magvchange", id="mySelect", onchange="infoUser()").form-control.mb-2.mr-sm-2.custom-select
@@ -57,7 +57,6 @@ block content
                 option(value="Giảng viên") Giảng viên
                 option(value="Lãnh đạo khoa") Lãnh đạo khoa
           button.btn.btn-primary.mt-2 Xác nhận
-    #demo     
   script(src='https://code.jquery.com/jquery-3.3.1.js')  
   script.
     function infoUser(){
@@ -68,5 +67,5 @@ block content
       document.getElementById("tengv").value = values[1];
       document.getElementById("email").value = vlEmail[0];
       document.getElementById("sdt").value = values[3];
-    }
+    } 
     

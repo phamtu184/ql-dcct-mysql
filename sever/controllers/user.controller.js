@@ -123,8 +123,8 @@ module.exports.postUserSignup = async function(req, res){
   if (password.length < 7){
     errors.push("Mật khẩu phải có từ 8 kí tự trở lên!");
   }
-  if (sdt.length < 10 || sdt.length > 10){
-    errors.push("Số điện thoại phải có 10 chữ số!");
+  if (sdt.length < 10 || sdt.length > 10 || /[a-z]/i.test(sdt)){
+    errors.push("Số điện thoại không hợp lệ (phải có 10 số và không có kí tự đặc biệt)!");
   }
   if (req.body.magv.length > 5 || req.body.magv.length < 5) {
     errors.push("Mã giảng viên phải có 5 kí tự!");
@@ -194,7 +194,6 @@ module.exports.postChangeUser = async function(req, res, next){
   const sdt = req.body.sdt;
   const users = await query(`SELECT * FROM giangvien`);
   const bomon = await query(`SELECT * FROM bomon`);
-  const emailbd = await query(`SELECT * FROM giangvien WHERE email = '${req.body.email + '@tvu.edu.vn'}'`);
   if (email.length < 3){
     errors.push("Email có từ 4 kí tự trở lên!")
   }
@@ -213,8 +212,8 @@ module.exports.postChangeUser = async function(req, res, next){
   if (password.length < 7){
     errors.push("Mật khẩu phải có từ 8 kí tự trở lên!");
   }
-  if (sdt.length < 10 || sdt.length > 10){
-    errors.push("Số điện thoại phải có 10 chữ số!");
+  if (sdt.length < 10 || sdt.length > 10 || /[a-z]/i.test(sdt)){
+    errors.push("Số điện thoại không hợp lệ (phải có 10 số và không có kí tự đặc biệt)!");
   }
   if (!req.body.magvchange || req.body.magvchange == " "){
     errors.push("Vui lòng chọn giáo viên!");

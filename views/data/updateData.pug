@@ -29,16 +29,18 @@ block content
             .card(style="background-color: rgba(158, 158, 158, 0.1);").labelColor
               .card-body
                 .col-md-10.ml-auto.mr-auto   
-                  form(action="/data/updateData", method="POST").was-validated
+                  form(action="/data/updateData", method="POST")#khoaForm
                     p.h4.text-center.py-4 Thêm khoa 
                     .md-form
                       i.fa.fa-user.prefix
-                      input.form-control(type="text", name="makhoa", required)
+                      input.form-control(type="text", name="makhoa", required, data-error="#errmakhoa")
                       label.font-weight-light(for="makhoa") Mã khoa:
+                      small#errmakhoa.form-text.text-danger.err
                     .md-form
                       i.fa.fa-user.prefix
-                      input.form-control(type="text", name="tenkhoa", required)
+                      input.form-control(type="text", name="tenkhoa", required, data-error="#errtenkhoa")
                       label.font-weight-light(for="tenkhoa") Tên khoa:
+                      small#errtenkhoa.form-text.text-danger.err
                     button.btn.btn-primary Thêm khoa
         h3.mt-4.text-center Danh sách khoa                        
         table.table.mt-4.table-bordered
@@ -58,16 +60,18 @@ block content
             .card(style="background-color: rgba(158, 158, 158, 0.1);").labelColor
               .card-body
                 .col-md-10.ml-auto.mr-auto     
-                  form(action="/data/updateData", method="POST").was-validated
+                  form(action="/data/updateData", method="POST")#bmForm
                     p.h4.text-center.py-4 Thêm bộ môn
                     .md-form
                       i.fa.fa-user.prefix
                       label.font-weight-light(for="mabm") Mã bộ môn:
-                      input(type="text", name="mabm", required).form-control
+                      input(type="text", name="mabm", required, data-error="#errmabm").form-control
+                      small#errmabm.form-text.text-danger.err
                     .md-form
                       i.fa.fa-user.prefix
                       label.font-weight-light(for="tenbm") Tên bộ môn:
-                      input(type="text", name="tenbm", required).form-control
+                      input(type="text", name="tenbm", required, data-error="#errtenbm").form-control
+                      small#errtenbm.form-text.text-danger.err
                     .form-group
                       label(for="knmakhoa") Tên khoa:
                       select(name="knmakhoa").form-control.mb-2.mr-sm-2.custom-select
@@ -93,11 +97,12 @@ block content
             .card(style="background-color: rgba(158, 158, 158, 0.1);").labelColor
               .card-body
                 .col-md-10.ml-auto.mr-auto     
-                  form(action="/data/updateData", method="POST").was-validated
+                  form(action="/data/updateData", method="POST")#namhocForm
                     .md-form
                       i.fa.fa-user.prefix
                       label.font-weight-light(for="namhoc") Năm học:
-                      input(type="text", name="namhoc", required).form-control
+                      input(type="text", name="namhoc", required, data-error="#errnamhoc").form-control
+                      small#errnamhoc.form-text.text-danger.err
                     button.btn.btn-primary Thêm năm học
         h3.mt-4.text-center Danh sách năm học
         table.table.mt-4.table-bordered
@@ -149,15 +154,17 @@ block content
             .card(style="background-color: rgba(158, 158, 158, 0.1);").labelColor
               .card-body
                 .col-md-10.ml-auto.mr-auto     
-                  form(action="/data/updateData", method="POST").was-validated
+                  form(action="/data/updateData", method="POST")#mhForm
                     .md-form
                       i.fa.fa-user.prefix
                       label.font-weight-light(for="mamh") Mã môn học:
-                      input(type="text", name="mamh",  required).form-control
+                      input(type="text", name="mamh",  required, data-error="#errmamh").form-control
+                      small#errmamh.form-text.text-danger.err
                     .md-form
                       i.fa.fa-user.prefix
                       label.font-weight-light(for="tenmh") Tên môn học:
-                      input(type="text", name="tenmh", required).form-control
+                      input(type="text", name="tenmh", required, data-error="#errtenmh").form-control
+                      small#errtenmh.form-text.text-danger.err
                     .form-group
                       label(for="tclythuyet") Tín chỉ lí thuyết:
                       select(name="tclythuyet").form-control.mb-2.mr-sm-2.custom-select
@@ -199,15 +206,17 @@ block content
             .card(style="background-color: rgba(158, 158, 158, 0.1);").labelColor
               .card-body
                 .col-md-10.ml-auto.mr-auto     
-                  form(action="/data/updateData", method="POST").was-validated
+                  form(action="/data/updateData", method="POST")#hdtForm
                     .md-form
                       i.fa.fa-user.prefix
                       label.font-weight-light(for="mahdt") Mã hệ đào tạo:
-                      input(type="text", name="mahdt", required).form-control
+                      input(type="text", name="mahdt", required, data-error="#errmahdt").form-control
+                      small#errmahdt.form-text.text-danger.err
                     .md-form
                       i.fa.fa-user.prefix
                       label.font-weight-light(for="tenhdt") Tên hệ đào tạo:
-                      input(type="text", name="tenhdt", required).form-control
+                      input(type="text", name="tenhdt", required, data-error="#errtenhdt").form-control
+                      small#errtenhdt.form-text.text-danger.err
                     button.btn.btn-primary Thêm hệ đào tạo
         h3.mt-4.text-center Danh sách hệ đào tạo
         table.table.mt-4.table-bordered
@@ -227,15 +236,17 @@ block content
             .card(style="background-color: rgba(158, 158, 158, 0.1);").labelColor
               .card-body
                 .col-md-10.ml-auto.mr-auto     
-                  form(action="/data/updateData", method="POST").was-validated
+                  form(action="/data/updateData", method="POST")#bhForm
                     .md-form
                       i.fa.fa-user.prefix
                       label.font-weight-light(for="mabh") Mã bậc học:
-                      input(type="text", name="mabh", required).form-control
+                      input(type="text", name="mabh", required, data-error="#errmabh").form-control
+                      small#errmabh.form-text.text-danger.err
                     .md-form
                       i.fa.fa-user.prefix
                       label.font-weight-light(for="tenbh") Tên bậc học:
-                      input(type="text", name="tenbh", required).form-control
+                      input(type="text", name="tenbh", required, data-error="#errtenbh").form-control
+                      small#errtenbh.form-text.text-danger.err
                     button.btn.btn-primary Thêm bậc học  
         h3.mt-4.text-center Danh sách bậc học
         table.table.mt-4.table-bordered
@@ -255,15 +266,17 @@ block content
             .card(style="background-color: rgba(158, 158, 158, 0.1);").labelColor
               .card-body
                 .col-md-10.ml-auto.mr-auto     
-                  form(action="/data/updateData", method="POST").was-validated
+                  form(action="/data/updateData", method="POST")#nhForm
                     .md-form
                       i.fa.fa-user.prefix
                       label.font-weight-light(for="manganh") Mã ngành:
-                      input(type="text", name="manganh", required).form-control
+                      input(type="text", name="manganh", required, data-error="#errmanganh").form-control
+                      small#errmanganh.form-text.text-danger.err
                     .md-form
                       i.fa.fa-user.prefix
                       label.font-weight-light(for="tenganh") Tên ngành:
-                      input(type="text", name="tennganh", required).form-control
+                      input(type="text", name="tennganh", required, data-error="#errtennganh").form-control
+                      small#errtennganh.form-text.text-danger.err
                     .form-group
                       label(for="knmabh") Tên bậc học:
                       select(name="knmabh").form-control.mb-2.mr-sm-2.custom-select
@@ -291,15 +304,17 @@ block content
             .card(style="background-color: rgba(158, 158, 158, 0.1);").labelColor
               .card-body
                 .col-md-10.ml-auto.mr-auto     
-                  form(action="/data/updateData", method="POST").was-validated
+                  form(action="/data/updateData", method="POST")#lopForm
                     .md-form
                       i.fa.fa-user.prefix
                       label.font-weight-light(for="malop") Mã lớp:
-                      input(type="text", name="malop", required).form-control
+                      input(type="text", name="malop", required, data-error="#errmalop").form-control
+                      small#errmalop.form-text.text-danger.err
                     .md-form
                       i.fa.fa-user.prefix
                       label.font-weight-light(for="tenlop") Tên lớp:
-                      input(type="text", name="tenlop", required).form-control
+                      input(type="text", name="tenlop", required, data-error="#errtenlop").form-control
+                      small#errtenlop.form-text.text-danger.err
                     .form-group
                       label(for="knmahdt") Tên hệ đào tạo:
                       select(name="knmahdt").form-control.mb-2.mr-sm-2.custom-select
@@ -329,6 +344,8 @@ block content
               td= lops.tenlop                   
 
   script(src='https://code.jquery.com/jquery-3.3.1.js')
+  script(src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js') 
+  script(src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.min.js') 
   script.
     $('#sectionChooser').change(function(){
       var myID = $(this).val();
@@ -336,5 +353,301 @@ block content
           myID === $(this).attr('id') ? $(this).show() : $(this).hide();
       });
     });
+    $().ready(function() {
+      $("#khoaForm").validate({
+        onfocusout: false,
+        onkeyup: function(element) {$(element).valid()},
+        onclick: false,
+        rules: {
+          "makhoa": {
+            required: true,
+            maxlength: 10
+          },
+          "tenkhoa":{
+            required: true,
+            maxlength: 30,
+            minlength: 5
+          }            
+        },
+        messages: {
+          "makhoa": {
+            required: "Vui lòng nhập mã khoa",
+            maxlength: "Tối đa 10 ký tự"
+          },
+          "tenkhoa": {
+            required: "Vui lòng nhập tên khoa",
+            maxlength: "Tối đa 30 ký tự",
+            minlength: "Tối thiểu 5 ký tự",
+          }
+        },
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+        },
+      });
 
+      $("#bmForm").validate({
+        onfocusout: false,
+        onkeyup: function(element) {$(element).valid()},
+        onclick: false,
+        rules: {
+          "mabm": {
+            required: true,
+            maxlength: 10
+          },
+          "tenbm":{
+            required: true,
+            maxlength: 30,
+            minlength: 5
+          }            
+        },
+        messages: {
+          "mabm": {
+            required: "Vui lòng nhập mã bộ môn",
+            maxlength: "Tối đa 10 ký tự"
+          },
+          "tenbm": {
+            required: "Vui lòng nhập tên bộ môn",
+            maxlength: "Tối đa 30 ký tự",
+            minlength: "Tối thiểu 5 ký tự",
+          }
+        },
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+        },
+      });
+
+      $.validator.addMethod("yearReg", function(value, element, reg) {
+        return this.optional(element) || reg.test(value);
+      }, "Năm học được giới hạn từ 2010 đến 2025");
+      $("#namhocForm").validate({
+        onfocusout: false,
+        onkeyup: function(element) {$(element).valid()},
+        onclick: false,
+        rules: {
+          "namhoc": {
+            required: true,
+            maxlength: 4,
+            minlength: 4,
+            digits: true,
+            yearReg : /201[0-9]|202[0-5]/
+          },
+        },
+        messages: {
+          "namhoc": {
+            required: "Vui lòng nhập năm học",
+            maxlength: "Năm học phải có 4 kí tự",
+            minlength: "Năm học phải có 4 kí tự",
+            digits: "Năm học chỉ chứa kí tự là số"
+          }
+        },
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+        },
+      }); 
+
+      $("#mhForm").validate({
+        onfocusout: false,
+        onkeyup: function(element) {$(element).valid()},
+        onclick: false,
+        rules: {
+          "mamh": {
+            required: true,
+            maxlength: 6,
+            minlength: 6
+          },
+          "tenmh":{
+            required: true,
+            maxlength: 30,
+            minlength: 5
+          }            
+        },
+        messages: {
+          "mamh": {
+            required: "Vui lòng nhập mã môn học",
+            maxlength: "Mã môn học phải chứa 6 ký tự",
+            minlength: "Mã môn học phải chứa 6 ký tự"
+          },
+          "tenmh": {
+            required: "Vui lòng nhập tên môn học",
+            maxlength: "Tối đa 30 ký tự",
+            minlength: "Tối thiểu 5 ký tự",
+          }
+        },
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+        },
+      });
+
+      $("#hdtForm").validate({
+        onfocusout: false,
+        onkeyup: function(element) {$(element).valid()},
+        onclick: false,
+        rules: {
+          "mahdt": {
+            required: true,
+            maxlength: 10,
+            minlength: 2
+          },
+          "tenhdt":{
+            required: true,
+            maxlength: 20,
+            minlength: 3
+          }            
+        },
+        messages: {
+          "mahdt": {
+            required: "Vui lòng nhập mã hệ đào tạo",
+            maxlength: "Tối đa 10 kí tự",
+            minlength: "Tối thiểu 2 kí tự"
+          },
+          "tenhdt": {
+            required: "Vui lòng nhập tên hệ đào tạo",
+            maxlength: "Tối đa 20 ký tự",
+            minlength: "Tối thiểu 3 ký tự",
+          }
+        },
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+        },
+      });
+
+      $("#bhForm").validate({
+        onfocusout: false,
+        onkeyup: function(element) {$(element).valid()},
+        onclick: false,
+        rules: {
+          "mabh": {
+            required: true,
+            maxlength: 10,
+            minlength: 2
+          },
+          "tenbh":{
+            required: true,
+            maxlength: 20,
+            minlength: 3
+          }            
+        },
+        messages: {
+          "mabh": {
+            required: "Vui lòng nhập mã bậc học",
+            maxlength: "Tối đa 10 kí tự",
+            minlength: "Tối thiểu 2 kí tự"
+          },
+          "tenbh": {
+            required: "Vui lòng nhập tên bậc học",
+            maxlength: "Tối đa 20 ký tự",
+            minlength: "Tối thiểu 3 ký tự",
+          }
+        },
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+        },
+      });   
+
+      $("#nhForm").validate({
+        onfocusout: false,
+        onkeyup: function(element) {$(element).valid()},
+        onclick: false,
+        rules: {
+          "manganh": {
+            required: true,
+            maxlength: 10,
+            minlength: 2
+          },
+          "tennganh":{
+            required: true,
+            maxlength: 30,
+            minlength: 5
+          }            
+        },
+        messages: {
+          "manganh": {
+            required: "Vui lòng nhập mã bậc học",
+            maxlength: "Tối đa 10 kí tự",
+            minlength: "Tối thiểu 2 kí tự"
+          },
+          "tennganh": {
+            required: "Vui lòng nhập tên bậc học",
+            maxlength: "Tối đa 30 ký tự",
+            minlength: "Tối thiểu 5 ký tự",
+          }
+        },
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+        },
+      });  
+
+      $("#lopForm").validate({
+        onfocusout: false,
+        onkeyup: function(element) {$(element).valid()},
+        onclick: false,
+        rules: {
+          "malop": {
+            required: true,
+            maxlength: 10,
+            minlength: 2
+          },
+          "tenlop":{
+            required: true,
+            maxlength: 40,
+            minlength: 5
+          }            
+        },
+        messages: {
+          "malop": {
+            required: "Vui lòng nhập mã bậc học",
+            maxlength: "Tối đa 10 kí tự",
+            minlength: "Tối thiểu 2 kí tự"
+          },
+          "tenlop": {
+            required: "Vui lòng nhập tên bậc học",
+            maxlength: "Tối đa 40 ký tự",
+            minlength: "Tối thiểu 5 ký tự",
+          }
+        },
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+        },
+      });            
+    });    
 

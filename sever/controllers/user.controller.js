@@ -106,7 +106,7 @@ module.exports.postUserSignup = async function(req, res){
   const tengv = req.body.tengv;
   const sdt = req.body.sdt;
   if (email.length < 3){
-    errors.push("Email có từ 4 kí tự trở lên!")
+    errors.push("Email có từ 3 kí tự trở lên!")
   }
   if (email.length > 50){
     errors.push("Email không được quá 50 kí tự!")

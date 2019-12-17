@@ -3,7 +3,7 @@ block content
   .container(style='margin-top: 170px')
     .card(style="background-color: rgba(158, 158, 158, 0.1);").labelColor
       .card-body
-        form(action="/users/signup", method="POST").was-validated
+        form(action="/users/signup", method="POST").was-validated#signupForm
           p.h4.text-center.py-4 Tạo tài khoản
           if errors
             each error in errors
@@ -12,33 +12,39 @@ block content
                 = error        
           .md-form
             i.fa.fa-user.prefix
-            input.form-control(type="text", name="magv",value=values ? values.magv : "", required)
+            input.form-control(type="text", name="magv",value=values ? values.magv : "", required, data-error="#errmagv")
             label.font-weight-light(for="magv") Mã giảng viên:
+            small#errmagv.form-text.text-muted.text-danger.err
           .md-form
             i.fa.fa-user.prefix
-            input.form-control(type="text", name="tengv",value=values ? values.tengv : "", required)
+            input.form-control(type="text", name="tengv",value=values ? values.tengv : "", required, data-error="#errtengv")
             label.font-weight-light(for="tengv") Họ và tên giảng viên:
+            small#errtengv.form-text.text-muted.text-danger.err
           .md-form
             .row
               .col-3
                 i.fa.fa-envelope.prefix
-                input.form-control(type="text", name="email",value=values ? values.email : "", required)
+                input.form-control(type="text", name="email",value=values ? values.email : "", required, data-error="#erremail")
                 label.font-weight-light(for="email") &nbsp; &nbsp; Email:
+                small#erremail.form-text.text-muted.text-danger.err
               .col
                 input.form-control(type='text', disabled='')
                 label.disabled(for='inputDisabledEx') @tvu.edu.vn          
           .md-form
             i.fa.fa-phone.prefix
-            input.form-control(type="text", name="sdt",value=values ? values.sdt : "", required)
+            input.form-control(type="text", name="sdt",value=values ? values.sdt : "", required, data-error="#errsdt")
             label.font-weight-light(for="sdt") Số điện thoại:
+            small#errsdt.form-text.text-muted.text-danger.err
           .md-form
             i.fa.fa-lock.prefix
-            input.form-control(type="password", name="password", required)
+            input.form-control(type="password", name="password", required, data-error="#errpw")#password
             label.font-weight-light(for="password") Mật khẩu:
+            small#errpw.form-text.text-muted.text-danger.err
           .md-form
             i.fa.fa-lock.prefix
-            input.form-control(type="password", name="passwordConf", required)
+            input.form-control(type="password", name="passwordConf", required, data-error="#errpwcf")
             label.font-weight-light(for="passwordConf") Xác nhận mật khẩu:
+            small#errpwcf.form-text.text-muted.text-danger.err
           .form-row.mt-2  
             .col
               label(for="knmabm") Tên bộ môn:
@@ -52,4 +58,89 @@ block content
                 option(value="Giảng viên") Giảng viên
                 option(value="Lãnh đạo khoa") Lãnh đạo khoa
           button.btn.btn-primary.mt-2 Đăng kí
-  script(src='https://code.jquery.com/jquery-3.3.1.js')      
+  script(src='https://code.jquery.com/jquery-3.3.1.js')   
+  script(src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js') 
+  script(src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.min.js') 
+  script.
+    $().ready(function() {
+      $("#signupForm").validate({
+        onfocusout: false,
+        onkeyup: function(element) {$(element).valid()},
+        onclick: false,
+        rules: {
+          "tengv": {
+            required: true,
+            minlength: 3,
+            maxlength: 50
+          },
+          "magv":{
+            required: true,
+            minlength: 5,
+            maxlength: 5
+          },
+          "email": {
+            required: true,
+            minlength: 3,
+            maxlength: 50
+          },
+          "sdt": {
+            required: true,
+            minlength: 10,
+            maxlength: 10,
+            digits: true,
+          },
+          "password": {
+            required: true,
+            minlength: 6
+          },
+          "passwordConf": {
+            required: true,
+            equalTo: "#password",
+            minlength: 6
+          }                    
+        },
+        messages: {
+          "tengv": {
+            required: "Vui lòng nhập họ tên giảng viên",
+            maxlength: "Tối đa 50 ký tự",
+            minlength: "Tối thiểu 3 ký tự",
+          },
+          "magv": {
+            required: "Vui lòng nhập mã giảng viên",
+            maxlength: "Mã giảng viên phải chứa 5 ký tự",
+            minlength: "Mã giảng viên phải chứa 5 ký tự",
+          },
+          "email": {
+            required: "Vui lòng nhập email",
+            maxlength: "Tối đa 50 ký tự",
+            minlength: "Tối thiểu 3 ký tự",
+          },
+          "sdt": {
+            required: "Vui lòng nhập số điện thoại",
+            maxlength: "Số điện thoại không hợp lệ (phải có 10 số và không có kí tự đặc biệt)!",
+            minlength: "Số điện thoại không hợp lệ (phải có 10 số và không có kí tự đặc biệt)!",
+            digits: "Số điện thoại không hợp lệ (phải có 10 số và không có kí tự đặc biệt)!"
+          },
+          "password": {
+            required: "Bắt buộc nhập mật khẩu",
+            minlength: "Hãy nhập ít nhất 6 ký tự"
+          },
+          "passwordConf": {
+            required: "Bắt buộc nhập xác nhận mật khẩu",
+            equalTo: "Xác nhận mật khẩu phải giống với mật khẩu",
+            minlength: "Hãy nhập ít nhất 6 ký tự"
+          }
+        },
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+        },
+        unhighlight: function(element) {
+          $(element).parent().removeClass("valid");
+        }
+      });
+    });

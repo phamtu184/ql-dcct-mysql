@@ -162,3 +162,56 @@ body{
 .closebtn:hover {
   color: black;
 }
+
+html,
+body,
+header,
+.view {
+  height: 100%;
+}
+
+.top-nav-collapse {
+  background-color: #3f51b5 !important;
+}
+
+.rgba-gradient {
+  background: -webkit-linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(57, 27, 94, 0.4) 100%);
+  background: -webkit-gradient(linear, 45deg, from(rgba(0, 0, 0, 0.7), rgba(57, 27, 94, 0.4) 100%));
+  background: linear-gradient(to 45deg, rgba(0, 0, 0, 0.7), rgba(57, 27, 94, 0.4) 100%);
+}
+
+.md-form label {
+  color: #ffffff;
+}
+.labelColor label {
+  color: #222222;
+}
+h6 {
+  line-height: 1.7;
+}
+
+.md-form small label{
+  color: #ff3547 !important;
+  margin-top: 0;
+  font-weight: 400!important;
+  position: static;
+  top: auto;
+  left: auto;
+  font-size : 100%;
+  box-sizing : content-box;
+  cursor : auto;
+  font-family:Roboto, sans-serif;
+  height:auto;
+  left:0px;
+  line-height:19.2px;
+  margin-bottom:0;
+  overflow-wrap:visible;
+  text-align:left;
+  text-size-adjust:100%;
+  transform:none;
+  transition-delay:0s;
+  transition-duration:0s;
+  transition-property:none;
+  transition-timing-function:ease;
+  width:auto;
+}

@@ -7,4 +7,6 @@ module.exports = router;
 
 router.get('/updateData', auth.permissionQtv, controller.getData);
 
+//router.delete('/updateData', auth.permissionQtv, controller.delKhoa);
+
 router.post('/updateData', auth.permissionQtv, controller.postData);

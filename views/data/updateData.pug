@@ -30,14 +30,14 @@ block content
               .card-body
                 .col-md-10.ml-auto.mr-auto   
                   form(action="/data/updateData", method="POST")#khoaForm
-                    p.h4.text-center.py-4 Thêm khoa 
+                    p.h4.text-center.py-4 Thêm khoa                   
                     .md-form
-                      i.fa.fa-user.prefix
+                      i.fa.fa-bookmark.prefix
                       input.form-control(type="text", name="makhoa", required, data-error="#errmakhoa")
                       label.font-weight-light(for="makhoa") Mã khoa:
                       small#errmakhoa.form-text.text-danger.err
                     .md-form
-                      i.fa.fa-user.prefix
+                      i.fa.fa-bookmark.prefix
                       input.form-control(type="text", name="tenkhoa", required, data-error="#errtenkhoa")
                       label.font-weight-light(for="tenkhoa") Tên khoa:
                       small#errtenkhoa.form-text.text-danger.err
@@ -48,10 +48,14 @@ block content
             tr
               th Mã khoa
               th Tên khoa
+              th Thoa tác
           each khoas in khoa
             tr
               td= khoas.makhoa
               td= khoas.tenkhoa
+              td
+                form(action="/data/updateData", method="post")
+                  button(type="submit" name="delKhoa" value= khoas.makhoa onclick="return confirm('Chắc chắn xóa?');").btn.btn-danger.fas.fa-trash-alt.mr-2.btn-md           
 
     .panel#bomon
       .container.mt-2
@@ -63,12 +67,12 @@ block content
                   form(action="/data/updateData", method="POST")#bmForm
                     p.h4.text-center.py-4 Thêm bộ môn
                     .md-form
-                      i.fa.fa-user.prefix
+                      i.fa.fa-bookmark.prefix
                       label.font-weight-light(for="mabm") Mã bộ môn:
                       input(type="text", name="mabm", required, data-error="#errmabm").form-control
                       small#errmabm.form-text.text-danger.err
                     .md-form
-                      i.fa.fa-user.prefix
+                      i.fa.fa-bookmark.prefix
                       label.font-weight-light(for="tenbm") Tên bộ môn:
                       input(type="text", name="tenbm", required, data-error="#errtenbm").form-control
                       small#errtenbm.form-text.text-danger.err
@@ -85,10 +89,14 @@ block content
             tr
               th Mã bộ môn
               th Tên bộ môn
+              th Thao tác
           each bomons in bomon
             tr
               td= bomons.mabm
               td= bomons.tenbm
+              td
+                form(action="/data/updateData", method="post")
+                  button(type="submit" name="delBm" value= bomons.mabm onclick="return confirm('Chắc chắn xóa?');").btn.btn-danger.fas.fa-trash-alt.mr-2.btn-md 
 
     .panel#namhoc
       .container.mt-2
@@ -99,7 +107,7 @@ block content
                 .col-md-10.ml-auto.mr-auto     
                   form(action="/data/updateData", method="POST")#namhocForm
                     .md-form
-                      i.fa.fa-user.prefix
+                      i.fa.fa-calendar-alt.prefix
                       label.font-weight-light(for="namhoc") Năm học:
                       input(type="text", name="namhoc", required, data-error="#errnamhoc").form-control
                       small#errnamhoc.form-text.text-danger.err
@@ -109,9 +117,13 @@ block content
           thead.thead-light
             tr
               th Năm học
+              th Thao tác
           each namhocs in namhoc
             tr
-              td= namhocs.namhoc               
+              td= namhocs.namhoc    
+              td
+                form(action="/data/updateData", method="post")
+                  button(type="submit" name="delNh" value= namhocs.namhoc onclick="return confirm('Chắc chắn xóa?');").btn.btn-danger.fas.fa-trash-alt.mr-2.btn-md            
 
     .panel#hocki
       .container.mt-2
@@ -141,11 +153,15 @@ block content
               th Mã học kì
               th Năm học
               th Tên học kì
+              th Thao tác
           each hockis in hocki
             tr
               td= hockis.mahk
               td= hockis.namhoc
               td= hockis.tenhk
+              td
+                form(action="/data/updateData", method="post")
+                  button(type="submit" name="delHk" value= hockis.mahk onclick="return confirm('Chắc chắn xóa?');").btn.btn-danger.fas.fa-trash-alt.mr-2.btn-md   
 
     .panel#monhoc
       .container.mt-2
@@ -156,33 +172,25 @@ block content
                 .col-md-10.ml-auto.mr-auto     
                   form(action="/data/updateData", method="POST")#mhForm
                     .md-form
-                      i.fa.fa-user.prefix
+                      i.fa.fa-bookmark.prefix
                       label.font-weight-light(for="mamh") Mã môn học:
                       input(type="text", name="mamh",  required, data-error="#errmamh").form-control
                       small#errmamh.form-text.text-danger.err
                     .md-form
-                      i.fa.fa-user.prefix
+                      i.fa.fa-bookmark.prefix
                       label.font-weight-light(for="tenmh") Tên môn học:
                       input(type="text", name="tenmh", required, data-error="#errtenmh").form-control
                       small#errtenmh.form-text.text-danger.err
-                    .form-group
-                      label(for="tclythuyet") Tín chỉ lí thuyết:
-                      select(name="tclythuyet").form-control.mb-2.mr-sm-2.custom-select
-                        option(value="0") 0
-                        option(value="1") 1
-                        option(value="2") 2
-                        option(value="3") 3
-                        option(value="4") 4
-                        option(value="5") 5
-                    .form-group
-                      label(for="tcthuchanh") Tín chỉ thực hành:
-                      select(name="tcthuchanh").form-control.mb-2.mr-sm-2.custom-select
-                        option(value="0") 0
-                        option(value="1") 1
-                        option(value="2") 2
-                        option(value="3") 3
-                        option(value="4") 4
-                        option(value="5") 5          
+                    .md-form
+                      i.fa.fa-bookmark.prefix
+                      label.font-weight-light(for="tclythuyet") Tín chỉ lí thuyết:
+                      input(type="text", name="tclythuyet", required, data-error="#errtclythuyet").form-control
+                      small#errtclythuyet.form-text.text-danger.err
+                    .md-form
+                      i.fa.fa-bookmark.prefix
+                      label.font-weight-light(for="tcthuchanh") Tín chỉ thực hành:
+                      input(type="text", name="tcthuchanh", required, data-error="#errtcthuchanh").form-control
+                      small#errtcthuchanh.form-text.text-danger.err      
                     button.btn.btn-primary Thêm môn học
         h3.mt-4.text-center Danh sách môn học
         table.table.mt-4.table-bordered
@@ -192,12 +200,16 @@ block content
               th Tên môn học
               th Tín chỉ lí thuyết
               th Tín chỉ thực hành
+              th Thao tác
           each monhocs in monhoc
             tr
               td= monhocs.mamh
               td= monhocs.tenmh
               td= monhocs.tclythuyet
               td= monhocs.tcthuchanh
+              td
+                form(action="/data/updateData", method="post")
+                  button(type="submit" name="delMh" value= monhocs.mamh onclick="return confirm('Chắc chắn xóa?');").btn.btn-danger.fas.fa-trash-alt.mr-2.btn-md  
 
     .panel#hedaotao
       .container.mt-2
@@ -208,12 +220,12 @@ block content
                 .col-md-10.ml-auto.mr-auto     
                   form(action="/data/updateData", method="POST")#hdtForm
                     .md-form
-                      i.fa.fa-user.prefix
+                      i.fa.fa-bookmark.prefix
                       label.font-weight-light(for="mahdt") Mã hệ đào tạo:
                       input(type="text", name="mahdt", required, data-error="#errmahdt").form-control
                       small#errmahdt.form-text.text-danger.err
                     .md-form
-                      i.fa.fa-user.prefix
+                      i.fa.fa-bookmark.prefix
                       label.font-weight-light(for="tenhdt") Tên hệ đào tạo:
                       input(type="text", name="tenhdt", required, data-error="#errtenhdt").form-control
                       small#errtenhdt.form-text.text-danger.err
@@ -224,10 +236,14 @@ block content
             tr
               th Mã hệ đào tạo
               th Tên hệ đào tạo
+              th Thao tác
           each hedaotaos in hedaotao
             tr
               td= hedaotaos.mahdt
-              td= hedaotaos.tenhdt                   
+              td= hedaotaos.tenhdt   
+              td
+                form(action="/data/updateData", method="post")
+                  button(type="submit" name="delHdt" value= hedaotaos.mahdt onclick="return confirm('Chắc chắn xóa?');").btn.btn-danger.fas.fa-trash-alt.mr-2.btn-md                  
 
     .panel#bachoc
       .container.mt-2
@@ -238,12 +254,12 @@ block content
                 .col-md-10.ml-auto.mr-auto     
                   form(action="/data/updateData", method="POST")#bhForm
                     .md-form
-                      i.fa.fa-user.prefix
+                      i.fa.fa-bookmark.prefix
                       label.font-weight-light(for="mabh") Mã bậc học:
                       input(type="text", name="mabh", required, data-error="#errmabh").form-control
                       small#errmabh.form-text.text-danger.err
                     .md-form
-                      i.fa.fa-user.prefix
+                      i.fa.fa-bookmark.prefix
                       label.font-weight-light(for="tenbh") Tên bậc học:
                       input(type="text", name="tenbh", required, data-error="#errtenbh").form-control
                       small#errtenbh.form-text.text-danger.err
@@ -254,10 +270,14 @@ block content
             tr
               th Mã bậc học
               th Tên bậc học
+              th Thao tác
           each bachocs in bachoc
             tr
               td= bachocs.mabh
               td= bachocs.tenbh
+              td
+                form(action="/data/updateData", method="post")
+                  button(type="submit" name="delBh" value= bachocs.mabh onclick="return confirm('Chắc chắn xóa?');").btn.btn-danger.fas.fa-trash-alt.mr-2.btn-md   
 
     .panel#nganhhoc
       .container.mt-2
@@ -268,12 +288,12 @@ block content
                 .col-md-10.ml-auto.mr-auto     
                   form(action="/data/updateData", method="POST")#nhForm
                     .md-form
-                      i.fa.fa-user.prefix
+                      i.fa.fa-bookmark.prefix
                       label.font-weight-light(for="manganh") Mã ngành:
                       input(type="text", name="manganh", required, data-error="#errmanganh").form-control
                       small#errmanganh.form-text.text-danger.err
                     .md-form
-                      i.fa.fa-user.prefix
+                      i.fa.fa-bookmark.prefix
                       label.font-weight-light(for="tenganh") Tên ngành:
                       input(type="text", name="tennganh", required, data-error="#errtennganh").form-control
                       small#errtennganh.form-text.text-danger.err
@@ -291,11 +311,15 @@ block content
               th Mã ngành
               th Mã bậc học
               th Tên ngành
+              th Thao tác
           each nganhs in nganh
             tr
               td= nganhs.manganh
               td= nganhs.mabh
               td= nganhs.tennganh
+              td
+                form(action="/data/updateData", method="post")
+                  button(type="submit" name="delNganh" value= nganhs.manganh onclick="return confirm('Chắc chắn xóa?');").btn.btn-danger.fas.fa-trash-alt.mr-2.btn-md 
 
     .panel#lop
       .container.mt-2
@@ -306,12 +330,12 @@ block content
                 .col-md-10.ml-auto.mr-auto     
                   form(action="/data/updateData", method="POST")#lopForm
                     .md-form
-                      i.fa.fa-user.prefix
+                      i.fa.fa-bookmark.prefix
                       label.font-weight-light(for="malop") Mã lớp:
                       input(type="text", name="malop", required, data-error="#errmalop").form-control
                       small#errmalop.form-text.text-danger.err
                     .md-form
-                      i.fa.fa-user.prefix
+                      i.fa.fa-bookmark.prefix
                       label.font-weight-light(for="tenlop") Tên lớp:
                       input(type="text", name="tenlop", required, data-error="#errtenlop").form-control
                       small#errtenlop.form-text.text-danger.err
@@ -336,12 +360,16 @@ block content
               th Mã hệ đào tạo
               th Mã ngành
               th Tên lớp
+              th Thao tác
           each lops in lop
             tr
               td= lops.malop
               td= lops.mahdt
               td= lops.manganh
-              td= lops.tenlop                   
+              td= lops.tenlop   
+              td
+                form(action="/data/updateData", method="post")
+                  button(type="submit" name="delLop" value= lops.malop onclick="return confirm('Chắc chắn xóa?');").btn.btn-danger.fas.fa-trash-alt.mr-2.btn-md                 
 
   script(src='https://code.jquery.com/jquery-3.3.1.js')
   script(src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js') 
@@ -458,6 +486,9 @@ block content
         },
       }); 
 
+      $.validator.addMethod("tcReg", function(value, element, reg) {
+        return this.optional(element) || reg.test(value);
+      }, "Số tín chỉ được giới hạn từ 0-10");
       $("#mhForm").validate({
         onfocusout: false,
         onkeyup: function(element) {$(element).valid()},
@@ -472,7 +503,21 @@ block content
             required: true,
             maxlength: 30,
             minlength: 5
-          }            
+          },
+          "tclythuyet":{
+            required: true,
+            maxlength: 1,
+            minlength: 1,
+            digits: true,
+            tcReg: /[0-9]|10/
+          },
+          "tcthuchanh":{
+            required: true,
+            maxlength: 1,
+            minlength: 1,
+            digits: true,
+            tcReg: /[0-9]|10/
+          }        
         },
         messages: {
           "mamh": {
@@ -484,7 +529,19 @@ block content
             required: "Vui lòng nhập tên môn học",
             maxlength: "Tối đa 30 ký tự",
             minlength: "Tối thiểu 5 ký tự",
-          }
+          },
+          "tclythuyet":{
+            required: "Vui lòng nhập số tín chỉ",
+            maxlength: "Số tín chỉ phải chứa 1 ký tự",
+            minlength: "Số tín chỉ phải chứa 1 ký tự",
+            digits: "Số tín chỉ có dạng số"
+          },
+          "tcthuchanh":{
+            required: "Vui lòng nhập số tín chỉ",
+            maxlength: "Số tín chỉ phải chứa 1 ký tự",
+            minlength: "Số tín chỉ phải chứa 1 ký tự",
+            digits: "Số tín chỉ có dạng số"
+          }      
         },
         errorPlacement: function(error, element) {
           var placement = $(element).data('error');

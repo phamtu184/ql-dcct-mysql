@@ -77,6 +77,9 @@ block content
       document.getElementById("sdt").value = values[3];
     } 
     $().ready(function() {
+      $.validator.addMethod("sdtReg", function(value, element, reg) {
+        return this.optional(element) || reg.test(value);
+      }, "Số điện thoại phải bắt đầu bằng số 0");        
       $("#changeUserForm").validate({
         onfocusout: false,
         onkeyup: function(element) {$(element).valid()},
@@ -100,6 +103,7 @@ block content
             minlength: 10,
             maxlength: 10,
             digits: true,
+            sdtReg: /^0/
           },
           "password": {
             required: true,

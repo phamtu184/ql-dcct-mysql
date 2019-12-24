@@ -63,6 +63,9 @@ block content
   script(src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.min.js') 
   script.
     $().ready(function() {
+      $.validator.addMethod("sdtReg", function(value, element, reg) {
+        return this.optional(element) || reg.test(value);
+      }, "Số điện thoại phải bắt đầu bằng số 0");      
       $("#signupForm").validate({
         onfocusout: false,
         onkeyup: function(element) {$(element).valid()},
@@ -88,6 +91,7 @@ block content
             minlength: 10,
             maxlength: 10,
             digits: true,
+            sdtReg: /^0/
           },
           "password": {
             required: true,

@@ -428,7 +428,7 @@ block content
 
       $.validator.addMethod("yearReg", function(value, element, reg) {
         return this.optional(element) || reg.test(value);
-      }, "Năm học được giới hạn từ 2010 đến 2025");
+      }, "Năm học phải là 2 năm liên tiếp nhau được nối bởi dấu - (VD: 2018-2019)");
       $("#namhocForm").validate({
         onfocusout: false,
         onkeyup: function(element) {$(element).valid()},
@@ -436,18 +436,16 @@ block content
         rules: {
           "namhoc": {
             required: true,
-            maxlength: 4,
-            minlength: 4,
-            digits: true,
-            yearReg : /201[0-9]|202[0-5]/
+            maxlength: 9,
+            minlength: 9,
+            yearReg : /^2010-2011|^2011-2012|^2012-2013|^2013-2014|^2014-2015|^2015-2016|^2016-2017|^2017-2018|^2018-2019|^2019-2020|^2020-2021|^2021-2022|^2022-2023|^2023-2024|^2024-2025|^2025-2026|^2026-2027|^2027-2028|^2028-2029|^2029-2030/
           },
         },
         messages: {
           "namhoc": {
             required: "Vui lòng nhập năm học",
-            maxlength: "Năm học phải có 4 kí tự",
-            minlength: "Năm học phải có 4 kí tự",
-            digits: "Năm học chỉ chứa kí tự là số"
+            maxlength: "Năm học phải là 2 năm liên tiếp nhau được nối bởi dấu - (VD: 2018-2019)",
+            minlength: "Năm học phải là 2 năm liên tiếp nhau được nối bởi dấu - (VD: 2018-2019)"
           }
         },
         errorPlacement: function(error, element) {

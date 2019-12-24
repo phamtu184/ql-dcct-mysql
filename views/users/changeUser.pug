@@ -3,7 +3,7 @@ block content
   .container(style='margin-top: 170px')
     .card(style="background-color: rgba(158, 158, 158, 0.1);").labelColor
       .card-body
-        form(action="/users/changeuser", method="POST").was-validated#changeUserForm
+        form(action="/users/changeuser", method="POST")#changeUserForm
           p.h4.text-center.py-4 Sửa tài khoản
           if errors
             each error in errors
@@ -130,12 +130,12 @@ block content
           },
           "password": {
             required: "Bắt buộc nhập mật khẩu",
-            minlength: "Hãy nhập ít nhất 6 ký tự"
+            minlength: "Mật khẩu phải có ít nhất 6 ký tự"
           },
           "passwordConf": {
             required: "Bắt buộc nhập xác nhận mật khẩu",
             equalTo: "Xác nhận mật khẩu phải giống với mật khẩu",
-            minlength: "Hãy nhập ít nhất 6 ký tự"
+            minlength: "Mật khẩu phải có ít nhất 6 ký tự"
           }
         },
         errorPlacement: function(error, element) {
